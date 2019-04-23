@@ -64,9 +64,13 @@ namespace eventview {
 
         SnowflakeProvider &operator=(const SnowflakeProvider &) = delete;
 
+        SnowflakeProvider(SnowflakeProvider &&) = default;
+
+        SnowflakeProvider &operator=(SnowflakeProvider &&) = default;
+
         ~SnowflakeProvider() = default;
 
-        Snowflake next() {
+        Snowflake next() noexcept {
             while (true) {
                 std::uint64_t timestamp = ts_provider_.get_timestamp();
                 auto current = state_.load();
@@ -86,7 +90,6 @@ namespace eventview {
                         next_state = TimeAndOrder{timestamp, next_order};
                     } else {
                         next_state = TimeAndOrder{timestamp, 0};
-                        max_order_id_ = 4;
                     }
 
                     if (state_.compare_exchange_weak(current, next_state)) {

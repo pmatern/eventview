@@ -88,17 +88,57 @@ TEST_CASE("write event") {
     REQUIRE(received.entity == entity);
 }
 
-TEST_CASE("entity storage") {
+TEST_CASE("storage node") {
     ValueNode child{
             {{"name", "jane"}, {"age", 12ull}}
     };
     ValueNode node{
-            {{"name",     "john"}, {"age", 41ull}},
+            {{"name",     "john"}, {"age", 41ull}, {"department_id", EntityDescriptor{3453, 5}}},
             {{"children", child}}
     };
 
     EntityDescriptor desc{577, 21};
     EventEntity entity{desc, node};
 
-    StorageNode sn{34234, std::move(entity)};
+    StorageNode sn{34234, entity};
+
+    REQUIRE(sn.exists());
+
+    SnowflakeProvider sp{ 56 };
+
+    EventID write_time = sp.next();
+    EntityDescriptor referencer = {write_time, 436};
+
+    sn.add_referencer(sp.next(), "manager", referencer);
+
+    auto refs = sn.referencers_for_field("manager");
+
+    REQUIRE(refs.has_value());
+
+    auto refs_val = refs.value();
+    REQUIRE(refs_val.size() == 1);
+
+    REQUIRE(referencer == refs_val[0]);
+
+
+    sn.remove_referencer(write_time - 1, "manager", referencer);
+
+    auto refs_unchanged = sn.referencers_for_field("manager");
+
+    REQUIRE(refs_unchanged.has_value());
+
+    auto refs_unchanged_val = refs.value();
+    REQUIRE(refs_unchanged_val.size() == 1);
+
+    REQUIRE(referencer == refs_unchanged_val[0]);
+
+    sn.remove_referencer(sp.next(), "manager", referencer);
+
+    auto refs_changed = sn.referencers_for_field("manager");
+
+    REQUIRE(refs_changed.has_value());
+
+    auto refs_changed_val = refs_changed.value();
+    REQUIRE(refs_changed_val.size() == 0);
+
 }

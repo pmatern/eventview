@@ -15,11 +15,15 @@ namespace eventview {
     template<typename Storage = std::vector<Event> >
     class EventLog final {
     public:
-        explicit EventLog(EventReceiver &receiver) : publisher_{std::move(receiver)} {}
+        explicit EventLog(EventReceiver receiver) : publisher_{std::move(receiver)} {}
 
         EventLog(const EventLog &other) = delete;
 
         EventLog &operator=(const EventLog &) = delete;
+
+        EventLog(EventLog &&) noexcept = default;
+
+        EventLog &operator=(EventLog &&) noexcept = default;
 
         ~EventLog() = default;
 

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="eventview" targetName="eventview_tests" />
       <config projectName="eventview" targetName="eventview" />
+      <config projectName="eventview" targetName="eventview_tests" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -12,7 +12,15 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0de57598-a840-4258-8a91-ada38f163fba" name="Default Changelist" comment="" />
+    <list default="true" id="0de57598-a840-4258-8a91-ada38f163fba" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entitystorage.h" beforeDir="false" afterPath="$PROJECT_DIR$/entitystorage.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventlog.h" beforeDir="false" afterPath="$PROJECT_DIR$/eventlog.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventview.h" beforeDir="false" afterPath="$PROJECT_DIR$/eventview.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eventwriter.h" beforeDir="false" afterPath="$PROJECT_DIR$/eventwriter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/snowflake.h" beforeDir="false" afterPath="$PROJECT_DIR$/snowflake.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests.cpp" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,98 +34,13 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eventview.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="50" column="122" selection-start-line="50" selection-start-column="122" selection-end-line="50" selection-end-column="122" />
+            <state relative-caret-position="850">
+              <caret line="50" column="58" selection-start-line="50" selection-start-column="58" selection-end-line="50" selection-end-column="58" />
               <folding>
                 <element signature="e#61#79#0" expanded="true" />
-                <element signature="e#3676#3678#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/entitystorage.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="140" lean-forward="true" selection-start-line="140" selection-end-line="140" />
-              <folding>
-                <element signature="e#118#140#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/variant">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
-              <caret line="1365" column="65" selection-start-line="1365" selection-start-column="65" selection-end-line="1365" selection-end-column="65" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="100" column="35" selection-start-line="100" selection-start-column="35" selection-end-line="100" selection-end-column="35" />
-              <folding>
-                <element signature="e#0#16#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eventlog.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__hash_table">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="879" column="4" selection-start-line="879" selection-start-column="4" selection-end-line="879" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/unordered_map">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="1432" column="28" selection-start-line="1432" selection-start-column="19" selection-end-line="1432" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eventview.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="23" column="43" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eventwriter.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#114#136#0" expanded="true" />
-                <element signature="e#241#315#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -126,11 +49,92 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/snowflake.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="64" column="73" selection-start-line="62" selection-start-column="8" selection-end-line="64" selection-end-column="73" />
+            <state relative-caret-position="201">
+              <caret line="95" selection-start-line="95" selection-end-line="95" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eventwriter.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
               <folding>
-                <element signature="e#110#127#0" expanded="true" />
-                <element signature="e#1748#1848#0" expanded="true" />
+                <element signature="e#193#267#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eventlog.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="19" column="49" selection-start-line="19" selection-start-column="49" selection-end-line="19" selection-end-column="49" />
+              <folding>
+                <element signature="e#60#77#0" expanded="true" />
+                <element signature="e#295#335#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/tuple">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="23188">
+              <caret line="1364" column="6" selection-start-line="1364" selection-start-column="6" selection-end-line="1364" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/utility">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="8262">
+              <caret line="486" column="10" selection-start-line="486" selection-start-column="10" selection-end-line="486" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/memory">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="29138">
+              <caret line="1714" column="17" selection-start-line="1714" selection-start-column="17" selection-end-line="1714" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/entitystorage.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="303">
+              <caret line="134" selection-start-line="134" selection-end-line="134" />
+              <folding>
+                <element signature="e#118#140#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/expected.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="21505">
+              <caret line="1265" selection-start-line="1265" selection-end-line="1265" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="138" column="38" lean-forward="true" selection-start-line="138" selection-start-column="38" selection-end-line="138" selection-end-column="38" />
+              <folding>
+                <element signature="e#0#16#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -144,6 +148,9 @@
       <find>struct Event</find>
     </findStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -151,13 +158,13 @@
         <option value="$PROJECT_DIR$/catch.h" />
         <option value="$PROJECT_DIR$/eventview.cpp" />
         <option value="$PROJECT_DIR$/expected.h" />
-        <option value="$PROJECT_DIR$/eventlog.h" />
-        <option value="$PROJECT_DIR$/snowflake.h" />
-        <option value="$PROJECT_DIR$/eventwriter.h" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/tests.cpp" />
-        <option value="$PROJECT_DIR$/entitystorage.h" />
         <option value="$PROJECT_DIR$/eventview.h" />
+        <option value="$PROJECT_DIR$/eventlog.h" />
+        <option value="$PROJECT_DIR$/eventwriter.h" />
+        <option value="$PROJECT_DIR$/snowflake.h" />
+        <option value="$PROJECT_DIR$/entitystorage.h" />
+        <option value="$PROJECT_DIR$/tests.cpp" />
       </list>
     </option>
   </component>
@@ -170,11 +177,13 @@
     <option name="width" value="1400" />
     <option name="height" value="837" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -186,10 +195,10 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -208,7 +217,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Catch.All in eventview_tests">
+  <component name="RunManager" selected="Catch.storage node">
     <configuration name="All in eventview_tests" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" nameIsGenerated="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="eventview" TARGET_NAME="eventview_tests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="eventview" RUN_TARGET_NAME="eventview_tests" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -221,13 +230,19 @@
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test IDPacker" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="eventview" TARGET_NAME="eventview_tests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="eventview" RUN_TARGET_NAME="eventview_tests" TEST_METHOD="Test IDPacker" TEST_MODE="SUITE_TEST">
+    <configuration name="entity storage" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="eventview" TARGET_NAME="eventview_tests" RUN_TARGET_PROJECT_NAME="eventview" RUN_TARGET_NAME="eventview_tests" TEST_METHOD="entity storage" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="log event" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="eventview" TARGET_NAME="eventview_tests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="eventview" RUN_TARGET_NAME="eventview_tests" TEST_METHOD="log event" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="storage node" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="eventview" TARGET_NAME="eventview_tests" RUN_TARGET_PROJECT_NAME="eventview" RUN_TARGET_NAME="eventview_tests" TEST_METHOD="storage node" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
@@ -251,19 +266,21 @@
     </configuration>
     <list>
       <item itemvalue="Catch.All in eventview_tests" />
-      <item itemvalue="Catch.Test IDPacker" />
       <item itemvalue="Catch.Generate snowflakes" />
       <item itemvalue="Catch.log event" />
       <item itemvalue="Catch.write event" />
+      <item itemvalue="Catch.entity storage" />
+      <item itemvalue="Catch.storage node" />
       <item itemvalue="CMake Application.eventview" />
       <item itemvalue="CMake Application.eventview_tests" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Catch.storage node" />
+        <item itemvalue="Catch.entity storage" />
         <item itemvalue="Catch.write event" />
         <item itemvalue="Catch.log event" />
         <item itemvalue="Catch.Generate snowflakes" />
-        <item itemvalue="Catch.Test IDPacker" />
       </list>
     </recent_temporary>
   </component>
@@ -280,61 +297,62 @@
       <workItem from="1555532921447" duration="13887000" />
       <workItem from="1555598706847" duration="5755000" />
       <workItem from="1555642697682" duration="92000" />
-      <workItem from="1555643073779" duration="29702000" />
+      <workItem from="1555643073779" duration="39306000" />
+      <workItem from="1555988602097" duration="605000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="log_event - 2019.04.20 at 11h 20m 43s.xml">
-      <configuration name="log event" configurationId="CMakeCatchTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="write_event - 2019.04.20 at 11h 21m 05s.xml">
-      <configuration name="write event" configurationId="CMakeCatchTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="log_event - 2019.04.20 at 11h 21m 14s.xml">
-      <configuration name="log event" configurationId="CMakeCatchTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="write_event - 2019.04.20 at 11h 22m 50s.xml">
-      <configuration name="write event" configurationId="CMakeCatchTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="write_event - 2019.04.20 at 11h 23m 25s.xml">
-      <configuration name="write event" configurationId="CMakeCatchTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="write_event - 2019.04.20 at 11h 25m 13s.xml">
-      <configuration name="write event" configurationId="CMakeCatchTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="write_event - 2019.04.20 at 11h 30m 03s.xml">
-      <configuration name="write event" configurationId="CMakeCatchTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="write_event - 2019.04.20 at 11h 30m 45s.xml">
-      <configuration name="write event" configurationId="CMakeCatchTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="write_event - 2019.04.20 at 11h 30m 49s.xml">
-      <configuration name="write event" configurationId="CMakeCatchTestRunConfigurationType" />
-    </history-entry>
     <history-entry file="All_in_eventview_tests - 2019.04.20 at 11h 42m 05s.xml">
       <configuration name="All in eventview_tests" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
+    <history-entry file="entity_storage - 2019.04.22 at 18h 59m 06s.xml">
+      <configuration name="entity storage" configurationId="CMakeCatchTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="storage_node - 2019.04.22 at 19h 46m 31s.xml">
+      <configuration name="storage node" configurationId="CMakeCatchTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="storage_node - 2019.04.22 at 19h 49m 21s.xml">
+      <configuration name="storage node" configurationId="CMakeCatchTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="storage_node - 2019.04.22 at 19h 53m 53s.xml">
+      <configuration name="storage node" configurationId="CMakeCatchTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="storage_node - 2019.04.22 at 19h 59m 18s.xml">
+      <configuration name="storage node" configurationId="CMakeCatchTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="storage_node - 2019.04.22 at 20h 00m 40s.xml">
+      <configuration name="storage node" configurationId="CMakeCatchTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="storage_node - 2019.04.22 at 20h 05m 47s.xml">
+      <configuration name="storage node" configurationId="CMakeCatchTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="storage_node - 2019.04.22 at 20h 07m 34s.xml">
+      <configuration name="storage node" configurationId="CMakeCatchTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="storage_node - 2019.04.22 at 20h 08m 25s.xml">
+      <configuration name="storage node" configurationId="CMakeCatchTestRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49436000" />
+    <option name="totallyTimeSpent" value="59645000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="33" width="1400" height="837" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18335788" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.185567" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32885906" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32885906" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
-      <window_info anchor="bottom" id="Messages" order="8" visible="true" weight="0.32885906" />
+      <window_info anchor="bottom" id="Messages" order="8" weight="0.32885906" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" />
@@ -372,6 +390,36 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/tests.cpp</url>
+          <line>111</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/entitystorage.h</url>
+          <line>85</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/tests.cpp</url>
+          <line>134</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>add_time &gt; remove_time</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
   <component name="editorHistoryManager">
     <entry file="file:///usr/include/_types/_uint64_t.h">
       <provider selected="true" editor-type-id="text-editor">
@@ -387,437 +435,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catch.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5003">
-          <caret line="14984" column="28" selection-start-line="14984" selection-start-column="28" selection-end-line="14984" selection-end-column="28" />
-          <folding>
-            <element signature="e#728#757#0" expanded="true" />
-            <element signature="e#871#941#0" expanded="true" />
-            <element signature="e#1205#1594#0" expanded="true" />
-            <element signature="e#2368#2399#0" expanded="true" />
-            <element signature="e#2472#2643#0" expanded="true" />
-            <element signature="e#5602#5648#0" expanded="true" />
-            <element signature="e#5674#5767#0" expanded="true" />
-            <element signature="e#5939#5991#0" expanded="true" />
-            <element signature="e#6159#6207#0" expanded="true" />
-            <element signature="e#6327#6375#0" expanded="true" />
-            <element signature="e#6494#7034#0" expanded="true" />
-            <element signature="e#7169#7925#0" expanded="true" />
-            <element signature="e#8335#8375#0" expanded="true" />
-            <element signature="e#8528#8572#0" expanded="true" />
-            <element signature="e#11040#11075#0" expanded="true" />
-            <element signature="e#12692#12735#0" expanded="true" />
-            <element signature="e#12920#12954#0" expanded="true" />
-            <element signature="e#13063#13104#0" expanded="true" />
-            <element signature="e#13248#13285#0" expanded="true" />
-            <element signature="e#13353#13466#0" expanded="true" />
-            <element signature="e#13529#13634#0" expanded="true" />
-            <element signature="e#13696#13799#0" expanded="true" />
-            <element signature="e#13853#13963#0" expanded="true" />
-            <element signature="e#14260#14310#0" expanded="true" />
-            <element signature="e#14655#14749#0" expanded="true" />
-            <element signature="e#14758#14775#0" expanded="true" />
-            <element signature="e#16457#16469#0" expanded="true" />
-            <element signature="e#18000#18018#0" expanded="true" />
-            <element signature="e#21382#21395#0" expanded="true" />
-            <element signature="e#21458#21488#0" expanded="true" />
-            <element signature="e#21623#21903#0" expanded="true" />
-            <element signature="e#22677#22968#0" expanded="true" />
-            <element signature="e#25445#25803#0" expanded="true" />
-            <element signature="e#26298#26730#0" expanded="true" />
-            <element signature="e#27089#27104#0" expanded="true" />
-            <element signature="e#27134#27149#0" expanded="true" />
-            <element signature="e#27174#27273#0" expanded="true" />
-            <element signature="e#27184#27197#0" expanded="true" />
-            <element signature="e#27233#27246#0" expanded="true" />
-            <element signature="e#27357#27474#0" expanded="true" />
-            <element signature="e#27367#27380#0" expanded="true" />
-            <element signature="e#27416#27429#0" expanded="true" />
-            <element signature="e#27600#27645#0" expanded="true" />
-            <element signature="e#27610#27623#0" expanded="true" />
-            <element signature="e#27670#27765#0" expanded="true" />
-            <element signature="e#27680#27693#0" expanded="true" />
-            <element signature="e#27720#27733#0" expanded="true" />
-            <element signature="e#27869#27982#0" expanded="true" />
-            <element signature="e#27879#27892#0" expanded="true" />
-            <element signature="e#27919#27932#0" expanded="true" />
-            <element signature="e#28165#28209#0" expanded="true" />
-            <element signature="e#28175#28188#0" expanded="true" />
-            <element signature="e#28235#28255#0" expanded="true" />
-            <element signature="e#28284#28322#0" expanded="true" />
-            <element signature="e#28295#28308#0" expanded="true" />
-            <element signature="e#28448#28460#0" expanded="true" />
-            <element signature="e#28575#28587#0" expanded="true" />
-            <element signature="e#28923#28935#0" expanded="true" />
-            <element signature="e#29485#30967#0" expanded="true" />
-            <element signature="e#34665#34827#0" expanded="true" />
-            <element signature="e#35194#35525#0" expanded="true" />
-            <element signature="e#38629#38974#0" expanded="true" />
-            <element signature="e#40521#40892#0" expanded="true" />
-            <element signature="e#43206#43590#0" expanded="true" />
-            <element signature="e#45255#45272#0" expanded="true" />
-            <element signature="e#45358#45375#0" expanded="true" />
-            <element signature="e#45838#45850#0" expanded="true" />
-            <element signature="e#46108#47131#0" expanded="true" />
-            <element signature="e#47156#47306#0" expanded="true" />
-            <element signature="e#47478#47490#0" expanded="true" />
-            <element signature="e#47606#47618#0" expanded="true" />
-            <element signature="e#47654#47680#0" expanded="true" />
-            <element signature="e#47786#47806#0" expanded="true" />
-            <element signature="e#47944#47956#0" expanded="true" />
-            <element signature="e#48013#48025#0" expanded="true" />
-            <element signature="e#48219#48231#0" expanded="true" />
-            <element signature="e#48410#48422#0" expanded="true" />
-            <element signature="e#48601#48945#0" expanded="true" />
-            <element signature="e#49042#49071#0" expanded="true" />
-            <element signature="e#49102#49121#0" expanded="true" />
-            <element signature="e#49447#49466#0" expanded="true" />
-            <element signature="e#49696#49744#0" expanded="true" />
-            <element signature="e#49941#49953#0" expanded="true" />
-            <element signature="e#50114#50126#0" expanded="true" />
-            <element signature="e#50291#50391#0" expanded="true" />
-            <element signature="e#50467#50469#0" expanded="true" />
-            <element signature="e#50717#50719#0" expanded="true" />
-            <element signature="e#50812#50814#0" expanded="true" />
-            <element signature="e#50922#50924#0" expanded="true" />
-            <element signature="e#51179#51181#0" expanded="true" />
-            <element signature="e#51280#51282#0" expanded="true" />
-            <element signature="e#51495#51503#0" expanded="true" />
-            <element signature="e#51649#51657#0" expanded="true" />
-            <element signature="e#51849#51857#0" expanded="true" />
-            <element signature="e#52054#52056#0" expanded="true" />
-            <element signature="e#52133#52135#0" expanded="true" />
-            <element signature="e#52214#52216#0" expanded="true" />
-            <element signature="e#52305#52307#0" expanded="true" />
-            <element signature="e#52402#52404#0" expanded="true" />
-            <element signature="e#52501#52503#0" expanded="true" />
-            <element signature="e#52611#52613#0" expanded="true" />
-            <element signature="e#52689#52691#0" expanded="true" />
-            <element signature="e#52766#52768#0" expanded="true" />
-            <element signature="e#52857#52859#0" expanded="true" />
-            <element signature="e#52953#52955#0" expanded="true" />
-            <element signature="e#53049#53051#0" expanded="true" />
-            <element signature="e#53132#53134#0" expanded="true" />
-            <element signature="e#53219#53231#0" expanded="true" />
-            <element signature="e#53266#53278#0" expanded="true" />
-            <element signature="e#53413#53437#0" expanded="true" />
-            <element signature="e#53618#53759#0" expanded="true" />
-            <element signature="e#53795#53819#0" expanded="true" />
-            <element signature="e#54135#54616#0" expanded="true" />
-            <element signature="e#54879#55123#0" expanded="true" />
-            <element signature="e#55219#55556#0" expanded="true" />
-            <element signature="e#55699#56010#0" expanded="true" />
-            <element signature="e#56152#56947#0" expanded="true" />
-            <element signature="e#57089#57582#0" expanded="true" />
-            <element signature="e#57951#57963#0" expanded="true" />
-            <element signature="e#58212#58291#0" expanded="true" />
-            <element signature="e#58308#58324#0" expanded="true" />
-            <element signature="e#58490#58510#0" expanded="true" />
-            <element signature="e#58787#58799#0" expanded="true" />
-            <element signature="e#59018#59038#0" expanded="true" />
-            <element signature="e#62501#62521#0" expanded="true" />
-            <element signature="e#62589#62989#0" expanded="true" />
-            <element signature="e#63694#63724#0" expanded="true" />
-            <element signature="e#64186#64198#0" expanded="true" />
-            <element signature="e#64438#64450#0" expanded="true" />
-            <element signature="e#64690#64702#0" expanded="true" />
-            <element signature="e#64942#64954#0" expanded="true" />
-            <element signature="e#65194#65206#0" expanded="true" />
-            <element signature="e#65445#65457#0" expanded="true" />
-            <element signature="e#65696#65708#0" expanded="true" />
-            <element signature="e#65948#65960#0" expanded="true" />
-            <element signature="e#66203#66218#0" expanded="true" />
-            <element signature="e#66640#66670#0" expanded="true" />
-            <element signature="e#66783#66795#0" expanded="true" />
-            <element signature="e#66912#66924#0" expanded="true" />
-            <element signature="e#67042#67054#0" expanded="true" />
-            <element signature="e#67171#67183#0" expanded="true" />
-            <element signature="e#67302#67332#0" expanded="true" />
-            <element signature="e#67443#67455#0" expanded="true" />
-            <element signature="e#67575#67587#0" expanded="true" />
-            <element signature="e#67708#67720#0" expanded="true" />
-            <element signature="e#67840#67852#0" expanded="true" />
-            <element signature="e#67974#67989#0" expanded="true" />
-            <element signature="e#68082#68097#0" expanded="true" />
-            <element signature="e#68353#68368#0" expanded="true" />
-            <element signature="e#68627#68642#0" expanded="true" />
-            <element signature="e#68790#68805#0" expanded="true" />
-            <element signature="e#68953#68968#0" expanded="true" />
-            <element signature="e#69119#69134#0" expanded="true" />
-            <element signature="e#69286#69301#0" expanded="true" />
-            <element signature="e#69538#69553#0" expanded="true" />
-            <element signature="e#69937#69949#0" expanded="true" />
-            <element signature="e#70073#70085#0" expanded="true" />
-            <element signature="e#70308#70328#0" expanded="true" />
-            <element signature="e#73670#73682#0" expanded="true" />
-            <element signature="e#74382#74399#0" expanded="true" />
-            <element signature="e#74863#74875#0" expanded="true" />
-            <element signature="e#75146#75158#0" expanded="true" />
-            <element signature="e#75837#75849#0" expanded="true" />
-            <element signature="e#75972#76000#0" expanded="true" />
-            <element signature="e#76367#76455#0" expanded="true" />
-            <element signature="e#76548#76785#0" expanded="true" />
-            <element signature="e#86188#86206#0" expanded="true" />
-            <element signature="e#87072#87089#0" expanded="true" />
-            <element signature="e#88595#88729#0" expanded="true" />
-            <element signature="e#88738#88758#0" expanded="true" />
-            <element signature="e#89367#89379#0" expanded="true" />
-            <element signature="e#89930#89942#0" expanded="true" />
-            <element signature="e#91357#91452#0" expanded="true" />
-            <element signature="e#91647#91742#0" expanded="true" />
-            <element signature="e#91826#91921#0" expanded="true" />
-            <element signature="e#92077#92172#0" expanded="true" />
-            <element signature="e#92278#92373#0" expanded="true" />
-            <element signature="e#92480#92575#0" expanded="true" />
-            <element signature="e#92682#92777#0" expanded="true" />
-            <element signature="e#92913#93008#0" expanded="true" />
-            <element signature="e#93144#93239#0" expanded="true" />
-            <element signature="e#93375#93470#0" expanded="true" />
-            <element signature="e#93606#93701#0" expanded="true" />
-            <element signature="e#93856#93951#0" expanded="true" />
-            <element signature="e#94100#94195#0" expanded="true" />
-            <element signature="e#94589#94591#0" expanded="true" />
-            <element signature="e#94783#94800#0" expanded="true" />
-            <element signature="e#95714#95731#0" expanded="true" />
-            <element signature="e#95816#95831#0" expanded="true" />
-            <element signature="e#95859#95874#0" expanded="true" />
-            <element signature="e#95902#95917#0" expanded="true" />
-            <element signature="e#96418#96436#0" expanded="true" />
-            <element signature="e#96582#96594#0" expanded="true" />
-            <element signature="e#96827#96842#0" expanded="true" />
-            <element signature="e#97526#97541#0" expanded="true" />
-            <element signature="e#98225#98240#0" expanded="true" />
-            <element signature="e#98626#98638#0" expanded="true" />
-            <element signature="e#98770#98782#0" expanded="true" />
-            <element signature="e#98914#98926#0" expanded="true" />
-            <element signature="e#99203#99225#0" expanded="true" />
-            <element signature="e#100308#100329#0" expanded="true" />
-            <element signature="e#100498#100510#0" expanded="true" />
-            <element signature="e#101209#101221#0" expanded="true" />
-            <element signature="e#103979#104015#0" expanded="true" />
-            <element signature="e#104192#104228#0" expanded="true" />
-            <element signature="e#104400#104412#0" expanded="true" />
-            <element signature="e#104836#104848#0" expanded="true" />
-            <element signature="e#105478#105490#0" expanded="true" />
-            <element signature="e#106235#106247#0" expanded="true" />
-            <element signature="e#107477#107489#0" expanded="true" />
-            <element signature="e#107624#107636#0" expanded="true" />
-            <element signature="e#107778#107790#0" expanded="true" />
-            <element signature="e#107919#107931#0" expanded="true" />
-            <element signature="e#108171#108205#0" expanded="true" />
-            <element signature="e#109013#109047#0" expanded="true" />
-            <element signature="e#112005#112018#0" expanded="true" />
-            <element signature="e#112145#112204#0" expanded="true" />
-            <element signature="e#112863#112880#0" expanded="true" />
-            <element signature="e#113262#113292#0" expanded="true" />
-            <element signature="e#113420#113432#0" expanded="true" />
-            <element signature="e#113731#113743#0" expanded="true" />
-            <element signature="e#114045#114057#0" expanded="true" />
-            <element signature="e#114385#114397#0" expanded="true" />
-            <element signature="e#114687#114699#0" expanded="true" />
-            <element signature="e#114844#114856#0" expanded="true" />
-            <element signature="e#115008#115020#0" expanded="true" />
-            <element signature="e#115318#115330#0" expanded="true" />
-            <element signature="e#115395#115423#0" expanded="true" />
-            <element signature="e#115596#115612#0" expanded="true" />
-            <element signature="e#116039#116055#0" expanded="true" />
-            <element signature="e#116326#116338#0" expanded="true" />
-            <element signature="e#116362#116390#0" expanded="true" />
-            <element signature="e#116578#116590#0" expanded="true" />
-            <element signature="e#116719#116747#0" expanded="true" />
-            <element signature="e#116927#116967#0" expanded="true" />
-            <element signature="e#117247#117259#0" expanded="true" />
-            <element signature="e#118628#118640#0" expanded="true" />
-            <element signature="e#119293#119305#0" expanded="true" />
-            <element signature="e#119486#119518#0" expanded="true" />
-            <element signature="e#119639#119663#0" expanded="true" />
-            <element signature="e#120361#120393#0" expanded="true" />
-            <element signature="e#120647#120659#0" expanded="true" />
-            <element signature="e#121959#121971#0" expanded="true" />
-            <element signature="e#122158#122197#0" expanded="true" />
-            <element signature="e#122468#122488#0" expanded="true" />
-            <element signature="e#122936#123256#0" expanded="true" />
-            <element signature="e#123272#123299#0" expanded="true" />
-            <element signature="e#123456#123528#0" expanded="true" />
-            <element signature="e#123742#123781#0" expanded="true" />
-            <element signature="e#123995#124007#0" expanded="true" />
-            <element signature="e#124843#124855#0" expanded="true" />
-            <element signature="e#126280#126297#0" expanded="true" />
-            <element signature="e#128009#128025#0" expanded="true" />
-            <element signature="e#128518#128536#0" expanded="true" />
-            <element signature="e#129148#129160#0" expanded="true" />
-            <element signature="e#129384#129396#0" expanded="true" />
-            <element signature="e#129594#129606#0" expanded="true" />
-            <element signature="e#130375#130387#0" expanded="true" />
-            <element signature="e#130658#130670#0" expanded="true" />
-            <element signature="e#131151#131168#0" expanded="true" />
-            <element signature="e#132904#138376#0" expanded="true" />
-            <element signature="e#412931#419904#0" expanded="true" />
-            <element signature="e#424701#425260#0" expanded="true" />
-            <element signature="e#425557#425680#0" expanded="true" />
-            <element signature="e#426559#434693#0" expanded="true" />
-            <element signature="e#434846#434874#0" expanded="true" />
-            <element signature="e#434956#434986#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/expected.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15079">
-          <caret line="887" column="23" selection-start-line="887" selection-start-column="8" selection-end-line="887" selection-end-column="23" />
-          <folding>
-            <element signature="e#1742#1810#0" expanded="true" />
-            <element signature="e#2287#2406#0" expanded="true" />
-            <element signature="e#3548#4918#0" expanded="true" />
-            <element signature="e#5054#5129#0" expanded="true" />
-            <element signature="e#5164#5182#0" expanded="true" />
-            <element signature="e#5424#5462#0" expanded="true" />
-            <element signature="e#5539#5578#0" expanded="true" />
-            <element signature="e#5649#5682#0" expanded="true" />
-            <element signature="e#6760#6894#0" expanded="true" />
-            <element signature="e#7233#7272#0" expanded="true" />
-            <element signature="e#7326#7431#0" expanded="true" />
-            <element signature="e#7646#7681#0" expanded="true" />
-            <element signature="e#7930#7960#0" expanded="true" />
-            <element signature="e#8020#8124#0" expanded="true" />
-            <element signature="e#8288#8491#0" expanded="true" />
-            <element signature="e#8984#10206#0" expanded="true" />
-            <element signature="e#10360#10384#0" expanded="true" />
-            <element signature="e#10413#10427#0" expanded="true" />
-            <element signature="e#10672#10698#0" expanded="true" />
-            <element signature="e#10883#10909#0" expanded="true" />
-            <element signature="e#10976#10998#0" expanded="true" />
-            <element signature="e#11580#11597#0" expanded="true" />
-            <element signature="e#11790#11816#0" expanded="true" />
-            <element signature="e#12471#12488#0" expanded="true" />
-            <element signature="e#12681#12707#0" expanded="true" />
-            <element signature="e#14514#14528#0" expanded="true" />
-            <element signature="e#14604#14626#0" expanded="true" />
-            <element signature="e#15211#15228#0" expanded="true" />
-            <element signature="e#15421#15447#0" expanded="true" />
-            <element signature="e#16536#16601#0" expanded="true" />
-            <element signature="e#16624#16638#0" expanded="true" />
-            <element signature="e#16992#17154#0" expanded="true" />
-            <element signature="e#17346#17546#0" expanded="true" />
-            <element signature="e#17771#18153#0" expanded="true" />
-            <element signature="e#18311#18326#0" expanded="true" />
-            <element signature="e#19478#19493#0" expanded="true" />
-            <element signature="e#20648#20663#0" expanded="true" />
-            <element signature="e#21823#21838#0" expanded="true" />
-            <element signature="e#23226#23245#0" expanded="true" />
-            <element signature="e#23483#23502#0" expanded="true" />
-            <element signature="e#24911#24925#0" expanded="true" />
-            <element signature="e#25091#25933#0" expanded="true" />
-            <element signature="e#26016#26044#0" expanded="true" />
-            <element signature="e#26223#26251#0" expanded="true" />
-            <element signature="e#26434#26999#0" expanded="true" />
-            <element signature="e#27074#27201#0" expanded="true" />
-            <element signature="e#27381#28072#0" expanded="true" />
-            <element signature="e#28150#28301#0" expanded="true" />
-            <element signature="e#28427#28440#0" expanded="true" />
-            <element signature="e#28705#28901#0" expanded="true" />
-            <element signature="e#28982#28996#0" expanded="true" />
-            <element signature="e#29110#29112#0" expanded="true" />
-            <element signature="e#29384#29398#0" expanded="true" />
-            <element signature="e#30728#30746#0" expanded="true" />
-            <element signature="e#30947#30949#0" expanded="true" />
-            <element signature="e#31175#31177#0" expanded="true" />
-            <element signature="e#31576#31646#0" expanded="true" />
-            <element signature="e#31669#31695#0" expanded="true" />
-            <element signature="e#31788#31810#0" expanded="true" />
-            <element signature="e#32005#32019#0" expanded="true" />
-            <element signature="e#33678#33704#0" expanded="true" />
-            <element signature="e#35149#35175#0" expanded="true" />
-            <element signature="e#36623#36649#0" expanded="true" />
-            <element signature="e#38083#38109#0" expanded="true" />
-            <element signature="e#39850#39868#0" expanded="true" />
-            <element signature="e#40824#40842#0" expanded="true" />
-            <element signature="e#41838#41856#0" expanded="true" />
-            <element signature="e#42320#42338#0" expanded="true" />
-            <element signature="e#42809#42827#0" expanded="true" />
-            <element signature="e#43287#43305#0" expanded="true" />
-            <element signature="e#43817#43979#0" expanded="true" />
-            <element signature="e#44236#44436#0" expanded="true" />
-            <element signature="e#44771#44933#0" expanded="true" />
-            <element signature="e#45176#45376#0" expanded="true" />
-            <element signature="e#47847#48332#0" expanded="true" />
-            <element signature="e#48527#48792#0" expanded="true" />
-            <element signature="e#49016#49281#0" expanded="true" />
-            <element signature="e#49513#49683#0" expanded="true" />
-            <element signature="e#49913#50122#0" expanded="true" />
-            <element signature="e#55091#55106#0" expanded="true" />
-            <element signature="e#55391#55608#0" expanded="true" />
-            <element signature="e#55851#56068#0" expanded="true" />
-            <element signature="e#57242#57256#0" expanded="true" />
-            <element signature="e#57336#57358#0" expanded="true" />
-            <element signature="e#58609#58627#0" expanded="true" />
-            <element signature="e#59033#59051#0" expanded="true" />
-            <element signature="e#59463#59481#0" expanded="true" />
-            <element signature="e#59889#59907#0" expanded="true" />
-            <element signature="e#60321#60483#0" expanded="true" />
-            <element signature="e#60726#60926#0" expanded="true" />
-            <element signature="e#64507#64522#0" expanded="true" />
-            <element signature="e#65432#65486#0" expanded="true" />
-            <element signature="e#65716#65770#0" expanded="true" />
-            <element signature="e#65928#65956#0" expanded="true" />
-            <element signature="e#66200#66779#0" expanded="true" />
-            <element signature="e#66845#66886#0" expanded="true" />
-            <element signature="e#67047#67088#0" expanded="true" />
-            <element signature="e#67248#67289#0" expanded="true" />
-            <element signature="e#67449#67490#0" expanded="true" />
-            <element signature="e#67664#68823#0" expanded="true" />
-            <element signature="e#68918#68960#0" expanded="true" />
-            <element signature="e#69151#69193#0" expanded="true" />
-            <element signature="e#69356#69398#0" expanded="true" />
-            <element signature="e#69563#69605#0" expanded="true" />
-            <element signature="e#69784#71008#0" expanded="true" />
-            <element signature="e#71083#71421#0" expanded="true" />
-            <element signature="e#71592#73187#0" expanded="true" />
-            <element signature="e#73409#73435#0" expanded="true" />
-            <element signature="e#73785#73811#0" expanded="true" />
-            <element signature="e#74364#74378#0" expanded="true" />
-            <element signature="e#74599#74660#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cmake-build-debug/entitystorage.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/snowflake.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="64" column="73" selection-start-line="62" selection-start-column="8" selection-end-line="64" selection-end-column="73" />
-          <folding>
-            <element signature="e#110#127#0" expanded="true" />
-            <element signature="e#1748#1848#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eventwriter.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#114#136#0" expanded="true" />
-            <element signature="e#241#315#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/entitystorage.h" />
     <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/unordered_map">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="191">
@@ -832,20 +450,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests.cpp">
+    <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/variant">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="100" column="35" selection-start-line="100" selection-start-column="35" selection-end-line="100" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eventlog.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+        <state relative-caret-position="158">
+          <caret line="1365" column="65" selection-start-line="1365" selection-start-column="65" selection-end-line="1365" selection-end-column="65" />
         </state>
       </provider>
     </entry>
@@ -859,30 +467,102 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/variant">
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="1365" column="65" selection-start-line="1365" selection-start-column="65" selection-end-line="1365" selection-end-column="65" />
+        <state relative-caret-position="119">
+          <caret line="7" column="28" lean-forward="true" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catch.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="14904" column="57" lean-forward="true" selection-start-line="14904" selection-start-column="57" selection-end-line="14904" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eventview.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="50" column="58" selection-start-line="50" selection-start-column="58" selection-end-line="50" selection-end-column="58" />
+          <folding>
+            <element signature="e#61#79#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eventwriter.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
+          <folding>
+            <element signature="e#193#267#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eventlog.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="49" selection-start-line="19" selection-start-column="49" selection-end-line="19" selection-end-column="49" />
+          <folding>
+            <element signature="e#60#77#0" expanded="true" />
+            <element signature="e#295#335#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/tuple">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23188">
+          <caret line="1364" column="6" selection-start-line="1364" selection-start-column="6" selection-end-line="1364" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/utility">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8262">
+          <caret line="486" column="10" selection-start-line="486" selection-start-column="10" selection-end-line="486" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/memory">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="29138">
+          <caret line="1714" column="17" selection-start-line="1714" selection-start-column="17" selection-end-line="1714" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/expected.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21505">
+          <caret line="1265" selection-start-line="1265" selection-end-line="1265" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snowflake.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="95" selection-start-line="95" selection-end-line="95" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/entitystorage.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="140" lean-forward="true" selection-start-line="140" selection-end-line="140" />
+        <state relative-caret-position="303">
+          <caret line="134" selection-start-line="134" selection-end-line="134" />
           <folding>
             <element signature="e#118#140#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eventview.h">
+    <entry file="file://$PROJECT_DIR$/tests.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="50" column="122" selection-start-line="50" selection-start-column="122" selection-end-line="50" selection-end-column="122" />
+        <state relative-caret-position="195">
+          <caret line="138" column="38" lean-forward="true" selection-start-line="138" selection-start-column="38" selection-end-line="138" selection-end-column="38" />
           <folding>
-            <element signature="e#61#79#0" expanded="true" />
-            <element signature="e#3676#3678#0" expanded="true" />
+            <element signature="e#0#16#0" expanded="true" />
           </folding>
         </state>
       </provider>

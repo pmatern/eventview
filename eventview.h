@@ -137,15 +137,13 @@ namespace eventview {
 
 namespace std {
 
-    template <>
-    struct hash<eventview::EntityDescriptor>
-    {
-        std::size_t operator()(const eventview::EntityDescriptor& ed) const
-        {
+    template<>
+    struct hash<eventview::EntityDescriptor> {
+        std::size_t operator()(const eventview::EntityDescriptor &ed) const {
             using std::size_t;
             using std::hash;
             using std::uint64_t;
-            return (hash<uint64_t >()(ed.id) ^ (hash<uint64_t>()(ed.type) << 1));
+            return (hash<uint64_t>()(ed.id) ^ (hash<uint64_t>()(ed.type) << 1));
         }
     };
 

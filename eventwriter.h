@@ -13,9 +13,9 @@ namespace eventview {
     template<typename EvtLog = EventLog<>, typename SFProvider = SnowflakeProvider<> >
     class EventWriter final {
     public:
-        EventWriter(std::uint32_t writer_id, EventReceiver &receiver) :
+        EventWriter(std::uint32_t writer_id, EventReceiver receiver) :
                 snowflakes_{SFProvider{writer_id}},
-                log_{EvtLog{receiver}} {}
+                log_{EvtLog{std::move(receiver)}} {}
 
         nonstd::expected<EventID, std::string> write_event(const EventEntity &evt) {
             EventEntity to_store{evt};
@@ -37,6 +37,10 @@ namespace eventview {
         EventWriter(const EventWriter &other) = delete;
 
         EventWriter &operator=(const EventWriter &) = delete;
+
+        EventWriter(EventWriter &&) = default;
+
+        EventWriter &operator=(EventWriter &&) = default;
 
         ~EventWriter() = default;
 

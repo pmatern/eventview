@@ -12,6 +12,8 @@
 #include <string>
 #include <atomic>
 #include <variant>
+#include <optional>
+#include <functional>
 
 namespace eventview {
     void accept_event();
@@ -45,20 +47,32 @@ namespace eventview {
         }
     };
 
+    using ReferenceSet = std::unordered_map<EntityDescriptor, Existence>;
+    using RemovedReferences = std::unordered_map<std::string, EntityDescriptor>;
 
     class StorageNode final {
-        using ReferenceSet = std::unordered_map<EntityDescriptor, Existence>;
 
     public:
-        StorageNode(EventID write_time, EventEntity &&initial_state) : existence_{Existence{write_time, 0}},
-                                                                       entity_{std::move(initial_state)},
-                                                                       referencers_{{}} {}
+        StorageNode(EventID write_time, EventEntity initial_state) : existence_{Existence{write_time, 0}},
+                                                                     entity_{std::move(initial_state)},
+                                                                     referencers_{{}} {}
+
+
+        StorageNode() = default;
 
         StorageNode(const StorageNode &other) = delete;
 
         StorageNode &operator=(const StorageNode &) = delete;
 
+        StorageNode(StorageNode &&) noexcept = default;
+
+        StorageNode &operator=(StorageNode &&) noexcept = default;
+
         ~StorageNode() = default;
+
+        EntityTypeID type() {
+            return entity_.descriptor.type;
+        }
 
         nonstd::expected<void, std::string>
         add_referencer(EventID write_time, const std::string &field_name, EntityDescriptor referencer) {
@@ -66,10 +80,10 @@ namespace eventview {
                 return nonstd::make_unexpected("node does not exist");
             }
 
-            auto refs_by_field = referencers_[field_name];
+            ReferenceSet& refs_by_field = referencers_[field_name];
 
             try {
-                auto found = refs_by_field[referencer];
+                Existence& found = refs_by_field[referencer];
                 found.touch(write_time);
                 return {};
             } catch (std::exception &e) {
@@ -83,10 +97,10 @@ namespace eventview {
                 return nonstd::make_unexpected("node does not exist");
             }
 
-            auto refs_by_field = referencers_[field_name];
+            ReferenceSet& refs_by_field = referencers_[field_name];
 
             try {
-                auto found = refs_by_field[referencer];
+                Existence& found = refs_by_field[referencer];
                 found.deref(write_time);
                 return {};
             } catch (std::exception &e) {
@@ -120,8 +134,8 @@ namespace eventview {
             }
         }
 
-        nonstd::expected<std::unordered_map<std::string, EntityDescriptor>, std::string>
-        update_fields(EventID update_time, EventEntity &update) {
+        nonstd::expected<RemovedReferences, std::string>
+        update_fields(EventID update_time, EventEntity update) {
             if (!exists()) {
                 return nonstd::make_unexpected("node does not exist");
             }
@@ -148,6 +162,15 @@ namespace eventview {
             }
         }
 
+        const nonstd::expected<std::reference_wrapper<const std::unordered_map<std::string, PrimitiveFieldValue> >, std::string>
+        get_fields() {
+            if (!exists()) {
+                return nonstd::make_unexpected("node does not exist");
+            }
+
+            return entity_.value_tree.fields;
+        }
+
 
         bool exists() {
             return existence_.exists();
@@ -161,6 +184,54 @@ namespace eventview {
         Existence existence_;
         EventEntity entity_;
         std::unordered_map<std::string, ReferenceSet> referencers_;
+    };
+
+
+    class EntityStore final {
+    public:
+
+        EntityStore(const EntityStore &other) = delete;
+
+        EntityStore &operator=(const EntityStore &) = delete;
+
+        EntityStore(EntityStore &&) noexcept = default;
+
+        EntityStore &operator=(EntityStore &&) noexcept = default;
+
+        ~EntityStore() = default;
+
+        nonstd::expected<RemovedReferences, std::string>
+        put(EventID write_time, EventEntity entity) {
+            try {
+                auto found = store_.find(entity.descriptor.id);
+
+                if (found != store_.end()) {
+                    store_.insert(std::make_pair(write_time, StorageNode{write_time, std::move(entity)}));
+                    return {};
+                } else {
+                    return found->second.update_fields(write_time, entity);
+                }
+            } catch (std::exception &e) {
+                return nonstd::make_unexpected(e.what());
+            }
+        }
+
+        std::optional<std::reference_wrapper<StorageNode> > get(const EntityDescriptor &descriptor) {
+            auto found = store_.find(descriptor.id);
+
+            if (found != store_.end()) {
+                StorageNode &node = found->second;
+                if (node.type() == descriptor.type) {
+                    return node;
+                }
+            }
+
+            return {};
+
+        }
+
+    private:
+        std::unordered_map<EntityID, StorageNode> store_;
     };
 
 }
