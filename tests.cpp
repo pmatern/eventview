@@ -8,6 +8,7 @@
 #include "eventlog.h"
 #include "eventwriter.h"
 #include "entitystorage.h"
+#include "publish.h"
 #include "expected.h"
 
 #define CATCH_CONFIG_MAIN
@@ -24,22 +25,21 @@ TEST_CASE("value node") {
             {{"name", std::string{"jane"}}, {"age", std::uint64_t{12}}}
     };
     ValueNode node{
-            {{"name",     std::string{"john"}}, {"age", std::uint64_t{41}}, {"department_id", EntityDescriptor{sp.next(), 5}}},
-            {{"children", child}}
+            {{"name",     std::string{"john"}}, {"age", std::uint64_t{41}}, {"department_id", EntityDescriptor{sp.next(), 5}}}
     };
 
-    REQUIRE(node.fields.size() == 3);
+    REQUIRE(node.size() == 3);
 
-    auto name = node.fields.find("name");
-    REQUIRE(name != node.fields.end());
+    auto name = node.find("name");
+    REQUIRE(name != node.end());
 
     auto name_val = name->second;
 
     REQUIRE(std::holds_alternative<std::string>(name_val));
     REQUIRE("john" == *std::get_if<std::string>(&name_val));
 
-    auto age = node.fields.find("age");
-    REQUIRE(age != node.fields.end());
+    auto age = node.find("age");
+    REQUIRE(age != node.end());
 
     auto age_val = age->second;
 
@@ -83,8 +83,7 @@ TEST_CASE("log event") {
             {{"name", std::string{"jane"}}, {"age", std::uint64_t{12}}}
     };
     ValueNode node{
-            {{"name",     std::string{"john"}}, {"age", std::uint64_t{41}}},
-            {{"children", child}}
+            {{"name",     std::string{"john"}}, {"age", std::uint64_t{41}}}
     };
 
     EntityDescriptor desc{577, 21};
@@ -111,8 +110,7 @@ TEST_CASE("write event") {
             {{"name", std::string{"jane"}}, {"age", std::uint64_t{12}}}
     };
     ValueNode node{
-            {{"name",     std::string{"john"}}, {"age", std::uint64_t{41}}},
-            {{"children", child}}
+            {{"name",     std::string{"john"}}, {"age", std::uint64_t{41}}}
     };
 
     EntityDescriptor desc{577, 21};
@@ -128,8 +126,7 @@ TEST_CASE("storage node referencers") {
             {{"name", std::string{"jane"}}, {"age", std::uint64_t{12}}}
     };
     ValueNode node{
-            {{"name",     std::string{"john"}}, {"age", std::uint64_t{41}}, {"department_id", EntityDescriptor{3453, 5}}},
-            {{"children", child}}
+            {{"name",     std::string{"john"}}, {"age", std::uint64_t{41}}, {"department_id", EntityDescriptor{3453, 5}}}
     };
 
     EntityDescriptor desc{577, 21};
@@ -188,8 +185,7 @@ TEST_CASE("storage node fields") {
     EntityDescriptor dept_id{sp.next(), 5};
 
     ValueNode node{
-            {{"name",     std::string{"john"}}, {"age", 41ull}, {"department_id", dept_id}},
-            {{"children", child}}
+            {{"name",     std::string{"john"}}, {"age", 41ull}, {"department_id", dept_id}}
     };
 
     EntityDescriptor desc{sp.next(), 21};
@@ -201,15 +197,11 @@ TEST_CASE("storage node fields") {
     REQUIRE(sn.exists());
     REQUIRE(sn.type() == desc.type);
 
-    //const nonstd::expected<std::reference_wrapper<const std::unordered_map<std::string, PrimitiveFieldValue> >, std::string>
     auto fields = sn.get_fields();
 
-    REQUIRE(fields.has_value());
+    auto name_val = fields.find("name");
 
-    auto fields_map = fields.value().get();
-    auto name_val = fields_map.find("name");
-
-    REQUIRE(name_val != fields_map.end());
+    REQUIRE(name_val != fields.end());
 
     auto john = name_val->second;
 
@@ -218,8 +210,7 @@ TEST_CASE("storage node fields") {
 
 
     ValueNode replacement {
-            {{"age", 91ull}},
-            {}
+            {{"age", 91ull}}
     };
 
     //this write won't take effect
@@ -233,12 +224,9 @@ TEST_CASE("storage node fields") {
 
     auto unchanged_fields = sn.get_fields();
 
-    REQUIRE(unchanged_fields.has_value());
+    auto unchanged_age_val = unchanged_fields.find("age");
 
-    auto unchanged_fields_map = unchanged_fields.value().get();
-    auto unchanged_age_val = unchanged_fields_map.find("age");
-
-    REQUIRE(unchanged_age_val != unchanged_fields_map.end());
+    REQUIRE(unchanged_age_val != unchanged_fields.end());
 
     auto forty_one = unchanged_age_val->second;
 
@@ -257,12 +245,9 @@ TEST_CASE("storage node fields") {
 
     auto changed_fields = sn.get_fields();
 
-    REQUIRE(changed_fields.has_value());
+    auto changed_age_val = changed_fields.find("age");
 
-    auto changed_fields_map = changed_fields.value().get();
-    auto changed_age_val = changed_fields_map.find("age");
-
-    REQUIRE(changed_age_val != changed_fields_map.end());
+    REQUIRE(changed_age_val != changed_fields.end());
 
     auto ninety_one = changed_age_val->second;
 
@@ -272,10 +257,6 @@ TEST_CASE("storage node fields") {
     sn.deref(sp.next());
 
     REQUIRE(!sn.exists());
-
-    //you can still read fields of nonexistent node
-    auto non_exist_result = sn.get_fields();
-    REQUIRE(non_exist_result);
 
 }
 
@@ -290,8 +271,7 @@ TEST_CASE("entity store") {
     EntityDescriptor dept_id{sp.next(), 5};
 
     ValueNode node{
-            {{"name",     std::string{"john"}}, {"age", 41ull}, {"department_id", dept_id}},
-            {{"children", child}}
+            {{"name",     std::string{"john"}}, {"age", 41ull}, {"department_id", dept_id}}
     };
 
     EntityDescriptor desc{sp.next(), 21};
@@ -311,4 +291,53 @@ TEST_CASE("entity store") {
     auto reremoved_refs = reput_result.value();
 
     REQUIRE(reremoved_refs.size()==1);
+
+    //TODO test getting fields
+}
+
+TEST_CASE("publish round trip") {
+    SnowflakeProvider sp{ 68 };
+    std::shared_ptr<EntityStore> store = std::make_shared<EntityStore>();
+    Publisher pub{store};
+
+    ValueNode node1{
+            {{"name", std::string{"jane"}}, {"age", std::uint64_t{12}}}
+    };
+
+    ValueNode node2{
+            {{"name",   std::string{"john"}}, {"age", std::uint64_t{41}}}
+    };
+
+    EntityDescriptor desc1{sp.next(), 21};
+    EventEntity entity1{desc1, node1};
+
+    EntityDescriptor desc2{sp.next(), 21};
+    EventEntity entity2{desc2, node2};
+
+    Event sent1{sp.next(), entity1};
+    Event sent2{sp.next(), entity2};
+
+    auto result1 = pub.publish(sent1);
+    REQUIRE(result1);
+
+    auto result2 = pub.publish(sent2);
+    REQUIRE(result2);
+
+
+    auto& lookup1 = store->get(desc1);
+    REQUIRE(lookup1);
+    auto& found1 = lookup1->get();
+
+    REQUIRE(found1.get_fields() == node1);
+
+
+    auto& lookup2 = store->get(desc2);
+    REQUIRE(lookup2);
+    auto& found2 = lookup2->get();
+
+    REQUIRE(found2.get_fields() == node2);
+
+    //TODO test referencers added
+    //TODO test referencers removed
+    //TODO test through eventwriter
 }

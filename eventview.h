@@ -7,6 +7,7 @@
 #include <variant>
 #include <unordered_map>
 #include <vector>
+#include <functional>
 #include "expected.h"
 
 namespace eventview {
@@ -46,23 +47,20 @@ namespace eventview {
         Reference,
     };
 
-    struct ValueNode {
-        std::unordered_map<std::string, PrimitiveFieldValue> fields;
-        std::unordered_map<std::string, ValueNode> children; //TODO build out more flattened internal structure with paths
-    };
+    using ValueNode = std::unordered_map<std::string, PrimitiveFieldValue>;
 
-    bool operator==(const ValueNode &lhs, const ValueNode &rhs) {
-        return lhs.fields == rhs.fields && lhs.children == rhs.children;
-    }
-
+//    bool operator==(const ValueNode &lhs, const ValueNode &rhs) {
+//        return lhs.fields == rhs.fields /* && lhs.children == rhs.children*/;
+//    }
+//
 
     struct EventEntity {
         EntityDescriptor descriptor;
-        ValueNode value_tree;
+        ValueNode node;
     };
 
     bool operator==(const EventEntity &lhs, const EventEntity &rhs) {
-        return lhs.descriptor == rhs.descriptor && lhs.value_tree == rhs.value_tree;
+        return lhs.descriptor == rhs.descriptor && lhs.node == rhs.node;
     }
 
     struct ViewSchemaNode {
@@ -133,6 +131,7 @@ namespace eventview {
         virtual ViewSchema register_view_schema(ViewSchema schema) = 0;
     };
 
+    using EventReceiver = std::function<nonstd::expected<void, std::string>(Event evt)>;
 }
 
 namespace std {

@@ -8,23 +8,22 @@
 #include "eventview.h"
 #include "expected.h"
 #include <unordered_map>
-#include <set>
 #include <string>
-#include <atomic>
+#include <vector>
+#include <exception>
 #include <variant>
 #include <optional>
-#include <functional>
 
 namespace eventview {
-    void accept_event();
-
-    void load_existing_references();
-
-    void disconnect_old_references();
-
-    void connect_references();
-
-    void set_fields();
+//    void accept_event();
+//
+//    void load_existing_references();
+//
+//    void disconnect_old_references();
+//
+//    void connect_references();
+//
+//    void set_fields();
 
     struct Existence {
         EventID add_time;
@@ -128,15 +127,15 @@ namespace eventview {
                 std::unordered_map<std::string, EntityDescriptor> snapshot;
 
                 if (update_time > existence_.add_time && update.descriptor == entity_.descriptor) {
-                    ValueNode to_deref = std::move(entity_.value_tree);
-                    entity_.value_tree = update.value_tree;
+                    ValueNode to_deref{entity_.node};
 
-                    for (auto kv : to_deref.fields) {
+                    for (auto& kv : to_deref) {
                         if (std::holds_alternative<EntityDescriptor>(kv.second)) {
                             snapshot[kv.first] = *std::get_if<EntityDescriptor>(&kv.second);
                         }
                     }
 
+                    entity_.node = update.node;
                     existence_.touch(update_time);
                 }
 
@@ -147,9 +146,8 @@ namespace eventview {
             }
         }
 
-        const nonstd::expected<std::reference_wrapper<const std::unordered_map<std::string, PrimitiveFieldValue> >, std::string>
-        get_fields() {
-            return entity_.value_tree.fields;
+        const ValueNode get_fields() {
+            return entity_.node;
         }
 
 

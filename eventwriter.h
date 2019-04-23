@@ -17,15 +17,14 @@ namespace eventview {
                 snowflakes_{SFProvider{writer_id}},
                 log_{EvtLog{std::move(receiver)}} {}
 
-        nonstd::expected<EventID, std::string> write_event(const EventEntity &evt) {
-            EventEntity to_store{evt};
+        nonstd::expected<EventID, std::string> write_event(EventEntity evt) {
 
             auto evt_id = snowflakes_.next();
-            if (0 == to_store.descriptor.id) {
-                to_store.descriptor.id = evt_id;
+            if (0 == evt.descriptor.id) {
+                evt.descriptor.id = evt_id;
             }
 
-            auto result = log_.append(Event{evt_id, std::move(to_store)});
+            auto result = log_.append(Event{evt_id, std::move(evt)});
 
             if (result) {
                 return evt_id;

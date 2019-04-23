@@ -4,13 +4,10 @@
 
 #include <vector>
 #include <exception>
-#include <functional>
 #include "expected.h"
 #include "eventview.h"
 
 namespace eventview {
-
-    using EventReceiver = std::function<nonstd::expected<void, std::string>(Event && evt)>;
 
     template<typename Storage = std::vector<Event> >
     class EventLog final {
@@ -27,15 +24,14 @@ namespace eventview {
 
         ~EventLog() = default;
 
-        nonstd::expected<void, std::string> append(Event &&evt) {
-            Event publish{evt};
+        nonstd::expected<void, std::string> append(Event evt) {
             try {
-                storage_.push_back(std::move(evt));
+                storage_.push_back(evt);
             } catch (std::exception &e) {
                 return nonstd::make_unexpected(e.what());
             }
 
-            auto result = publisher_(std::move(publish));
+            auto result = publisher_(std::move(evt));
             if (result) {
                 return {};
             } else {

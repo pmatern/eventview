@@ -3,6 +3,6 @@ project(eventview)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_library(eventview eventview.cpp eventview.h snowflake.h eventwriter.h eventlog.h expected.h entitystorage.h)
+add_library(eventview eventview.cpp eventview.h snowflake.h eventwriter.h eventlog.h expected.h entitystorage.h publish.h)
 
-add_executable(eventview_tests tests.cpp catch.h eventview.h snowflake.h eventwriter.h eventlog.h expected.h entitystorage.h)
+add_executable(eventview_tests tests.cpp catch.h eventview.h snowflake.h eventwriter.h eventlog.h expected.h entitystorage.h publish.h)
