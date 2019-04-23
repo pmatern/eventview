@@ -269,5 +269,11 @@ TEST_CASE("storage node fields") {
     REQUIRE(std::holds_alternative<std::uint64_t>(ninety_one));
     REQUIRE(91ull == *std::get_if<std::uint64_t>(&ninety_one));
 
+    sn.deref(sp.next());
+
+    REQUIRE(!sn.exists());
+
+    auto non_exist_result = sn.get_fields();
+    REQUIRE(!non_exist_result);
 
 }
