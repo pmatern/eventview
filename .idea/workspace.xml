@@ -2,8 +2,8 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="eventview" targetName="eventview" />
       <config projectName="eventview" targetName="eventview_tests" />
+      <config projectName="eventview" targetName="eventview" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -13,6 +13,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0de57598-a840-4258-8a91-ada38f163fba" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entitystorage.h" beforeDir="false" afterPath="$PROJECT_DIR$/entitystorage.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -29,21 +31,9 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eventview.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
-              <caret line="43" column="15" lean-forward="true" selection-start-line="43" selection-start-column="15" selection-end-line="43" selection-end-column="15" />
-              <folding>
-                <element signature="e#61#79#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/snowflake.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
+            <state relative-caret-position="1615">
               <caret line="95" selection-start-line="95" selection-end-line="95" />
             </state>
           </provider>
@@ -52,7 +42,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eventwriter.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
+            <state relative-caret-position="391">
               <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
               <folding>
                 <element signature="e#193#267#0" expanded="true" />
@@ -104,11 +94,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/entitystorage.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="165" column="8" selection-start-line="165" selection-start-column="8" selection-end-line="165" selection-end-column="8" />
+            <state relative-caret-position="331">
+              <caret line="149" column="9" lean-forward="true" selection-start-line="149" selection-start-column="9" selection-end-line="149" selection-end-column="9" />
               <folding>
                 <element signature="e#118#140#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catch.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="194">
+              <caret line="14904" column="57" selection-start-line="14904" selection-start-column="57" selection-end-line="14904" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -125,8 +124,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="277" lean-forward="true" selection-start-line="277" selection-end-line="277" />
+            <state relative-caret-position="282">
+              <caret line="275" column="51" selection-start-line="275" selection-start-column="51" selection-end-line="275" selection-end-column="51" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -180,7 +179,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -192,6 +190,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -214,7 +213,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Catch.storage node fields">
+  <component name="RunManager" selected="Catch.All in eventview_tests">
     <configuration name="All in eventview_tests" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" nameIsGenerated="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="eventview" TARGET_NAME="eventview_tests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="eventview" RUN_TARGET_NAME="eventview_tests" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -266,10 +265,10 @@
       <item itemvalue="Catch.write event" />
       <item itemvalue="Catch.entity storage" />
       <item itemvalue="Catch.storage node" />
-      <item itemvalue="CMake Application.eventview" />
-      <item itemvalue="CMake Application.eventview_tests" />
       <item itemvalue="Catch.storage node fields" />
       <item itemvalue="Catch.value node" />
+      <item itemvalue="CMake Application.eventview" />
+      <item itemvalue="CMake Application.eventview_tests" />
     </list>
     <recent_temporary>
       <list>
@@ -295,17 +294,12 @@
       <workItem from="1555598706847" duration="5755000" />
       <workItem from="1555642697682" duration="92000" />
       <workItem from="1555643073779" duration="39306000" />
-      <workItem from="1555988602097" duration="5626000" />
+      <workItem from="1555988602097" duration="5697000" />
+      <workItem from="1556038643484" duration="1729000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="value_node - 2019.04.22 at 22h 08m 18s.xml">
-      <configuration name="value node" configurationId="CMakeCatchTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="value_node - 2019.04.22 at 22h 11m 22s.xml">
-      <configuration name="value node" configurationId="CMakeCatchTestRunConfigurationType" />
-    </history-entry>
     <history-entry file="storage_node_fields - 2019.04.22 at 22h 22m 47s.xml">
       <configuration name="storage node fields" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
@@ -330,15 +324,21 @@
     <history-entry file="storage_node_fields - 2019.04.22 at 22h 38m 20s.xml">
       <configuration name="storage node fields" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
+    <history-entry file="storage_node_fields - 2019.04.22 at 22h 44m 09s.xml">
+      <configuration name="storage node fields" configurationId="CMakeCatchTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="All_in_eventview_tests - 2019.04.23 at 10h 30m 05s.xml">
+      <configuration name="All in eventview_tests" configurationId="CMakeCatchTestRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64666000" />
+    <option name="totallyTimeSpent" value="66466000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="33" width="1400" height="837" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.185567" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18777615" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -450,10 +450,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catch.h">
+    <entry file="file://$PROJECT_DIR$/eventview.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="14904" column="57" lean-forward="true" selection-start-line="14904" selection-start-column="57" selection-end-line="14904" selection-end-column="57" />
+        <state relative-caret-position="731">
+          <caret line="43" column="15" selection-start-line="43" selection-start-column="15" selection-end-line="43" selection-end-column="15" />
+          <folding>
+            <element signature="e#61#79#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snowflake.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1615">
+          <caret line="95" selection-start-line="95" selection-end-line="95" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eventwriter.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
+          <folding>
+            <element signature="e#193#267#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -496,47 +516,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/snowflake.h">
+    <entry file="file://$PROJECT_DIR$/catch.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="95" selection-start-line="95" selection-end-line="95" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eventview.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="43" column="15" lean-forward="true" selection-start-line="43" selection-start-column="15" selection-end-line="43" selection-end-column="15" />
-          <folding>
-            <element signature="e#61#79#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="194">
+          <caret line="14904" column="57" selection-start-line="14904" selection-start-column="57" selection-end-line="14904" selection-end-column="57" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/entitystorage.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="165" column="8" selection-start-line="165" selection-start-column="8" selection-end-line="165" selection-end-column="8" />
+        <state relative-caret-position="331">
+          <caret line="149" column="9" lean-forward="true" selection-start-line="149" selection-start-column="9" selection-end-line="149" selection-end-column="9" />
           <folding>
             <element signature="e#118#140#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eventwriter.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
-          <folding>
-            <element signature="e#193#267#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="277" lean-forward="true" selection-start-line="277" selection-end-line="277" />
+        <state relative-caret-position="282">
+          <caret line="275" column="51" selection-start-line="275" selection-start-column="51" selection-end-line="275" selection-end-column="51" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
           </folding>

@@ -273,7 +273,8 @@ TEST_CASE("storage node fields") {
 
     REQUIRE(!sn.exists());
 
+    //you can still read fields of nonexistent node
     auto non_exist_result = sn.get_fields();
-    REQUIRE(!non_exist_result);
+    REQUIRE(non_exist_result);
 
 }

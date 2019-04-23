@@ -76,15 +76,12 @@ namespace eventview {
 
         nonstd::expected<void, std::string>
         add_referencer(EventID write_time, const std::string &field_name, EntityDescriptor referencer) {
-            if (!exists()) {
-                return nonstd::make_unexpected("node does not exist");
-            }
-
-            auto& refs_by_field = referencers_[field_name];
-
             try {
+                auto& refs_by_field = referencers_[field_name];
+
                 auto& found = refs_by_field[referencer];
                 found.touch(write_time);
+                existence_.touch(write_time);
                 return {};
             } catch (std::exception &e) {
                 return nonstd::make_unexpected(e.what());
@@ -93,15 +90,12 @@ namespace eventview {
 
         nonstd::expected<void, std::string>
         remove_referencer(EventID write_time, const std::string &field_name, EntityDescriptor referencer) {
-            if (!exists()) {
-                return nonstd::make_unexpected("node does not exist");
-            }
-
-            auto& refs_by_field = referencers_[field_name];
-
             try {
+                auto& refs_by_field = referencers_[field_name];
+
                 auto& found = refs_by_field[referencer];
                 found.deref(write_time);
+                existence_.touch(write_time);
                 return {};
             } catch (std::exception &e) {
                 return nonstd::make_unexpected(e.what());
@@ -110,10 +104,6 @@ namespace eventview {
 
         const nonstd::expected<std::vector<EntityDescriptor>, std::string>
         referencers_for_field(const std::string &field) {
-            if (!exists()) {
-                return nonstd::make_unexpected("node does not exist");
-            }
-
             try {
                 std::vector<EntityDescriptor> snapshot;
 
@@ -136,10 +126,6 @@ namespace eventview {
 
         nonstd::expected<RemovedReferences, std::string>
         update_fields(EventID update_time, EventEntity update) {
-            if (!exists()) {
-                return nonstd::make_unexpected("node does not exist");
-            }
-
             try {
                 std::unordered_map<std::string, EntityDescriptor> snapshot;
 
@@ -153,6 +139,7 @@ namespace eventview {
                         }
                     }
 
+                    existence_.touch(update_time);
                 }
 
                 return std::move(snapshot);
@@ -164,10 +151,6 @@ namespace eventview {
 
         const nonstd::expected<std::reference_wrapper<const std::unordered_map<std::string, PrimitiveFieldValue> >, std::string>
         get_fields() {
-            if (!exists()) {
-                return nonstd::make_unexpected("node does not exist");
-            }
-
             return entity_.value_tree.fields;
         }
 
