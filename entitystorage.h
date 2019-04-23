@@ -80,10 +80,10 @@ namespace eventview {
                 return nonstd::make_unexpected("node does not exist");
             }
 
-            ReferenceSet& refs_by_field = referencers_[field_name];
+            auto& refs_by_field = referencers_[field_name];
 
             try {
-                Existence& found = refs_by_field[referencer];
+                auto& found = refs_by_field[referencer];
                 found.touch(write_time);
                 return {};
             } catch (std::exception &e) {
@@ -97,10 +97,10 @@ namespace eventview {
                 return nonstd::make_unexpected("node does not exist");
             }
 
-            ReferenceSet& refs_by_field = referencers_[field_name];
+            auto& refs_by_field = referencers_[field_name];
 
             try {
-                Existence& found = refs_by_field[referencer];
+                auto& found = refs_by_field[referencer];
                 found.deref(write_time);
                 return {};
             } catch (std::exception &e) {

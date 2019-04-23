@@ -13,12 +13,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0de57598-a840-4258-8a91-ada38f163fba" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entitystorage.h" beforeDir="false" afterPath="$PROJECT_DIR$/entitystorage.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eventlog.h" beforeDir="false" afterPath="$PROJECT_DIR$/eventlog.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eventview.h" beforeDir="false" afterPath="$PROJECT_DIR$/eventview.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eventwriter.h" beforeDir="false" afterPath="$PROJECT_DIR$/eventwriter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/snowflake.h" beforeDir="false" afterPath="$PROJECT_DIR$/snowflake.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -37,8 +32,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eventview.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="850">
-              <caret line="50" column="58" selection-start-line="50" selection-start-column="58" selection-end-line="50" selection-end-column="58" />
+            <state relative-caret-position="731">
+              <caret line="43" column="15" lean-forward="true" selection-start-line="43" selection-start-column="15" selection-end-line="43" selection-end-column="15" />
               <folding>
                 <element signature="e#61#79#0" expanded="true" />
               </folding>
@@ -58,7 +53,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eventwriter.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
+            <state relative-caret-position="178">
               <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
               <folding>
                 <element signature="e#193#267#0" expanded="true" />
@@ -110,8 +105,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/entitystorage.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
-              <caret line="134" selection-start-line="134" selection-end-line="134" />
+            <state relative-caret-position="181">
+              <caret line="142" column="17" lean-forward="true" selection-start-line="142" selection-start-column="17" selection-end-line="142" selection-end-column="17" />
               <folding>
                 <element signature="e#118#140#0" expanded="true" />
               </folding>
@@ -131,8 +126,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="138" column="38" lean-forward="true" selection-start-line="138" selection-start-column="38" selection-end-line="138" selection-end-column="38" />
+            <state relative-caret-position="296">
+              <caret line="270" column="4" selection-start-line="270" selection-start-column="4" selection-end-line="270" selection-end-column="4" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -146,6 +141,9 @@
     <findStrings>
       <find>make</find>
       <find>struct Event</find>
+      <find>&amp;</find>
+      <find>41</find>
+      <find>12</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -217,14 +215,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Catch.storage node">
+  <component name="RunManager" selected="Catch.storage node fields">
     <configuration name="All in eventview_tests" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" nameIsGenerated="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="eventview" TARGET_NAME="eventview_tests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="eventview" RUN_TARGET_NAME="eventview_tests" TEST_MODE="SUITE_TEST">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-        <option name="BeforeTestRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Generate snowflakes" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="eventview" TARGET_NAME="eventview_tests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="eventview" RUN_TARGET_NAME="eventview_tests" TEST_METHOD="Generate snowflakes" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
@@ -236,13 +228,19 @@
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="log event" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="eventview" TARGET_NAME="eventview_tests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="eventview" RUN_TARGET_NAME="eventview_tests" TEST_METHOD="log event" TEST_MODE="SUITE_TEST">
+    <configuration name="storage node fields" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="eventview" TARGET_NAME="eventview_tests" RUN_TARGET_PROJECT_NAME="eventview" RUN_TARGET_NAME="eventview_tests" TEST_METHOD="storage node fields" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="storage node" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="eventview" TARGET_NAME="eventview_tests" RUN_TARGET_PROJECT_NAME="eventview" RUN_TARGET_NAME="eventview_tests" TEST_METHOD="storage node" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="value node" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="eventview" TARGET_NAME="eventview_tests" RUN_TARGET_PROJECT_NAME="eventview" RUN_TARGET_NAME="eventview_tests" TEST_METHOD="value node" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
@@ -266,21 +264,21 @@
     </configuration>
     <list>
       <item itemvalue="Catch.All in eventview_tests" />
-      <item itemvalue="Catch.Generate snowflakes" />
-      <item itemvalue="Catch.log event" />
       <item itemvalue="Catch.write event" />
       <item itemvalue="Catch.entity storage" />
       <item itemvalue="Catch.storage node" />
       <item itemvalue="CMake Application.eventview" />
       <item itemvalue="CMake Application.eventview_tests" />
+      <item itemvalue="Catch.storage node fields" />
+      <item itemvalue="Catch.value node" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Catch.storage node fields" />
+        <item itemvalue="Catch.value node" />
         <item itemvalue="Catch.storage node" />
         <item itemvalue="Catch.entity storage" />
         <item itemvalue="Catch.write event" />
-        <item itemvalue="Catch.log event" />
-        <item itemvalue="Catch.Generate snowflakes" />
       </list>
     </recent_temporary>
   </component>
@@ -298,44 +296,44 @@
       <workItem from="1555598706847" duration="5755000" />
       <workItem from="1555642697682" duration="92000" />
       <workItem from="1555643073779" duration="39306000" />
-      <workItem from="1555988602097" duration="605000" />
+      <workItem from="1555988602097" duration="5333000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="All_in_eventview_tests - 2019.04.20 at 11h 42m 05s.xml">
-      <configuration name="All in eventview_tests" configurationId="CMakeCatchTestRunConfigurationType" />
+    <history-entry file="value_node - 2019.04.22 at 22h 08m 18s.xml">
+      <configuration name="value node" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="entity_storage - 2019.04.22 at 18h 59m 06s.xml">
-      <configuration name="entity storage" configurationId="CMakeCatchTestRunConfigurationType" />
+    <history-entry file="value_node - 2019.04.22 at 22h 11m 22s.xml">
+      <configuration name="value node" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="storage_node - 2019.04.22 at 19h 46m 31s.xml">
-      <configuration name="storage node" configurationId="CMakeCatchTestRunConfigurationType" />
+    <history-entry file="storage_node_fields - 2019.04.22 at 22h 22m 47s.xml">
+      <configuration name="storage node fields" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="storage_node - 2019.04.22 at 19h 49m 21s.xml">
-      <configuration name="storage node" configurationId="CMakeCatchTestRunConfigurationType" />
+    <history-entry file="storage_node_fields - 2019.04.22 at 22h 28m 55s.xml">
+      <configuration name="storage node fields" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="storage_node - 2019.04.22 at 19h 53m 53s.xml">
-      <configuration name="storage node" configurationId="CMakeCatchTestRunConfigurationType" />
+    <history-entry file="storage_node_fields - 2019.04.22 at 22h 28m 57s.xml">
+      <configuration name="storage node fields" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="storage_node - 2019.04.22 at 19h 59m 18s.xml">
-      <configuration name="storage node" configurationId="CMakeCatchTestRunConfigurationType" />
+    <history-entry file="value_node - 2019.04.22 at 22h 32m 07s.xml">
+      <configuration name="value node" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="storage_node - 2019.04.22 at 20h 00m 40s.xml">
-      <configuration name="storage node" configurationId="CMakeCatchTestRunConfigurationType" />
+    <history-entry file="storage_node_fields - 2019.04.22 at 22h 33m 25s.xml">
+      <configuration name="storage node fields" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="storage_node - 2019.04.22 at 20h 05m 47s.xml">
-      <configuration name="storage node" configurationId="CMakeCatchTestRunConfigurationType" />
+    <history-entry file="storage_node_fields - 2019.04.22 at 22h 33m 37s.xml">
+      <configuration name="storage node fields" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="storage_node - 2019.04.22 at 20h 07m 34s.xml">
-      <configuration name="storage node" configurationId="CMakeCatchTestRunConfigurationType" />
+    <history-entry file="storage_node_fields - 2019.04.22 at 22h 36m 20s.xml">
+      <configuration name="storage node fields" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="storage_node - 2019.04.22 at 20h 08m 25s.xml">
-      <configuration name="storage node" configurationId="CMakeCatchTestRunConfigurationType" />
+    <history-entry file="storage_node_fields - 2019.04.22 at 22h 38m 20s.xml">
+      <configuration name="storage node fields" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59645000" />
+    <option name="totallyTimeSpent" value="64373000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="33" width="1400" height="837" extended-state="0" />
@@ -346,8 +344,8 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32885906" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32885906" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32885906" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.48724833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -389,27 +387,6 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/tests.cpp</url>
-          <line>111</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/entitystorage.h</url>
-          <line>85</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/tests.cpp</url>
-          <line>134</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -481,26 +458,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eventview.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="850">
-          <caret line="50" column="58" selection-start-line="50" selection-start-column="58" selection-end-line="50" selection-end-column="58" />
-          <folding>
-            <element signature="e#61#79#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eventwriter.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
-          <folding>
-            <element signature="e#193#267#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eventlog.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -547,20 +504,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/eventwriter.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
+          <folding>
+            <element signature="e#193#267#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/entitystorage.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="134" selection-start-line="134" selection-end-line="134" />
+        <state relative-caret-position="181">
+          <caret line="142" column="17" lean-forward="true" selection-start-line="142" selection-start-column="17" selection-end-line="142" selection-end-column="17" />
           <folding>
             <element signature="e#118#140#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/eventview.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="43" column="15" lean-forward="true" selection-start-line="43" selection-start-column="15" selection-end-line="43" selection-end-column="15" />
+          <folding>
+            <element signature="e#61#79#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tests.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="138" column="38" lean-forward="true" selection-start-line="138" selection-start-column="38" selection-end-line="138" selection-end-column="38" />
+        <state relative-caret-position="296">
+          <caret line="270" column="4" selection-start-line="270" selection-start-column="4" selection-end-line="270" selection-end-column="4" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
           </folding>
