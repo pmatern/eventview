@@ -58,8 +58,6 @@ namespace eventview {
                                                                      referencers_{{}} {}
 
 
-        StorageNode() = default;
-
         StorageNode(const StorageNode &other) = delete;
 
         StorageNode &operator=(const StorageNode &) = delete;
@@ -172,6 +170,7 @@ namespace eventview {
 
     class EntityStore final {
     public:
+        EntityStore() = default;
 
         EntityStore(const EntityStore &other) = delete;
 
@@ -188,18 +187,18 @@ namespace eventview {
             try {
                 auto found = store_.find(entity.descriptor.id);
 
-                if (found != store_.end()) {
-                    store_.insert(std::make_pair(write_time, StorageNode{write_time, std::move(entity)}));
+                if (found == store_.end()) {
+                    store_.insert(std::make_pair(entity.descriptor.id, StorageNode{write_time, std::move(entity)}));
                     return {};
                 } else {
-                    return found->second.update_fields(write_time, entity);
+                    return found->second.update_fields(write_time, std::move(entity));
                 }
             } catch (std::exception &e) {
                 return nonstd::make_unexpected(e.what());
             }
         }
 
-        std::optional<std::reference_wrapper<StorageNode> > get(const EntityDescriptor &descriptor) {
+        const std::optional<std::reference_wrapper<StorageNode> > get(const EntityDescriptor &descriptor) {
             auto found = store_.find(descriptor.id);
 
             if (found != store_.end()) {
@@ -210,7 +209,6 @@ namespace eventview {
             }
 
             return {};
-
         }
 
     private:

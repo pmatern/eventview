@@ -278,3 +278,37 @@ TEST_CASE("storage node fields") {
     REQUIRE(non_exist_result);
 
 }
+
+TEST_CASE("entity store") {
+    SnowflakeProvider sp{ 45 };
+    EntityStore store{};
+
+    ValueNode child{
+            {{"name", std::string{"jane"}}, {"age", 12ull}}
+    };
+
+    EntityDescriptor dept_id{sp.next(), 5};
+
+    ValueNode node{
+            {{"name",     std::string{"john"}}, {"age", 41ull}, {"department_id", dept_id}},
+            {{"children", child}}
+    };
+
+    EntityDescriptor desc{sp.next(), 21};
+    EventEntity entity{desc, node};
+
+    auto result = store.get(desc);
+    REQUIRE(!result.has_value());
+
+    auto put_result = store.put(sp.next(), entity);
+    REQUIRE(put_result);
+    auto removed_refs = put_result.value();
+
+    REQUIRE(removed_refs.size()==0);
+
+    auto reput_result = store.put(sp.next(), entity);
+    REQUIRE(reput_result);
+    auto reremoved_refs = reput_result.value();
+
+    REQUIRE(reremoved_refs.size()==1);
+}
