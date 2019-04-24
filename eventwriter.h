@@ -33,6 +33,10 @@ namespace eventview {
             }
         }
 
+        EventID next_id() {
+            return snowflakes_.next();
+        }
+
         EventWriter(const EventWriter &other) = delete;
 
         EventWriter &operator=(const EventWriter &) = delete;

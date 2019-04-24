@@ -292,20 +292,26 @@ TEST_CASE("entity store") {
 
     REQUIRE(reremoved_refs.size()==1);
 
-    //TODO test getting fields
+    auto& fields = store.get(desc);
+    REQUIRE(fields);
+    auto& fields_val = fields->get().get_fields();
+
+    REQUIRE(fields_val == node);
+
 }
 
 TEST_CASE("publish round trip") {
     SnowflakeProvider sp{ 68 };
     std::shared_ptr<EntityStore> store = std::make_shared<EntityStore>();
     Publisher pub{store};
+    EntityDescriptor mgr_ref = EntityDescriptor{sp.next(), 90ull};
 
     ValueNode node1{
             {{"name", std::string{"jane"}}, {"age", std::uint64_t{12}}}
     };
 
     ValueNode node2{
-            {{"name",   std::string{"john"}}, {"age", std::uint64_t{41}}}
+            {{"name",   std::string{"john"}}, {"age", std::uint64_t{41}}, {"manager_id", mgr_ref}}
     };
 
     EntityDescriptor desc1{sp.next(), 21};
@@ -337,7 +343,47 @@ TEST_CASE("publish round trip") {
 
     REQUIRE(found2.get_fields() == node2);
 
-    //TODO test referencers added
-    //TODO test referencers removed
-    //TODO test through eventwriter
+    auto& stub = store->get(mgr_ref);
+    REQUIRE(stub);
+    auto& found_stub = stub->get();
+
+    auto& stub_referencers = found_stub.referencers_for_field("manager_id");
+    REQUIRE(stub_referencers);
+
+    auto& referencer = stub_referencers.value();
+
+    REQUIRE(referencer.size() == 1);
+    REQUIRE(referencer[0] == desc2);
+
+    //TODO test stub referencers removed
+}
+
+
+TEST_CASE("event writer round trip") {
+    std::shared_ptr<EntityStore> store = std::make_shared<EntityStore>();
+    Publisher pub{store};
+
+    EventWriter writer{ 46, [&](Event evt) {
+        return pub.publish(evt);
+    }};
+
+    EntityDescriptor mgr_ref{writer.next_id(), 90ull};
+
+
+    ValueNode node{
+            {{"name",   std::string{"john"}}, {"age", std::uint64_t{41}}, {"manager_id", mgr_ref}}
+    };
+
+    EntityDescriptor desc{writer.next_id(), 21};
+    EventEntity entity{desc, node};
+
+    auto result = writer.write_event(entity);
+    REQUIRE(result);
+
+    auto& lookup = store->get(desc);
+    REQUIRE(lookup);
+    auto& found = lookup->get();
+
+    REQUIRE(found.get_fields() == node);
+
 }
