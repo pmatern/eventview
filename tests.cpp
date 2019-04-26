@@ -9,7 +9,7 @@
 #include "eventwriter.h"
 #include "entitystorage.h"
 #include "publish.h"
-#include "query.h"
+#include "view.h"
 
 #define CATCH_CONFIG_MAIN
 
@@ -273,7 +273,7 @@ TEST_CASE("entity store") {
 
     REQUIRE(reremoved_refs.size()==1);
 
-    auto& fields = store.get(desc);
+    const auto& fields = store.get(desc);
     REQUIRE(fields);
     auto& fields_val = fields->get().get_fields();
 
@@ -308,20 +308,20 @@ TEST_CASE("publish round trip") {
 
     pub.publish(sent2);
 
-    auto& lookup1 = store->get(desc1);
+    const auto& lookup1 = store->get(desc1);
     REQUIRE(lookup1);
     auto& found1 = lookup1->get();
 
     REQUIRE(found1.get_fields() == node1);
 
 
-    auto& lookup2 = store->get(desc2);
+    const auto& lookup2 = store->get(desc2);
     REQUIRE(lookup2);
     auto& found2 = lookup2->get();
 
     REQUIRE(found2.get_fields() == node2);
 
-    auto& stub = store->get(mgr_ref);
+    const auto& stub = store->get(mgr_ref);
     REQUIRE(stub);
     auto& found_stub = stub->get();
 
@@ -355,17 +355,17 @@ TEST_CASE("event writer round trip") {
     auto result = writer.write_event(entity);
     REQUIRE(result);
 
-    auto& lookup = store->get(desc);
+    const auto& lookup = store->get(desc);
     REQUIRE(lookup);
     auto& found = lookup->get();
 
     REQUIRE(found.get_fields() == node);
 }
 
-TEST_CASE("write to query loop") {
+TEST_CASE("write to read_view loop") {
     std::shared_ptr<EntityStore> store = std::make_shared<EntityStore>();
     Publisher pub{store};
-    ViewProcessor view_processor{store};
+    ViewReader view_processor{store};
 
     EventWriter writer{406, [&](Event evt) {
         return pub.publish(evt);
@@ -405,7 +405,7 @@ TEST_CASE("write to query loop") {
     view_desc.paths.push_back(vp_2);
     view_desc.paths.push_back(vp_3);
 
-    const auto &view = view_processor.query(view_desc);
+    const auto &view = view_processor.read_view(view_desc);
 
     REQUIRE(view);
     REQUIRE(view->root == view_desc.root);

@@ -70,34 +70,7 @@ namespace eventview {
 
         ~SnowflakeProvider() = default;
 
-        Snowflake next() noexcept {
-            while (true) {
-                std::uint64_t timestamp = ts_provider_.get_timestamp();
-                auto current = state_.load();
-
-                if (current.time > timestamp) { //handle weird clock jumps
-                    auto retry_wait_hint = current.time - timestamp;
-                    //usleep(useconds_t(retryWaitHint * 1000))
-                } else {
-                    TimeAndOrder next_state;
-
-                    if (current.time == timestamp) {
-                        auto next_order = current.order + 1;
-                        if (next_order > max_order_id_) {
-                            continue;
-                        }
-
-                        next_state = TimeAndOrder{timestamp, next_order};
-                    } else {
-                        next_state = TimeAndOrder{timestamp, 0};
-                    }
-
-                    if (state_.compare_exchange_weak(current, next_state)) {
-                        return id_packer_.pack(next_state.time, writer_id_, next_state.order);
-                    }
-                }
-            }
-        }
+        inline Snowflake next() noexcept;
 
     private:
         struct TimeAndOrder {
@@ -112,6 +85,36 @@ namespace eventview {
         std::atomic<TimeAndOrder> state_;
     };
 
+
+    template<>
+    inline Snowflake SnowflakeProvider<>::next() noexcept {
+        while (true) {
+            std::uint64_t timestamp = ts_provider_.get_timestamp();
+            auto current = state_.load();
+
+            if (current.time > timestamp) { //handle weird clock jumps
+                auto retry_wait_hint = current.time - timestamp;
+                //usleep(useconds_t(retryWaitHint * 1000))
+            } else {
+                TimeAndOrder next_state;
+
+                if (current.time == timestamp) {
+                    auto next_order = current.order + 1;
+                    if (next_order > max_order_id_) {
+                        continue;
+                    }
+
+                    next_state = TimeAndOrder{timestamp, next_order};
+                } else {
+                    next_state = TimeAndOrder{timestamp, 0};
+                }
+
+                if (state_.compare_exchange_weak(current, next_state)) {
+                    return id_packer_.pack(next_state.time, writer_id_, next_state.order);
+                }
+            }
+        }
+    }
 }
 
 

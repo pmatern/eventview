@@ -2311,7 +2311,7 @@ namespace Catch {
 
         void setCompleted();
 
-// query
+// read_view
         auto allowThrows() const -> bool;
     };
 
