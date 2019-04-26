@@ -28,18 +28,26 @@ namespace eventview {
         ~ViewProcessor() = default;
 
         std::optional<View> query(const ViewDescriptor& view_desc) {
-            auto& root_node = store_->get(view_desc.root);
+            try {
+                auto &root_node = store_->get(view_desc.root);
 
-            if (root_node) {
-                View view{view_desc.root, {}};
+                if (root_node) {
+                    View view{view_desc.root, {}};
 
-                for (auto& path : view_desc.paths) {
-                    process_path_element(path, 0, root_node->get(), view);
+                    for (auto &path : view_desc.paths) {
+                        process_path_element(path, 0, root_node->get(), view);
+                    }
+
+                    return std::move(view);
                 }
-
-                return std::move(view);
+                return {};
+            } catch (std::exception& e) {
+                //do something
+                return {};
+            } catch (...) {
+                //do something else?
+                return {};
             }
-            return {};
         }
 
     private:
@@ -66,8 +74,8 @@ namespace eventview {
             auto ref = fields.find(elem.name);
 
             if (ref != fields.end()) {
-                if (std::holds_alternative<EntityDescriptor>(ref->second)) {
-                    auto& desc = *std::get_if<EntityDescriptor>(&ref->second);
+                if (ref->second.is_descriptor()) {
+                    auto& desc = ref->second.as_descriptor();
 
                     if (desc.type == elem.type) {
                         auto &next_node = store_->get(desc);
@@ -82,18 +90,16 @@ namespace eventview {
         void follow_reverse_refs(const ViewPath& path, const PathElement& elem, const ViewPath::size_type& idx,
                         const StorageNode& node, View& view) {
 
-            auto &referencers = node.referencers_for_field(elem.name);
-            if (referencers) {
-                for (auto &ed : referencers.value()) {
-                    if (ed.type == elem.type) {
-                        auto &next_node = store_->get(ed);
-                        if (next_node) {
-                            process_path_element(path, idx + 1, next_node->get(), view);
-                        }
+            for (auto &ed : node.referencers_for_field(elem.name)) {
+                if (ed.type == elem.type) {
+                    auto &next_node = store_->get(ed);
+                    if (next_node) {
+                        process_path_element(path, idx + 1, next_node->get(), view);
                     }
                 }
             }
         }
+
 
 
         void load_value(const ViewPath& path, const PathElement& path_elem, const StorageNode& node, View& view) {

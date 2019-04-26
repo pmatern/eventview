@@ -2,12 +2,39 @@
 #ifndef EVENTVIEW_EVENTWRITER_H
 #define EVENTVIEW_EVENTWRITER_H
 
+#include <variant>
 #include "eventview.h"
 #include "snowflake.h"
 #include "eventlog.h"
-#include "expected.h"
 
 namespace eventview {
+
+    class WriteResult final {
+    public:
+        WriteResult(EventID id):result_{id}{}
+        WriteResult(std::string error_msg):result_{std::move(error_msg)}{}
+
+        WriteResult(const WriteResult &) = default;
+        WriteResult& operator=(const WriteResult &) = default;
+        WriteResult(WriteResult &&) noexcept = default;
+        WriteResult& operator=(WriteResult &&) = default;
+        ~WriteResult() = default;
+
+        explicit operator bool() const {
+            return std::holds_alternative<EventID >(result_);
+        }
+
+        const EventID event_id() const {
+            return  *std::get_if<EventID>(&result_);
+        }
+
+        const std::string& error() const {
+            return  *std::get_if<std::string>(&result_);
+        }
+
+    private:
+        std::variant<EventID, std::string> result_;
+    };
 
 
     template<typename EvtLog = EventLog<>, typename SFProvider = SnowflakeProvider<> >
@@ -17,19 +44,20 @@ namespace eventview {
                 snowflakes_{SFProvider{writer_id}},
                 log_{EvtLog{std::move(receiver)}} {}
 
-        nonstd::expected<EventID, std::string> write_event(EventEntity evt) {
+        WriteResult write_event(EventEntity evt) {
 
             auto evt_id = snowflakes_.next();
             if (0 == evt.descriptor.id) {
                 evt.descriptor.id = evt_id;
             }
 
-            auto result = log_.append(Event{evt_id, std::move(evt)});
-
-            if (result) {
+            try {
+                log_.append(Event{evt_id, std::move(evt)});
                 return evt_id;
-            } else {
-                return nonstd::make_unexpected(result.error());
+            } catch (std::exception& e) {
+                return {e.what()};
+            } catch (...) {
+                return {"unexpected exception"};
             }
         }
 

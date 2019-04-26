@@ -8,7 +8,6 @@
 #include <unordered_map>
 #include <vector>
 #include <functional>
-#include "expected.h"
 
 namespace eventview {
 
@@ -73,8 +72,46 @@ namespace eventview {
         std::vector<ViewPath> paths;
     };
 
+    struct PrimitiveFieldValue {
+        std::variant<std::uint64_t, std::double_t, std::string, bool, EntityDescriptor> val;
 
-    using PrimitiveFieldValue = std::variant<std::uint64_t, std::double_t, std::string, bool, EntityDescriptor>;
+        bool is_long() const {
+            return std::holds_alternative<std::uint64_t>(val);
+        }
+
+        const std::uint64_t& as_long() const {
+            return *std::get_if<std::uint64_t>(&val);
+        }
+
+        bool is_double() const {
+            return std::holds_alternative<std::double_t>(val);
+        }
+
+        const std::double_t& as_double() const {
+            return *std::get_if<std::double_t>(&val);
+        }
+
+        bool is_string() const {
+            return std::holds_alternative<std::string>(val);
+        }
+
+        const std::string& as_string() const {
+            return *std::get_if<std::string>(&val);
+        }
+
+        bool is_descriptor() const {
+            return std::holds_alternative<EntityDescriptor>(val);
+        }
+
+        const EntityDescriptor& as_descriptor() const {
+            return *std::get_if<EntityDescriptor>(&val);
+        }
+
+    };
+
+    bool operator==(const PrimitiveFieldValue& lhs, const PrimitiveFieldValue& rhs){
+        return lhs.val == rhs.val;
+    }
 
     using ValueNode = std::unordered_map<std::string, PrimitiveFieldValue>;
 
@@ -115,7 +152,7 @@ namespace eventview {
     };
 
 
-    using EventReceiver = std::function<nonstd::expected<void, std::string>(Event evt)>;
+    using EventReceiver = std::function<void (Event evt)>;
 
     /*
     enum class PrimitiveFieldType {

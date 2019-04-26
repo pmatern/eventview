@@ -4,7 +4,6 @@
 
 #include <vector>
 #include <exception>
-#include "expected.h"
 #include "eventview.h"
 
 namespace eventview {
@@ -24,30 +23,19 @@ namespace eventview {
 
         ~EventLog() = default;
 
-        nonstd::expected<void, std::string> append(Event evt) {
-            try {
-                storage_.push_back(evt);
-            } catch (std::exception &e) {
-                return nonstd::make_unexpected(e.what());
-            }
 
-            auto result = publisher_(std::move(evt));
-            if (result) {
-                return {};
-            } else {
-                return nonstd::make_unexpected(result.error());
-            }
+        void append(Event evt) {
+            /*
+             * If storage succeeds, then publish fails, the caller might retry. In that case there will be dupe events in the
+             * underlying persistent log. That's okay.
+             */
+            storage_.push_back(evt);
+            publisher_(std::move(evt));
         }
 
-        nonstd::expected<void, std::string> replay() {
-            for (auto &evt : storage_) {
-                auto publish = evt;
-                auto result = publisher_(std::move(publish));
-                if (result) {
-                    return {};
-                } else {
-                    return result.error();
-                }
+        void replay() {
+            for (auto evt : storage_) {
+                publisher_(std::move(evt));
             }
         }
 

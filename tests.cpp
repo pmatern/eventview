@@ -9,7 +9,6 @@
 #include "eventwriter.h"
 #include "entitystorage.h"
 #include "publish.h"
-#include "expected.h"
 #include "query.h"
 
 #define CATCH_CONFIG_MAIN
@@ -23,10 +22,10 @@ TEST_CASE("value node") {
     SnowflakeProvider sp{ 125 };
 
     ValueNode child{
-            {{"name", std::string{"jane"}}, {"age", std::uint64_t{12}}}
+            {{"name", {std::string{"jane"}}}, {"age", {12ull}}}
     };
     ValueNode node{
-            {{"name",     std::string{"john"}}, {"age", std::uint64_t{41}}, {"department_id", EntityDescriptor{sp.next(), 5}}}
+            {{"name",  {std::string{"john"}}}, {"age", {41ull}}, {"department_id", {EntityDescriptor{sp.next(), 5}}}}
     };
 
     REQUIRE(node.size() == 3);
@@ -36,16 +35,16 @@ TEST_CASE("value node") {
 
     auto name_val = name->second;
 
-    REQUIRE(std::holds_alternative<std::string>(name_val));
-    REQUIRE("john" == *std::get_if<std::string>(&name_val));
+    REQUIRE(name_val.is_string());
+    REQUIRE("john" == name_val.as_string());
 
     auto age = node.find("age");
     REQUIRE(age != node.end());
 
     auto age_val = age->second;
 
-    REQUIRE(std::holds_alternative<std::uint64_t>(age_val));
-    REQUIRE(41ull == *std::get_if<std::uint64_t>(&age_val));
+    REQUIRE(age_val.is_long());
+    REQUIRE(41ull == age_val.as_long());
 
 
 }
@@ -73,7 +72,7 @@ TEST_CASE("Generate snowflakes") {
 
 TEST_CASE("log event") {
     Event received;
-    eventview::EventReceiver rcvr = [&](Event &&evt) -> nonstd::expected<void, std::string> {
+    eventview::EventReceiver rcvr = [&](Event &&evt) -> void {
         received = std::move(evt);
         return {};
     };
@@ -81,10 +80,10 @@ TEST_CASE("log event") {
     EventLog el{rcvr};
 
     ValueNode child{
-            {{"name", std::string{"jane"}}, {"age", std::uint64_t{12}}}
+            {{"name", {std::string{"jane"}}}, {"age", {12ull}}}
     };
     ValueNode node{
-            {{"name",     std::string{"john"}}, {"age", std::uint64_t{41}}}
+            {{"name",  {std::string{"john"}}}, {"age", {41ull}}}
     };
 
     EntityDescriptor desc{577, 21};
@@ -92,14 +91,13 @@ TEST_CASE("log event") {
     Event sent{848467, entity};
 
     Event to_send{sent};
-    auto result = el.append(std::move(to_send));
-    REQUIRE(result);
+    el.append(std::move(to_send));
     REQUIRE(received == sent);
 }
 
 TEST_CASE("write event") {
     Event received;
-    eventview::EventReceiver rcvr = [&](Event &&evt) -> nonstd::expected<void, std::string> {
+    eventview::EventReceiver rcvr = [&](Event &&evt) -> void {
         received = std::move(evt);
         return {};
     };
@@ -108,10 +106,10 @@ TEST_CASE("write event") {
     EventWriter writer{554, rcvr};
 
     ValueNode child{
-            {{"name", std::string{"jane"}}, {"age", std::uint64_t{12}}}
+            {{"name", {std::string{"jane"}}}, {"age", {12ull}}}
     };
     ValueNode node{
-            {{"name",     std::string{"john"}}, {"age", std::uint64_t{41}}}
+            {{"name", {std::string{"john"}}}, {"age", {41ull}}}
     };
 
     EntityDescriptor desc{577, 21};
@@ -124,10 +122,10 @@ TEST_CASE("write event") {
 
 TEST_CASE("storage node referencers") {
     ValueNode child{
-            {{"name", std::string{"jane"}}, {"age", std::uint64_t{12}}}
+            {{"name", {std::string{"jane"}}}, {"age", {12ull}}}
     };
     ValueNode node{
-            {{"name",     std::string{"john"}}, {"age", std::uint64_t{41}}, {"department_id", EntityDescriptor{3453, 5}}}
+            {{"name", {std::string{"john"}}}, {"age", {41ull}}, {"department_id", {EntityDescriptor{3453, 5}}}}
     };
 
     EntityDescriptor desc{577, 21};
@@ -144,11 +142,9 @@ TEST_CASE("storage node referencers") {
 
     sn.add_referencer(sp.next(), "manager", referencer);
 
-    auto refs = sn.referencers_for_field("manager");
+    auto refs_val = sn.referencers_for_field("manager");
 
-    REQUIRE(refs.has_value());
 
-    auto refs_val = refs.value();
     REQUIRE(refs_val.size() == 1);
 
     REQUIRE(referencer == refs_val[0]);
@@ -156,22 +152,16 @@ TEST_CASE("storage node referencers") {
 
     sn.remove_referencer(write_time - 1, "manager", referencer);
 
-    auto refs_unchanged = sn.referencers_for_field("manager");
+    auto refs_unchanged_val = sn.referencers_for_field("manager");
 
-    REQUIRE(refs_unchanged.has_value());
-
-    auto refs_unchanged_val = refs.value();
     REQUIRE(refs_unchanged_val.size() == 1);
 
     REQUIRE(referencer == refs_unchanged_val[0]);
 
     sn.remove_referencer(sp.next(), "manager", referencer);
 
-    auto refs_changed = sn.referencers_for_field("manager");
+    auto refs_changed_val = sn.referencers_for_field("manager");
 
-    REQUIRE(refs_changed.has_value());
-
-    auto refs_changed_val = refs_changed.value();
     REQUIRE(refs_changed_val.size() == 0);
 
 }
@@ -180,13 +170,13 @@ TEST_CASE("storage node fields") {
     SnowflakeProvider sp{ 85 };
 
     ValueNode child{
-            {{"name", std::string{"jane"}}, {"age", 12ull}}
+        {{"name", {std::string{"jane"}}}, {"age", {12ull}}}
     };
 
     EntityDescriptor dept_id{sp.next(), 5};
 
     ValueNode node{
-            {{"name",     std::string{"john"}}, {"age", 41ull}, {"department_id", dept_id}}
+        {{"name", {std::string{"john"}}}, {"age", {41ull}}, {"department_id", {dept_id}}}
     };
 
     EntityDescriptor desc{sp.next(), 21};
@@ -206,20 +196,17 @@ TEST_CASE("storage node fields") {
 
     auto john = name_val->second;
 
-    REQUIRE(std::holds_alternative<std::string>(john));
-    REQUIRE("john" == *std::get_if<std::string>(&john));
+    REQUIRE(john.is_string());
+    REQUIRE("john" == john.as_string());
 
 
     ValueNode replacement {
-            {{"age", 91ull}}
+        {{"age", {91ull}}}
     };
 
     //this write won't take effect
     EventEntity replace_entity{ desc, replacement};
-    auto result = sn.update_fields(write_time - 100, replace_entity);
-
-    REQUIRE(result.has_value());
-    auto result_val = result.value();
+    auto result_val = sn.update_fields(write_time - 100, replace_entity);
 
     REQUIRE(result_val.size() == 0);
 
@@ -231,15 +218,12 @@ TEST_CASE("storage node fields") {
 
     auto forty_one = unchanged_age_val->second;
 
-    REQUIRE(std::holds_alternative<std::uint64_t>(forty_one));
-    REQUIRE(41ull == *std::get_if<std::uint64_t>(&forty_one));
+    REQUIRE(forty_one.is_long());
+    REQUIRE(41ull == forty_one.as_long());
 
 
     //this write WILL take effect
-    auto real_result = sn.update_fields(sp.next(), replace_entity);
-
-    REQUIRE(real_result.has_value());
-    auto real_result_val = real_result.value();
+    auto real_result_val = sn.update_fields(sp.next(), replace_entity);
 
     REQUIRE(real_result_val.size() == 1);
     REQUIRE(real_result_val["department_id"] == dept_id);
@@ -252,8 +236,8 @@ TEST_CASE("storage node fields") {
 
     auto ninety_one = changed_age_val->second;
 
-    REQUIRE(std::holds_alternative<std::uint64_t>(ninety_one));
-    REQUIRE(91ull == *std::get_if<std::uint64_t>(&ninety_one));
+    REQUIRE(ninety_one.is_long());
+    REQUIRE(91ull == ninety_one.as_long());
 
     sn.deref(sp.next());
 
@@ -266,13 +250,13 @@ TEST_CASE("entity store") {
     EntityStore store{};
 
     ValueNode child{
-            {{"name", std::string{"jane"}}, {"age", 12ull}}
+        {{"name", {std::string{"jane"}}}, {"age", {12ull}}}
     };
 
     EntityDescriptor dept_id{sp.next(), 5};
 
     ValueNode node{
-            {{"name",     std::string{"john"}}, {"age", 41ull}, {"department_id", dept_id}}
+        {{"name",  {std::string{"john"}}}, {"age", {41ull}}, {"department_id", {dept_id}}}
     };
 
     EntityDescriptor desc{sp.next(), 21};
@@ -281,15 +265,11 @@ TEST_CASE("entity store") {
     auto result = store.get(desc);
     REQUIRE(!result.has_value());
 
-    auto put_result = store.put(sp.next(), entity);
-    REQUIRE(put_result);
-    auto removed_refs = put_result.value();
+    auto removed_refs = store.put(sp.next(), entity);
 
     REQUIRE(removed_refs.size()==0);
 
-    auto reput_result = store.put(sp.next(), entity);
-    REQUIRE(reput_result);
-    auto reremoved_refs = reput_result.value();
+    auto reremoved_refs = store.put(sp.next(), entity);
 
     REQUIRE(reremoved_refs.size()==1);
 
@@ -308,11 +288,11 @@ TEST_CASE("publish round trip") {
     EntityDescriptor mgr_ref = EntityDescriptor{sp.next(), 90ull};
 
     ValueNode node1{
-            {{"name", std::string{"jane"}}, {"age", std::uint64_t{12}}}
+        {{"name", {std::string{"jane"}}}, {"age", {12ull}}}
     };
 
     ValueNode node2{
-            {{"name",   std::string{"john"}}, {"age", std::uint64_t{41}}, {"manager_id", mgr_ref}}
+        {{"name", {std::string{"john"}}}, {"age", {41ull}}, {"manager_id", {mgr_ref}}}
     };
 
     EntityDescriptor desc1{sp.next(), 21};
@@ -324,12 +304,9 @@ TEST_CASE("publish round trip") {
     Event sent1{sp.next(), entity1};
     Event sent2{sp.next(), entity2};
 
-    auto result1 = pub.publish(sent1);
-    REQUIRE(result1);
+    pub.publish(sent1);
 
-    auto result2 = pub.publish(sent2);
-    REQUIRE(result2);
-
+    pub.publish(sent2);
 
     auto& lookup1 = store->get(desc1);
     REQUIRE(lookup1);
@@ -348,10 +325,7 @@ TEST_CASE("publish round trip") {
     REQUIRE(stub);
     auto& found_stub = stub->get();
 
-    auto& stub_referencers = found_stub.referencers_for_field("manager_id");
-    REQUIRE(stub_referencers);
-
-    auto& referencer = stub_referencers.value();
+    auto referencer = found_stub.referencers_for_field("manager_id");
 
     REQUIRE(referencer.size() == 1);
     REQUIRE(referencer[0] == desc2);
@@ -371,8 +345,8 @@ TEST_CASE("event writer round trip") {
     EntityDescriptor mgr_ref{writer.next_id(), 90ull};
 
 
-    ValueNode node{
-            {{"name",   std::string{"john"}}, {"age", std::uint64_t{41}}, {"manager_id", mgr_ref}}
+    ValueNode node {
+        {{"name", {std::string{"john"}}}, {"age", {41ull}}, {"manager_id", {mgr_ref}}}
     };
 
     EntityDescriptor desc{writer.next_id(), 21};
@@ -400,11 +374,11 @@ TEST_CASE("write to query loop") {
     EntityDescriptor manager_desc{writer.next_id(), 23};
 
     ValueNode node{
-        {{"name", std::string{"john"}}, {"age", std::uint64_t{41}}, {"manager_id", manager_desc}}
+        {{"name", {std::string{"john"}}}, {"age", {41ull}}, {"manager_id", {manager_desc}}}
     };
 
     ValueNode mgr_node{
-        {{"name", std::string{"ted"}}, {"age", std::uint64_t{56}}}
+        {{"name", {std::string{"ted"}}}, {"age", {56ull}}}
     };
 
     EntityDescriptor desc{writer.next_id(), 21};
@@ -437,7 +411,7 @@ TEST_CASE("write to query loop") {
     REQUIRE(view->root == view_desc.root);
     REQUIRE(view->values.size() == view_desc.paths.size());
 
-    REQUIRE(*std::get_if<std::string>(&view->values[0].value) == "ted");
-    REQUIRE(*std::get_if<std::uint64_t>(&view->values[1].value) == 56);
-    REQUIRE(*std::get_if<std::string>(&view->values[2].value) =="john");
+    REQUIRE(view->values[0].value.as_string() == "ted");
+    REQUIRE(view->values[1].value.as_long() == 56);
+    REQUIRE(view->values[2].value.as_string() =="john");
 }
