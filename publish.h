@@ -26,7 +26,7 @@ namespace eventview {
         ~Publisher() = default;
 
 
-        inline void publish(Event evt);
+        inline void publish(Event &&evt);
 
     private:
 
@@ -36,7 +36,7 @@ namespace eventview {
         std::shared_ptr<EntityStore> store_;
     };
 
-    inline void Publisher::publish(Event evt) {
+    inline void Publisher::publish(Event &&evt) {
         auto result = store_->put(evt.id, evt.entity);
 
         //remove old referencers

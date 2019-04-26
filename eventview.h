@@ -113,6 +113,13 @@ namespace eventview {
     struct EventEntity {
         EntityDescriptor descriptor;
         ValueNode node;
+
+        EventEntity() = default;
+        EventEntity(EventEntity &&) = default;
+        EventEntity& operator=(EventEntity &&) = default;
+        EventEntity(const EventEntity &) = default;
+        EventEntity& operator=(const EventEntity &) = default;
+        ~EventEntity() = default;
     };
 
     bool operator==(const EventEntity &lhs, const EventEntity &rhs) {
@@ -122,6 +129,14 @@ namespace eventview {
     struct Event {
         EventID id;
         EventEntity entity;
+
+        Event() = default;
+        Event(Event &&) = default;
+        Event& operator=(Event &&) = default;
+        Event(const Event &) = default;
+        Event& operator=(const Event &) = default;
+        ~Event() = default;
+
     };
 
     bool operator==(const Event &lhs, const Event &rhs) {

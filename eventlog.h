@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <exception>
+#include <iostream>
 #include "eventview.h"
 
 namespace eventview {
@@ -26,7 +27,7 @@ namespace eventview {
         ~EventLog() = default;
 
 
-        void append(Event evt) {
+        void append(Event &&evt) {
             /*
              * If storage succeeds, then publish fails, the caller might retry. In that case there will be dupe events in the
              * underlying persistent log. That's okay.

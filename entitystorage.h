@@ -57,13 +57,15 @@ namespace eventview {
             return entity_.descriptor.type;
         }
 
-        inline void add_referencer(EventID write_time, const std::string &field_name, EntityDescriptor referencer);
+        inline void
+        add_referencer(EventID write_time, const std::string &field_name, const EntityDescriptor &referencer);
 
-        inline void remove_referencer(EventID write_time, const std::string &field_name, EntityDescriptor referencer);
+        inline void
+        remove_referencer(EventID write_time, const std::string &field_name, const EntityDescriptor &referencer);
 
         inline std::vector<EntityDescriptor> referencers_for_field(const std::string &field) const;
 
-        inline RemovedReferences update_fields(EventID update_time, EventEntity update);
+        inline RemovedReferences update_fields(EventID update_time, const EventEntity &update);
 
         const ValueNode get_fields() const {
             return entity_.node;
@@ -84,7 +86,7 @@ namespace eventview {
     };
 
     inline void
-    StorageNode::add_referencer(EventID write_time, const std::string &field_name, EntityDescriptor referencer) {
+    StorageNode::add_referencer(EventID write_time, const std::string &field_name, const EntityDescriptor &referencer) {
         auto &refs_by_field = referencers_[field_name];
 
         auto &found = refs_by_field[referencer];
@@ -93,7 +95,8 @@ namespace eventview {
     }
 
     inline void
-    StorageNode::remove_referencer(EventID write_time, const std::string &field_name, EntityDescriptor referencer) {
+    StorageNode::remove_referencer(EventID write_time, const std::string &field_name,
+                                   const EntityDescriptor &referencer) {
         auto &refs_by_field = referencers_[field_name];
 
         auto &found = refs_by_field[referencer];
@@ -118,7 +121,7 @@ namespace eventview {
         return std::move(snapshot);
     }
 
-    inline RemovedReferences StorageNode::update_fields(EventID update_time, EventEntity update) {
+    inline RemovedReferences StorageNode::update_fields(EventID update_time, const EventEntity &update) {
         std::unordered_map<std::string, EntityDescriptor> snapshot;
 
         if (update_time > existence_.add_time && update.descriptor == entity_.descriptor) {
@@ -161,13 +164,14 @@ namespace eventview {
     };
 
     inline const RemovedReferences EntityStore::put(EventID write_time, EventEntity entity) {
-        auto found = store_.find(entity.descriptor.id);
+        auto desc_id = entity.descriptor.id;
+        auto found = store_.find(desc_id);
 
         if (found == store_.end()) {
-            store_.insert(std::make_pair(entity.descriptor.id, StorageNode{write_time, std::move(entity)}));
+            store_.insert(std::make_pair(desc_id, StorageNode{write_time, std::move(entity)}));
             return {};
         } else {
-            return found->second.update_fields(write_time, std::move(entity));
+            return found->second.update_fields(write_time, entity);
         }
 
     }

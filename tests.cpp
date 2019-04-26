@@ -304,9 +304,9 @@ TEST_CASE("publish round trip") {
     Event sent1{sp.next(), entity1};
     Event sent2{sp.next(), entity2};
 
-    pub.publish(sent1);
+    pub.publish(Event{sent1});
 
-    pub.publish(sent2);
+    pub.publish(Event{sent2});
 
     const auto& lookup1 = store->get(desc1);
     REQUIRE(lookup1);
@@ -338,8 +338,8 @@ TEST_CASE("event writer round trip") {
     std::shared_ptr<EntityStore> store = std::make_shared<EntityStore>();
     Publisher pub{store};
 
-    EventWriter writer{ 46, [&](Event evt) {
-        return pub.publish(evt);
+    EventWriter writer{ 46, [&](Event &&evt) {
+        pub.publish(std::move(evt));
     }};
 
     EntityDescriptor mgr_ref{writer.next_id(), 90ull};
@@ -367,8 +367,8 @@ TEST_CASE("write to read_view loop") {
     Publisher pub{store};
     ViewReader view_processor{store};
 
-    EventWriter writer{406, [&](Event evt) {
-        return pub.publish(evt);
+    EventWriter writer{406, [&](Event &&evt) {
+        pub.publish(std::move(evt));
     }};
 
     EntityDescriptor manager_desc{writer.next_id(), 23};
