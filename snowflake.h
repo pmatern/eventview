@@ -49,7 +49,10 @@ namespace eventview {
     template<typename IDPacker = SnowflakeIDPacker, typename TimestampProvider = RecentHistoryTimestampProvider>
     class SnowflakeProvider final {
     public:
-        explicit SnowflakeProvider(std::uint32_t writer_id) {
+        explicit SnowflakeProvider(std::uint32_t writer_id) : SnowflakeProvider(writer_id, IDPacker{}, TimestampProvider{}) {}
+
+        SnowflakeProvider(std::uint32_t writer_id, IDPacker packer, TimestampProvider ts_provider) :
+                id_packer_{std::move(packer)}, ts_provider_{std::move(ts_provider)} {
 
             auto max_writer_id = static_cast<std::uint32_t>(std::pow(2.0, id_packer_.writer_id_precision));
 

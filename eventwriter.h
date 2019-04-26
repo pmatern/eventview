@@ -42,12 +42,11 @@ namespace eventview {
     };
 
 
-    template<typename EvtLog = EventLog<>, typename SFProvider = SnowflakeProvider<> >
     class EventWriter final {
     public:
         EventWriter(std::uint32_t writer_id, EventReceiver receiver) :
-                snowflakes_{SFProvider{writer_id}},
-                log_{EvtLog{std::move(receiver)}} {}
+                snowflakes_{SnowflakeProvider{writer_id}},
+                log_{EventLog{std::move(receiver)}} {}
 
         inline const WriteResult write_event(EventEntity evt) noexcept;
 
@@ -71,12 +70,11 @@ namespace eventview {
         }
          */
     private:
-        EvtLog log_;
-        SFProvider snowflakes_;
+        EventLog<> log_;
+        SnowflakeProvider<> snowflakes_;
     };
 
-    template<>
-    inline const WriteResult EventWriter<>::write_event(EventEntity evt) noexcept {
+    inline const WriteResult EventWriter::write_event(EventEntity evt) noexcept {
 
         auto evt_id = snowflakes_.next();
         if (0 == evt.descriptor.id) {

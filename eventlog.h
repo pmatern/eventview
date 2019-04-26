@@ -11,7 +11,9 @@ namespace eventview {
     template<typename Storage = std::vector<Event> >
     class EventLog final {
     public:
-        explicit EventLog(EventReceiver receiver) : publisher_{std::move(receiver)} {}
+        explicit EventLog(EventReceiver receiver) : EventLog(receiver, Storage{}) {}
+
+        EventLog(EventReceiver receiver, Storage storage) : publisher_{std::move(receiver)}, storage_{std::move(storage)} {}
 
         EventLog(const EventLog &other) = delete;
 

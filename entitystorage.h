@@ -1,6 +1,3 @@
-//
-// Created by Matern, Pete on 2019-04-20.
-//
 
 #ifndef EVENTVIEW_ENTITYSTORAGE_H
 #define EVENTVIEW_ENTITYSTORAGE_H

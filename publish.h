@@ -1,6 +1,3 @@
-//
-// Created by Matern, Pete on 2019-04-23.
-//
 
 #ifndef EVENTVIEW_PUBLISH_H
 #define EVENTVIEW_PUBLISH_H
