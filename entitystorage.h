@@ -100,7 +100,7 @@ namespace eventview {
         }
 
         const nonstd::expected<std::vector<EntityDescriptor>, std::string>
-        referencers_for_field(const std::string &field) {
+        referencers_for_field(const std::string &field) const {
             try {
                 std::vector<EntityDescriptor> snapshot;
 
@@ -146,7 +146,7 @@ namespace eventview {
             }
         }
 
-        const ValueNode get_fields() {
+        const ValueNode get_fields() const {
             return entity_.node;
         }
 

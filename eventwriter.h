@@ -37,7 +37,7 @@ namespace eventview {
             return snowflakes_.next();
         }
 
-        EventWriter(const EventWriter &other) = delete;
+        EventWriter(const EventWriter &) = delete;
 
         EventWriter &operator=(const EventWriter &) = delete;
 

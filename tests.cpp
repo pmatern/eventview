@@ -10,6 +10,7 @@
 #include "entitystorage.h"
 #include "publish.h"
 #include "expected.h"
+#include "query.h"
 
 #define CATCH_CONFIG_MAIN
 
@@ -385,5 +386,58 @@ TEST_CASE("event writer round trip") {
     auto& found = lookup->get();
 
     REQUIRE(found.get_fields() == node);
+}
 
+TEST_CASE("write to query loop") {
+    std::shared_ptr<EntityStore> store = std::make_shared<EntityStore>();
+    Publisher pub{store};
+    ViewProcessor view_processor{store};
+
+    EventWriter writer{406, [&](Event evt) {
+        return pub.publish(evt);
+    }};
+
+    EntityDescriptor manager_desc{writer.next_id(), 23};
+
+    ValueNode node{
+        {{"name", std::string{"john"}}, {"age", std::uint64_t{41}}, {"manager_id", manager_desc}}
+    };
+
+    ValueNode mgr_node{
+        {{"name", std::string{"ted"}}, {"age", std::uint64_t{56}}}
+    };
+
+    EntityDescriptor desc{writer.next_id(), 21};
+    EventEntity entity{desc, node};
+    EventEntity manager_entity{manager_desc, mgr_node};
+
+    auto mgr_result = writer.write_event(manager_entity);
+    REQUIRE(mgr_result);
+    auto result = writer.write_event(entity);
+    REQUIRE(result);
+
+    ViewDescriptor view_desc{manager_desc, {}};
+    ViewPath vp_1{};
+    vp_1.push_back({"name", 0, false});
+
+    ViewPath vp_2{};
+    vp_2.push_back({"age", 0, false});
+
+    ViewPath vp_3{};
+    vp_3.push_back({"manager_id", 21, false});
+    vp_3.push_back({"name", 0, false});
+
+    view_desc.paths.push_back(vp_1);
+    view_desc.paths.push_back(vp_2);
+    view_desc.paths.push_back(vp_3);
+
+    const auto &view = view_processor.query(view_desc);
+
+    REQUIRE(view);
+    REQUIRE(view->root == view_desc.root);
+    REQUIRE(view->values.size() == view_desc.paths.size());
+
+    REQUIRE(*std::get_if<std::string>(&view->values[0].value) == "ted");
+    REQUIRE(*std::get_if<std::uint64_t>(&view->values[1].value) == 56);
+    REQUIRE(*std::get_if<std::string>(&view->values[2].value) =="john");
 }
