@@ -2,8 +2,8 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="eventview" targetName="eventview" />
       <config projectName="eventview" targetName="eventview_tests" />
+      <config projectName="eventview" targetName="eventview" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -14,11 +14,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0de57598-a840-4258-8a91-ada38f163fba" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entitystorage.h" beforeDir="false" afterPath="$PROJECT_DIR$/entitystorage.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eventlog.h" beforeDir="false" afterPath="$PROJECT_DIR$/eventlog.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eventview.h" beforeDir="false" afterPath="$PROJECT_DIR$/eventview.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/publish.h" beforeDir="false" afterPath="$PROJECT_DIR$/publish.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,11 +29,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eventview.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="138" lean-forward="true" selection-start-line="138" selection-end-line="138" />
+            <state relative-caret-position="354">
+              <caret line="143" column="5" selection-start-line="143" selection-start-column="5" selection-end-line="143" selection-end-column="5" />
               <folding>
                 <element signature="e#61#79#0" expanded="true" />
                 <element signature="e#4795#4797#0" expanded="true" />
@@ -87,23 +83,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/snowflake.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-87">
-              <caret line="48" column="71" selection-start-line="48" selection-start-column="71" selection-end-line="48" selection-end-column="71" />
-              <folding>
-                <element signature="e#61#78#0" expanded="true" />
-                <element signature="e#4034#4036#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/entitystorage.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="167" column="42" lean-forward="true" selection-start-line="167" selection-start-column="42" selection-end-line="167" selection-end-column="42" />
+            <state relative-caret-position="253">
+              <caret line="176" column="5" selection-start-line="176" selection-start-column="5" selection-end-line="176" selection-end-column="5" />
               <folding>
                 <element signature="e#118#140#0" expanded="true" />
               </folding>
@@ -114,11 +97,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/publish.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="39" selection-start-line="39" selection-end-line="39" />
+            <state relative-caret-position="141">
+              <caret line="39" column="42" selection-start-line="39" selection-start-column="42" selection-end-line="39" selection-end-column="42" />
               <folding>
                 <element signature="e#106#125#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
             </state>
           </provider>
         </entry>
@@ -180,16 +172,16 @@
         <option value="$PROJECT_DIR$/catch.h" />
         <option value="$PROJECT_DIR$/eventview.cpp" />
         <option value="$PROJECT_DIR$/expected.h" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/query.h" />
         <option value="$PROJECT_DIR$/view.h" />
         <option value="$PROJECT_DIR$/snowflake.h" />
         <option value="$PROJECT_DIR$/eventwriter.h" />
-        <option value="$PROJECT_DIR$/entitystorage.h" />
         <option value="$PROJECT_DIR$/publish.h" />
         <option value="$PROJECT_DIR$/tests.cpp" />
         <option value="$PROJECT_DIR$/eventview.h" />
         <option value="$PROJECT_DIR$/eventlog.h" />
+        <option value="$PROJECT_DIR$/entitystorage.h" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
       </list>
     </option>
   </component>
@@ -217,10 +209,6 @@
             <path>
               <item name="eventview" type="b2602c69:ProjectViewProjectNode" />
               <item name="eventview" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="eventview" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
@@ -273,13 +261,13 @@
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="write to query loop" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="eventview" TARGET_NAME="eventview_tests" RUN_TARGET_PROJECT_NAME="eventview" RUN_TARGET_NAME="eventview_tests" TEST_METHOD="write to query loop" TEST_MODE="SUITE_TEST">
+    <configuration name="write to query loop" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="eventview" TARGET_NAME="eventview_tests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="eventview" RUN_TARGET_NAME="eventview_tests" TEST_METHOD="write to query loop" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="write to read_view loop" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="eventview" TARGET_NAME="eventview_tests" RUN_TARGET_PROJECT_NAME="eventview" RUN_TARGET_NAME="eventview_tests" TEST_METHOD="write to read_view loop" TEST_MODE="SUITE_TEST">
+    <configuration name="write to read_view loop" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="eventview" TARGET_NAME="eventview_tests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="eventview" RUN_TARGET_NAME="eventview_tests" TEST_METHOD="write to read_view loop" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
@@ -300,10 +288,10 @@
       <item itemvalue="Catch.storage node fields" />
       <item itemvalue="Catch.publish round trip" />
       <item itemvalue="Catch.event writer round trip" />
-      <item itemvalue="CMake Application.eventview" />
-      <item itemvalue="CMake Application.eventview_tests" />
       <item itemvalue="Catch.write to query loop" />
       <item itemvalue="Catch.write to read_view loop" />
+      <item itemvalue="CMake Application.eventview" />
+      <item itemvalue="CMake Application.eventview_tests" />
     </list>
     <recent_temporary>
       <list>
@@ -333,61 +321,61 @@
       <workItem from="1556038643484" duration="11079000" />
       <workItem from="1556062449861" duration="2815000" />
       <workItem from="1556134836297" duration="11322000" />
-      <workItem from="1556221635395" duration="33382000" />
+      <workItem from="1556221635395" duration="35884000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="write_to_read_view_loop - 2019.04.26 at 15h 22m 18s.xml">
-      <configuration name="write to read_view loop" configurationId="CMakeCatchTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="write_to_read_view_loop - 2019.04.26 at 15h 27m 23s.xml">
-      <configuration name="write to read_view loop" configurationId="CMakeCatchTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="All_in_eventview_tests - 2019.04.26 at 15h 32m 17s.xml">
+    <history-entry file="All_in_eventview_tests - 2019.04.26 at 16h 02m 17s.xml">
       <configuration name="All in eventview_tests" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="write_to_read_view_loop - 2019.04.26 at 15h 35m 06s.xml">
-      <configuration name="write to read_view loop" configurationId="CMakeCatchTestRunConfigurationType" />
+    <history-entry file="All_in_eventview_tests - 2019.04.26 at 16h 32m 40s.xml">
+      <configuration name="All in eventview_tests" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="write_to_read_view_loop - 2019.04.26 at 15h 43m 14s.xml">
-      <configuration name="write to read_view loop" configurationId="CMakeCatchTestRunConfigurationType" />
+    <history-entry file="All_in_eventview_tests - 2019.04.26 at 16h 33m 45s.xml">
+      <configuration name="All in eventview_tests" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="write_to_read_view_loop - 2019.04.26 at 15h 53m 59s.xml">
-      <configuration name="write to read_view loop" configurationId="CMakeCatchTestRunConfigurationType" />
+    <history-entry file="All_in_eventview_tests - 2019.04.26 at 16h 34m 31s.xml">
+      <configuration name="All in eventview_tests" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="write_to_read_view_loop - 2019.04.26 at 15h 55m 10s.xml">
-      <configuration name="write to read_view loop" configurationId="CMakeCatchTestRunConfigurationType" />
+    <history-entry file="All_in_eventview_tests - 2019.04.26 at 16h 34m 49s.xml">
+      <configuration name="All in eventview_tests" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="write_to_read_view_loop - 2019.04.26 at 15h 57m 52s.xml">
-      <configuration name="write to read_view loop" configurationId="CMakeCatchTestRunConfigurationType" />
+    <history-entry file="All_in_eventview_tests - 2019.04.26 at 16h 37m 37s.xml">
+      <configuration name="All in eventview_tests" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="write_to_read_view_loop - 2019.04.26 at 16h 02m 09s.xml">
-      <configuration name="write to read_view loop" configurationId="CMakeCatchTestRunConfigurationType" />
+    <history-entry file="All_in_eventview_tests - 2019.04.26 at 16h 39m 55s.xml">
+      <configuration name="All in eventview_tests" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="All_in_eventview_tests - 2019.04.26 at 16h 02m 17s.xml">
+    <history-entry file="All_in_eventview_tests - 2019.04.26 at 16h 41m 16s.xml">
+      <configuration name="All in eventview_tests" configurationId="CMakeCatchTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="All_in_eventview_tests - 2019.04.26 at 16h 46m 33s.xml">
+      <configuration name="All in eventview_tests" configurationId="CMakeCatchTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="All_in_eventview_tests - 2019.04.26 at 16h 48m 09s.xml">
       <configuration name="All in eventview_tests" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="123335000" />
+    <option name="totallyTimeSpent" value="125837000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="33" width="1400" height="837" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19513991" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19513991" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32885906" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32885906" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32885906" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.41879195" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
-      <window_info anchor="bottom" id="Messages" order="8" weight="0.32885906" />
+      <window_info active="true" anchor="bottom" id="Messages" order="8" visible="true" weight="0.32885906" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" />
@@ -506,13 +494,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="69" selection-start-line="7" selection-start-column="69" selection-end-line="7" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -599,35 +580,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/entitystorage.h">
+    <entry file="file://$PROJECT_DIR$/eventview.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="167" column="42" lean-forward="true" selection-start-line="167" selection-start-column="42" selection-end-line="167" selection-end-column="42" />
+        <state relative-caret-position="354">
+          <caret line="143" column="5" selection-start-line="143" selection-start-column="5" selection-end-line="143" selection-end-column="5" />
           <folding>
-            <element signature="e#118#140#0" expanded="true" />
+            <element signature="e#61#79#0" expanded="true" />
+            <element signature="e#4795#4797#0" expanded="true" />
+            <element signature="e#4798#4800#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/publish.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="39" selection-start-line="39" selection-end-line="39" />
+        <state relative-caret-position="141">
+          <caret line="39" column="42" selection-start-line="39" selection-start-column="42" selection-end-line="39" selection-end-column="42" />
           <folding>
             <element signature="e#106#125#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eventview.h">
+    <entry file="file://$PROJECT_DIR$/entitystorage.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="138" lean-forward="true" selection-start-line="138" selection-end-line="138" />
+        <state relative-caret-position="253">
+          <caret line="176" column="5" selection-start-line="176" selection-start-column="5" selection-end-line="176" selection-end-column="5" />
           <folding>
-            <element signature="e#61#79#0" expanded="true" />
-            <element signature="e#4795#4797#0" expanded="true" />
-            <element signature="e#4798#4800#0" expanded="true" />
+            <element signature="e#118#140#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>
