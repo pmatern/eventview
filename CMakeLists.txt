@@ -7,6 +7,6 @@ set(CMAKE_CXX_STANDARD 17)
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=thread -O1 -fno-omit-frame-pointer -g")
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=undefined -O1 -fno-omit-frame-pointer -g")
 
-add_library(eventview eventview.cpp eventview.h snowflake.h eventwriter.h eventlog.h entitystorage.h publish.h view.h)
+add_library(eventview eventview.cpp eventview.h snowflake.h eventwriter.h eventlog.h entitystorage.h publish.h view.h mpsc.h)
 
-add_executable(eventview_tests tests.cpp catch.h eventview.h snowflake.h eventwriter.h eventlog.h entitystorage.h publish.h view.h)
+add_executable(eventview_tests tests.cpp catch.h eventview.h snowflake.h eventwriter.h eventlog.h entitystorage.h publish.h view.h mpsc.h)

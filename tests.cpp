@@ -10,6 +10,7 @@
 #include "entitystorage.h"
 #include "publish.h"
 #include "view.h"
+#include "mpsc.h"
 
 #define CATCH_CONFIG_MAIN
 
@@ -414,4 +415,18 @@ TEST_CASE("write to read_view loop") {
     REQUIRE(view->values[0].value.as_string() == "ted");
     REQUIRE(view->values[1].value.as_long() == 56);
     REQUIRE(view->values[2].value.as_string() =="john");
+}
+
+TEST_CASE("basic mpsc") {
+    MPSC<std::uint64_t, 5> mpsc{};
+
+    REQUIRE(!mpsc.consume());
+
+    REQUIRE(mpsc.produce(45ull));
+
+    auto got = mpsc.consume();
+
+    REQUIRE(got);
+
+    REQUIRE(*got == 45ull);
 }

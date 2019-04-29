@@ -4,6 +4,9 @@
 
 #include <assert.h>
 #include <variant>
+#include <thread>
+#include <atomic>
+#include <future>
 
 #include "eventview.h"
 #include "entitystorage.h"
