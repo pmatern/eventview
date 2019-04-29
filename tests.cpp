@@ -11,6 +11,7 @@
 #include "publish.h"
 #include "view.h"
 #include "mpsc.h"
+#include "opdispatch.h"
 
 #define CATCH_CONFIG_MAIN
 
@@ -429,4 +430,29 @@ TEST_CASE("basic mpsc") {
     REQUIRE(got);
 
     REQUIRE(*got == 45ull);
+
+    //queue size of 5 is actually only 4 usable slots right now :(
+    for (int i=0; i<4; ++i) {
+        REQUIRE(mpsc.produce(i));
+    }
+
+    REQUIRE(!mpsc.produce(6));
+
+    for (int i=0; i<4; ++i) {
+        auto consumed = mpsc.consume();
+        REQUIRE(consumed);
+        REQUIRE(i == *consumed);
+    }
+}
+
+TEST_CASE("basic opdispatch") {
+
+//    EventPublishCallback pub = [](Event &&evt){
+//    };
+//
+//    ViewReadCallback view = [](const ViewDescriptor &view_desc) -> const std::optional<View> {
+//        return {};
+//    };
+//
+//    OpDispatch<5> dispatch{pub, view};
 }
