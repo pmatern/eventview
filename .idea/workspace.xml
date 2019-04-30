@@ -13,8 +13,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0de57598-a840-4258-8a91-ada38f163fba" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mpsc.h" beforeDir="false" afterPath="$PROJECT_DIR$/mpsc.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/opdispatch.h" beforeDir="false" afterPath="$PROJECT_DIR$/opdispatch.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests.cpp" afterDir="false" />
     </list>
@@ -32,22 +30,22 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view.h">
+        <entry file="file://$PROJECT_DIR$/eventview.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="782">
-              <caret line="46" column="12" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="12" />
+            <state relative-caret-position="158">
+              <caret line="104" column="27" selection-start-line="104" selection-start-column="8" selection-end-line="104" selection-end-column="27" />
+              <folding>
+                <element signature="e#61#79#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/publish.h">
+        <entry file="file://$PROJECT_DIR$/view.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
-              <caret line="41" column="47" selection-start-line="41" selection-start-column="11" selection-end-line="41" selection-end-column="47" />
-              <folding>
-                <element signature="e#58#77#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="231">
+              <caret line="127" column="40" lean-forward="true" selection-start-line="127" selection-start-column="40" selection-end-line="127" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -76,8 +74,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="455" column="38" lean-forward="true" selection-start-line="455" selection-start-column="38" selection-end-line="455" selection-end-column="38" />
+            <state relative-caret-position="311">
+              <caret line="514" column="4" selection-start-line="514" selection-start-column="4" selection-end-line="514" selection-end-column="4" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -97,8 +95,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/opdispatch.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="491">
-              <caret line="101" lean-forward="true" selection-start-line="101" selection-end-line="101" />
+            <state relative-caret-position="277">
+              <caret line="88" column="37" lean-forward="true" selection-start-line="88" selection-start-column="37" selection-end-line="88" selection-end-column="37" />
               <folding>
                 <element signature="e#112#130#0" expanded="true" />
               </folding>
@@ -160,6 +158,9 @@
       <find>try</find>
       <find>put</find>
       <find>cout</find>
+      <find>viewva</find>
+      <find>Event</find>
+      <find>Event{</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -325,14 +326,11 @@
       <workItem from="1556134836297" duration="11322000" />
       <workItem from="1556221635395" duration="35979000" />
       <workItem from="1556411310814" duration="17897000" />
-      <workItem from="1556574936838" duration="8765000" />
+      <workItem from="1556574936838" duration="10310000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="basic_mpsc - 2019.04.30 at 11h 00m 59s.xml">
-      <configuration name="basic mpsc" configurationId="CMakeCatchTestRunConfigurationType" />
-    </history-entry>
     <history-entry file="basic_opdispatch - 2019.04.30 at 11h 01m 36s.xml">
       <configuration name="basic opdispatch" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
@@ -360,15 +358,18 @@
     <history-entry file="basic_opdispatch - 2019.04.30 at 11h 29m 14s.xml">
       <configuration name="basic opdispatch" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
+    <history-entry file="basic_opdispatch - 2019.04.30 at 11h 55m 22s.xml">
+      <configuration name="basic opdispatch" configurationId="CMakeCatchTestRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="152594000" />
+    <option name="totallyTimeSpent" value="154139000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="33" width="1400" height="837" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.20103092" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20103092" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -380,9 +381,9 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
       <window_info anchor="bottom" id="Messages" order="8" sideWeight="0.4992636" weight="0.32885906" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32885906" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50073636" side_tool="true" weight="0.32885906" />
-      <window_info anchor="bottom" id="Version Control" order="11" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32885906" />
       <window_info anchor="bottom" id="CMake" order="12" weight="0.32885906" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -416,6 +417,32 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -553,23 +580,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eventview.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1156">
-          <caret line="68" column="9" selection-start-line="62" selection-start-column="6" selection-end-line="68" selection-end-column="9" />
-          <folding>
-            <element signature="e#61#79#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="46" column="12" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/publish.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="697">
@@ -638,10 +648,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/view.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="127" column="40" lean-forward="true" selection-start-line="127" selection-start-column="40" selection-end-line="127" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eventview.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="104" column="27" selection-start-line="104" selection-start-column="8" selection-end-line="104" selection-end-column="27" />
+          <folding>
+            <element signature="e#61#79#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/opdispatch.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="491">
-          <caret line="101" lean-forward="true" selection-start-line="101" selection-end-line="101" />
+        <state relative-caret-position="277">
+          <caret line="88" column="37" lean-forward="true" selection-start-line="88" selection-start-column="37" selection-end-line="88" selection-end-column="37" />
           <folding>
             <element signature="e#112#130#0" expanded="true" />
           </folding>
@@ -650,8 +677,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="455" column="38" lean-forward="true" selection-start-line="455" selection-start-column="38" selection-end-line="455" selection-end-column="38" />
+        <state relative-caret-position="311">
+          <caret line="514" column="4" selection-start-line="514" selection-start-column="4" selection-end-line="514" selection-end-column="4" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
           </folding>

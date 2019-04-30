@@ -78,7 +78,7 @@ namespace eventview {
         };
 
 
-        const std::future<void> publish_event(Event &&evt) {
+        std::future<void> publish_event(Event &&evt) {
             std::promise<void> p{};
             auto result = p.get_future();
 

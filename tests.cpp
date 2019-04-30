@@ -445,13 +445,75 @@ TEST_CASE("basic mpsc") {
     }
 }
 
+View build_view() {
+    View v{};
+
+    v.root = {2324, 43};
+
+
+    ViewPath vp_1{};
+    vp_1.push_back({"name", 0, false});
+
+    v.values.push_back({vp_1, {std::string{"ted"}}});
+
+    ViewPath vp_2{};
+    vp_2.push_back({"age", 0, false});
+
+    v.values.push_back({vp_2, {67ull}});
+
+    ViewPath vp_3{};
+    vp_3.push_back({"manager_id", 21, false});
+    vp_3.push_back({"name", 0, false});
+
+    v.values.push_back({vp_3, {std::string{"jack"}}});
+
+    return v;
+}
+
 TEST_CASE("basic opdispatch") {
+
+    ViewPath vp_1{};
+    vp_1.push_back({"name", 0, false});
+
+    ViewPath vp_2{};
+    vp_2.push_back({"age", 0, false});
+
+    ViewPath vp_3{};
+    vp_3.push_back({"manager_id", 21, false});
+    vp_3.push_back({"name", 0, false});
+
+
+
     EventPublishCallback pub = [](Event &&evt){
+        std::cout << "event accepted" << std::endl;
     };
 
     ViewReadCallback view = [](const ViewDescriptor &view_desc) -> const std::optional<View> {
-        return {};
+        std::cout << "returning view" << std::endl;
+        return build_view();
     };
 
     OpDispatch<5> dispatch{pub, view};
+
+
+    ValueNode node1{
+        {{"name", {std::string{"jane"}}}, {"age", {12ull}}}
+    };
+
+    EntityDescriptor desc1{234, 21};
+    EventEntity entity1{desc1, node1};
+
+    auto pub_f = dispatch.publish_event(Event{678,  entity1});
+    pub_f.get();
+
+    std::cout << "write complete" << std::endl;
+
+    auto read_f = dispatch.read_view(ViewDescriptor{});
+    auto res = read_f.get();
+
+    std::cout << "view read complete" << std::endl;
+
+    REQUIRE(res);
+    REQUIRE(build_view().values.size() == res->values.size());
+
 }
