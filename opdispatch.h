@@ -9,6 +9,7 @@
 #include <future>
 #include <thread>
 #include <chrono>
+#include <optional>
 
 #include "eventview.h"
 #include "mpsc.h"
@@ -19,7 +20,14 @@ namespace eventview {
 
     struct Operation {
         std::variant<Event, ViewDescriptor> op;
-        std::variant<std::promise<void>, std::promise<View> > res;
+        std::variant<std::promise<void>, std::promise<std::optional<View> > > res;
+
+        Operation()=default;
+        Operation(const Operation &)=delete;
+        Operation& operator=(const Operation &)=delete;
+        Operation(Operation &&)=default;
+        Operation& operator=(Operation &&)=default;
+        ~Operation()=default;
 
 
         bool is_write() {
@@ -42,10 +50,11 @@ namespace eventview {
             return std::move(*std::get_if<ViewDescriptor>(&op));
         }
 
-        std::promise<View> take_read_res() {
-            return std::move(*std::get_if<std::promise<View> >(&res));
+        std::promise<std::optional<View>> take_read_res() {
+            return std::move(*std::get_if<std::promise<std::optional<View>>>(&res));
         }
     };
+
 
     using EventPublishCallback = std::function<void(Event &&evt)>;
     using ViewReadCallback = std::function<const std::optional<View> (const ViewDescriptor &view_desc)>;
@@ -54,14 +63,15 @@ namespace eventview {
     class OpDispatch {
 
     public:
-        OpDispatch(EventPublishCallback pub, ViewReadCallback read) : worker_{ std::thread{[&]{ work(); } } },
-            pub_{std::move(pub)}, read_{std::move(read)} {}
+        OpDispatch(EventPublishCallback pub, ViewReadCallback read) : pub_{std::move(pub)}, read_{std::move(read)},
+        running_{true}, worker_{ [&]{ work(); } }  {}
 
         OpDispatch(const OpDispatch &) = delete;
         OpDispatch& operator=(const OpDispatch &) = delete;
         OpDispatch(OpDispatch &&) = default;
         OpDispatch& operator=(OpDispatch &&) = default;
         ~OpDispatch() {
+            running_.store(false, std::memory_order_release);
             if (worker_.joinable()) {
                 worker_.join();
             }
@@ -74,18 +84,18 @@ namespace eventview {
 
             Operation op{ std::move(evt), std::move(p) };
 
-            gateway_.produce(std::move(op));
+            mpsc_.produce(std::move(op));
 
             return std::move(result);
         }
 
-        std::future<View> read_view(ViewDescriptor &&desc) {
-            std::promise<View> p{};
+        std::future<std::optional<View>> read_view(ViewDescriptor &&desc) {
+            std::promise<std::optional<View>> p{};
             auto result = p.get_future();
 
             Operation op{ std::move(desc), std::move(p) };
 
-            gateway_.produce(std::move(op));
+            mpsc_.produce(std::move(op));
 
             return std::move(result);
         }
@@ -95,8 +105,8 @@ namespace eventview {
 
         void work() {
             try {
-                while (true) {
-                    auto op = gateway_.consume();
+                while (running_.load(std::memory_order_consume)) {
+                    auto op = mpsc_.consume();
                     if (op) {
                         process_op(std::move(*op));
                     } else {
@@ -135,8 +145,9 @@ namespace eventview {
 
         EventPublishCallback pub_;
         ViewReadCallback read_;
-        MPSC<std::unique_ptr<Operation>, NumThreads> gateway_;
+        MPSC<Operation, NumThreads> mpsc_;
         std::thread worker_;
+        std::atomic<bool> running_;
     };
 
 }

@@ -446,13 +446,12 @@ TEST_CASE("basic mpsc") {
 }
 
 TEST_CASE("basic opdispatch") {
+    EventPublishCallback pub = [](Event &&evt){
+    };
 
-//    EventPublishCallback pub = [](Event &&evt){
-//    };
-//
-//    ViewReadCallback view = [](const ViewDescriptor &view_desc) -> const std::optional<View> {
-//        return {};
-//    };
-//
-//    OpDispatch<5> dispatch{pub, view};
+    ViewReadCallback view = [](const ViewDescriptor &view_desc) -> const std::optional<View> {
+        return {};
+    };
+
+    OpDispatch<5> dispatch{pub, view};
 }

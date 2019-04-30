@@ -15,13 +15,9 @@ namespace eventview {
     class MPSC {
 
     public:
-        using index = typename std::array<std::atomic<Elem>, BuffSize>::size_type;
+        using index = typename std::array<Elem, BuffSize>::size_type;
 
-        MPSC() : write_idx_{0}, read_idx_{0}, max_read_idx_{0}, ring_buff_{} {
-            for (index i=0; i<BuffSize; ++i) {
-                ring_buff_[i] = {};
-            }
-        }
+        MPSC() : write_idx_{0}, read_idx_{0}, max_read_idx_{0}, ring_buff_{} {}
 
         MPSC(const MPSC &) = delete;
 
@@ -46,7 +42,7 @@ namespace eventview {
         std::atomic<index> write_idx_;
         std::atomic<index> read_idx_;
         std::atomic<index> max_read_idx_;
-        std::array<std::atomic<Elem>, BuffSize> ring_buff_;
+        std::array<Elem, BuffSize> ring_buff_;
     };
 
 
@@ -61,12 +57,12 @@ namespace eventview {
                 return false;
             }
 
-        } while (!write_idx_.compare_exchange_weak(current_write, current_write + 1));
+        } while (!write_idx_.compare_exchange_weak(current_write, current_write + 1, std::memory_order_acq_rel));
 
-        ring_buff_[position(current_write)].store(elem, std::memory_order::memory_order_release);
+        ring_buff_[position(current_write)] = std::move(elem);
 
         auto current_write_test = current_write;
-        while (!max_read_idx_.compare_exchange_weak(current_write_test, current_write + 1)) {
+        while (!max_read_idx_.compare_exchange_weak(current_write_test, current_write + 1, std::memory_order_acq_rel)) {
             //the cas operation writes the current value into current_write_test.
             //that changes subsequent tests in a way we don't want so we restore the value on failure.
             current_write_test = current_write;
@@ -89,9 +85,9 @@ namespace eventview {
                 return {};
             }
 
-            auto elem = ring_buff_[position(current_read)].load(std::memory_order::memory_order_acquire);
+            auto elem = std::move(ring_buff_[position(current_read)]);
 
-            if (read_idx_.compare_exchange_weak(current_read, (current_read + 1))) {
+            if (read_idx_.compare_exchange_weak(current_read, current_read + 1,  std::memory_order_acq_rel)) {
                 return elem;
             }
         }
