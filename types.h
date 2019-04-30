@@ -1,5 +1,5 @@
-#ifndef EVENTVIEW_EVENTVIEW_H
-#define EVENTVIEW_EVENTVIEW_H
+#ifndef EVENTVIEW_TYPES_H
+#define EVENTVIEW_TYPES_H
 
 #include <cstdint>
 #include <cmath>
@@ -176,4 +176,4 @@ namespace std {
 }
 
 
-#endif //EVENTVIEW_EVENTVIEW_H
+#endif //EVENTVIEW_TYPES_H

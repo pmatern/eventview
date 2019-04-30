@@ -2,8 +2,8 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="eventview" targetName="eventview" />
       <config projectName="eventview" targetName="eventview_tests" />
+      <config projectName="eventview" targetName="eventview" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -13,8 +13,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0de57598-a840-4258-8a91-ada38f163fba" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/publishimpl.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/viewimpl.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/opdispatch.h" beforeDir="false" afterPath="$PROJECT_DIR$/opdispatch.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/publish.h" beforeDir="false" afterPath="$PROJECT_DIR$/publish.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view.h" beforeDir="false" afterPath="$PROJECT_DIR$/view.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,12 +36,13 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eventview.h">
+        <entry file="file://$PROJECT_DIR$/opdispatch.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
-              <caret line="104" column="27" selection-start-line="104" selection-start-column="8" selection-end-line="104" selection-end-column="27" />
+            <state relative-caret-position="245">
+              <caret line="15" selection-start-line="15" selection-end-line="15" />
               <folding>
-                <element signature="e#61#79#0" expanded="true" />
+                <element signature="e#112#130#0" expanded="true" />
+                <element signature="e#1600#1626#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -44,38 +51,57 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="127" column="40" lean-forward="true" selection-start-line="127" selection-start-column="40" selection-end-line="127" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eventwriter.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1496">
-              <caret line="88" column="23" selection-start-line="88" selection-start-column="23" selection-end-line="88" selection-end-column="23" />
+            <state relative-caret-position="646">
+              <caret line="38" column="37" lean-forward="true" selection-start-line="38" selection-start-column="37" selection-end-line="38" selection-end-column="37" />
               <folding>
-                <element signature="e#66#84#0" expanded="true" />
+                <element signature="e#52#71#0" expanded="true" />
+                <element signature="e#175#201#0" expanded="true" />
+                <element signature="e#765#791#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mpsc.h">
+        <entry file="file://$PROJECT_DIR$/publishimpl.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-443">
-              <caret line="13" column="51" lean-forward="true" selection-start-line="13" selection-start-column="51" selection-end-line="13" selection-end-column="51" />
+            <state relative-caret-position="168">
+              <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+              <folding>
+                <element signature="e#114#133#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/viewimpl.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="298">
+              <caret line="61" column="18" selection-start-line="61" selection-start-column="18" selection-end-line="61" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/publish.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="389">
+              <caret line="44" column="1" lean-forward="true" selection-start-line="44" selection-start-column="1" selection-end-line="44" selection-end-column="1" />
+              <folding>
+                <element signature="e#58#77#0" expanded="true" />
+                <element signature="e#235#261#0" expanded="true" />
+                <element signature="e#781#807#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="514" column="4" selection-start-line="514" selection-start-column="4" selection-end-line="514" selection-end-column="4" />
+            <state relative-caret-position="158">
+              <caret line="370" column="33" selection-start-line="370" selection-start-column="33" selection-end-line="370" selection-end-column="33" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -84,55 +110,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eventview.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" selection-start-line="10" selection-end-line="10" />
+              <folding>
+                <element signature="e#61#79#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/opdispatch.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="88" column="37" lean-forward="true" selection-start-line="88" selection-start-column="37" selection-end-line="88" selection-end-column="37" />
-              <folding>
-                <element signature="e#112#130#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/tuple">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
-              <caret line="1016" column="4" selection-start-line="1016" selection-start-column="4" selection-end-line="1016" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/functional">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23987">
-              <caret line="1411" column="47" selection-start-line="1411" selection-start-column="47" selection-end-line="1411" selection-end-column="47" />
-              <folding>
-                <element signature="e#44120#44131#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/catch.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="587" selection-start-line="587" selection-end-line="587" />
-              <folding>
-                <element signature="e#62958#63753#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="187">
+              <caret line="11" column="161" selection-start-line="11" selection-start-column="161" selection-end-line="11" selection-end-column="161" />
             </state>
           </provider>
         </entry>
@@ -158,9 +151,11 @@
       <find>try</find>
       <find>put</find>
       <find>cout</find>
-      <find>viewva</find>
       <find>Event</find>
+      <find>viewva</find>
       <find>Event{</find>
+      <find>ViewReader</find>
+      <find>Publisher</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -174,17 +169,20 @@
         <option value="$PROJECT_DIR$/eventview.cpp" />
         <option value="$PROJECT_DIR$/expected.h" />
         <option value="$PROJECT_DIR$/query.h" />
-        <option value="$PROJECT_DIR$/view.h" />
         <option value="$PROJECT_DIR$/snowflake.h" />
         <option value="$PROJECT_DIR$/eventwriter.h" />
         <option value="$PROJECT_DIR$/eventview.h" />
         <option value="$PROJECT_DIR$/eventlog.h" />
         <option value="$PROJECT_DIR$/entitystorage.h" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/publish.h" />
         <option value="$PROJECT_DIR$/mpsc.h" />
+        <option value="$PROJECT_DIR$/ViewReaderImpl.h" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/viewimpl.h" />
         <option value="$PROJECT_DIR$/opdispatch.h" />
+        <option value="$PROJECT_DIR$/publishimpl.h" />
         <option value="$PROJECT_DIR$/tests.cpp" />
+        <option value="$PROJECT_DIR$/view.h" />
+        <option value="$PROJECT_DIR$/publish.h" />
       </list>
     </option>
   </component>
@@ -239,7 +237,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Catch.basic opdispatch">
+  <component name="RunManager" selected="Catch.All in eventview_tests">
     <configuration name="All in eventview_tests" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" nameIsGenerated="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="eventview" TARGET_NAME="eventview_tests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="eventview" RUN_TARGET_NAME="eventview_tests" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -252,7 +250,7 @@
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="basic opdispatch" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="eventview" TARGET_NAME="eventview_tests" RUN_TARGET_PROJECT_NAME="eventview" RUN_TARGET_NAME="eventview_tests" TEST_METHOD="basic opdispatch" TEST_MODE="SUITE_TEST">
+    <configuration name="basic opdispatch" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="eventview" TARGET_NAME="eventview_tests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="eventview" RUN_TARGET_NAME="eventview_tests" TEST_METHOD="basic opdispatch" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
@@ -292,9 +290,9 @@
       <item itemvalue="Catch.write to query loop" />
       <item itemvalue="Catch.write to read_view loop" />
       <item itemvalue="Catch.basic mpsc" />
+      <item itemvalue="Catch.basic opdispatch" />
       <item itemvalue="CMake Application.eventview" />
       <item itemvalue="CMake Application.eventview_tests" />
-      <item itemvalue="Catch.basic opdispatch" />
     </list>
     <recent_temporary>
       <list>
@@ -326,14 +324,12 @@
       <workItem from="1556134836297" duration="11322000" />
       <workItem from="1556221635395" duration="35979000" />
       <workItem from="1556411310814" duration="17897000" />
-      <workItem from="1556574936838" duration="10310000" />
+      <workItem from="1556574936838" duration="11958000" />
+      <workItem from="1556654102313" duration="2919000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="basic_opdispatch - 2019.04.30 at 11h 01m 36s.xml">
-      <configuration name="basic opdispatch" configurationId="CMakeCatchTestRunConfigurationType" />
-    </history-entry>
     <history-entry file="basic_opdispatch - 2019.04.30 at 11h 07m 21s.xml">
       <configuration name="basic opdispatch" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
@@ -361,26 +357,29 @@
     <history-entry file="basic_opdispatch - 2019.04.30 at 11h 55m 22s.xml">
       <configuration name="basic opdispatch" configurationId="CMakeCatchTestRunConfigurationType" />
     </history-entry>
+    <history-entry file="basic_opdispatch - 2019.04.30 at 11h 56m 22s.xml">
+      <configuration name="basic opdispatch" configurationId="CMakeCatchTestRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="154139000" />
+    <option name="totallyTimeSpent" value="158706000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="33" width="1400" height="837" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20103092" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20397644" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32885906" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4992636" visible="true" weight="0.32885906" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4992636" weight="0.32885906" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.19731544" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
-      <window_info anchor="bottom" id="Messages" order="8" sideWeight="0.4992636" weight="0.32885906" />
+      <window_info anchor="bottom" id="Messages" order="8" sideWeight="0.4992636" visible="true" weight="0.32885906" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32885906" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50073636" side_tool="true" weight="0.32885906" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32885906" />
@@ -443,13 +442,27 @@
         </entry>
       </map>
     </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/tests.cpp</url>
-          <line>421</line>
+          <line>422</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
@@ -558,16 +571,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eventview.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/snowflake.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
@@ -576,16 +579,6 @@
             <element signature="e#61#78#0" expanded="true" />
             <element signature="e#1701#1801#0" expanded="true" />
             <element signature="e#3198#3200#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/publish.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="41" column="47" selection-start-line="41" selection-start-column="11" selection-end-line="41" selection-end-column="47" />
-          <folding>
-            <element signature="e#58#77#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -607,13 +600,6 @@
           <folding>
             <element signature="e#44120#44131#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
         </state>
       </provider>
     </entry>
@@ -641,6 +627,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/eventview.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mpsc.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-443">
@@ -648,17 +644,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view.h">
+    <entry file="file://$PROJECT_DIR$/ViewReaderImpl.h" />
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="127" column="40" lean-forward="true" selection-start-line="127" selection-start-column="40" selection-end-line="127" selection-end-column="40" />
+        <state relative-caret-position="187">
+          <caret line="11" column="161" selection-start-line="11" selection-start-column="161" selection-end-line="11" selection-end-column="161" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/viewimpl.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="61" column="18" selection-start-line="61" selection-start-column="18" selection-end-line="61" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/eventview.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="104" column="27" selection-start-line="104" selection-start-column="8" selection-end-line="104" selection-end-column="27" />
+        <state relative-caret-position="170">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
           <folding>
             <element signature="e#61#79#0" expanded="true" />
           </folding>
@@ -667,20 +671,55 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/opdispatch.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="88" column="37" lean-forward="true" selection-start-line="88" selection-start-column="37" selection-end-line="88" selection-end-column="37" />
+        <state relative-caret-position="245">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
           <folding>
             <element signature="e#112#130#0" expanded="true" />
+            <element signature="e#1600#1626#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/publishimpl.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+          <folding>
+            <element signature="e#114#133#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="514" column="4" selection-start-line="514" selection-start-column="4" selection-end-line="514" selection-end-column="4" />
+        <state relative-caret-position="158">
+          <caret line="370" column="33" selection-start-line="370" selection-start-column="33" selection-end-line="370" selection-end-column="33" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="38" column="37" lean-forward="true" selection-start-line="38" selection-start-column="37" selection-end-line="38" selection-end-column="37" />
+          <folding>
+            <element signature="e#52#71#0" expanded="true" />
+            <element signature="e#175#201#0" expanded="true" />
+            <element signature="e#765#791#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/publish.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="389">
+          <caret line="44" column="1" lean-forward="true" selection-start-line="44" selection-start-column="1" selection-end-line="44" selection-end-column="1" />
+          <folding>
+            <element signature="e#58#77#0" expanded="true" />
+            <element signature="e#235#261#0" expanded="true" />
+            <element signature="e#781#807#0" expanded="true" />
           </folding>
         </state>
       </provider>

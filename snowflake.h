@@ -4,7 +4,7 @@
 #include <chrono>
 #include <atomic>
 #include <assert.h>
-#include "eventview.h"
+#include "types.h"
 
 namespace eventview {
 

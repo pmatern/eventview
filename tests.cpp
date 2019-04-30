@@ -3,13 +3,14 @@
 #include <functional>
 #include <variant>
 
-#include "eventview.h"
+#include "types.h"
 #include "snowflake.h"
 #include "eventlog.h"
 #include "eventwriter.h"
 #include "entitystorage.h"
 #include "publish.h"
-#include "view.h"
+#include "viewimpl.h"
+#include "publishimpl.h"
 #include "mpsc.h"
 #include "opdispatch.h"
 
@@ -286,7 +287,7 @@ TEST_CASE("entity store") {
 TEST_CASE("publish round trip") {
     SnowflakeProvider sp{ 68 };
     std::shared_ptr<EntityStore> store = std::make_shared<EntityStore>();
-    Publisher pub{store};
+    PublisherImpl pub{store};
     EntityDescriptor mgr_ref = EntityDescriptor{sp.next(), 90ull};
 
     ValueNode node1{
@@ -338,7 +339,7 @@ TEST_CASE("publish round trip") {
 
 TEST_CASE("event writer round trip") {
     std::shared_ptr<EntityStore> store = std::make_shared<EntityStore>();
-    Publisher pub{store};
+    PublisherImpl pub{store};
 
     EventWriter writer{ 46, [&](Event &&evt) {
         pub.publish(std::move(evt));
@@ -366,8 +367,8 @@ TEST_CASE("event writer round trip") {
 
 TEST_CASE("write to read_view loop") {
     std::shared_ptr<EntityStore> store = std::make_shared<EntityStore>();
-    Publisher pub{store};
-    ViewReader view_processor{store};
+    PublisherImpl pub{store};
+    ViewReaderImpl view_processor{store};
 
     EventWriter writer{406, [&](Event &&evt) {
         pub.publish(std::move(evt));

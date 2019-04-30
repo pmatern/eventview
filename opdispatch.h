@@ -11,10 +11,8 @@
 #include <chrono>
 #include <optional>
 
-#include "eventview.h"
+#include "types.h"
 #include "mpsc.h"
-#include "eventwriter.h"
-#include "view.h"
 
 namespace eventview {
 

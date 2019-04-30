@@ -8,15 +8,16 @@
 #include <atomic>
 #include <future>
 
-#include "eventview.h"
-#include "entitystorage.h"
+#include "types.h"
+#include "opdispatch.h"
 
 namespace eventview {
 
+    template<std::uint32_t NumThreads>
     class Publisher {
 
     public:
-        explicit Publisher(std::shared_ptr<EntityStore> store) : store_{std::move(store)} {}
+        explicit Publisher(std::shared_ptr<OpDispatch<NumThreads>> dispatch) : dispatch_{dispatch} {}
 
         Publisher(const Publisher &other) = delete;
 
@@ -33,58 +34,14 @@ namespace eventview {
 
     private:
 
-        inline void reference_stub(EntityDescriptor stub, EventID ref_time,
-                                   const std::string &field, EntityDescriptor ref, bool add_ref);
-
-        std::shared_ptr<EntityStore> store_;
+        std::shared_ptr<OpDispatch<NumThreads>> dispatch_;
     };
 
-    inline void Publisher::publish(Event &&evt) {
-        auto result = store_->put(evt.id, evt.entity);
-
-        //remove old referencers
-        for (auto &kv : result) {
-            const auto &lookup = store_->get(kv.second);
-            if (lookup) {
-                auto &node = lookup->get();
-                node.remove_referencer(evt.id, kv.first, evt.entity.descriptor);
-            } else {
-                //need to add stub storage node for not-yet existent entity and remove ref it
-                reference_stub(kv.second, evt.id, kv.first, evt.entity.descriptor, false);
-            }
-        }
-
-        //add new referencers
-        for (auto &kv : evt.entity.node) {
-            if (kv.second.is_descriptor()) {
-                auto &desc = kv.second.as_descriptor();
-
-                const auto &lookup = store_->get(desc);
-                if (lookup) {
-                    auto &node = lookup->get();
-                    node.add_referencer(evt.id, kv.first, evt.entity.descriptor);
-                } else {
-                    //need to add stub storage node for not-yet existent entity and ref it
-                    reference_stub(desc, evt.id, kv.first, evt.entity.descriptor, true);
-                }
-            }
-        }
-
+    template<std::uint32_t NumThreads>
+    inline void Publisher<NumThreads>::publish(Event &&evt) {
+        auto future = dispatch_->publish_event(std::move(evt));
+        future.get(); //return void or throw transferred exception
     }
-
-    inline void Publisher::reference_stub(EntityDescriptor stub, EventID ref_time,
-                                          const std::string &field, EntityDescriptor ref, bool add_ref) {
-        //super low write time ensures whatever delayed write comes in will apply
-        store_->put(1, {stub, {}});
-        const auto &node = store_->get(stub);
-
-        if (add_ref) {
-            node->get().add_referencer(ref_time, field, ref);
-        } else {
-            node->get().remove_referencer(ref_time, field, ref);
-        }
-    }
-
 }
 
 #endif //EVENTVIEW_PUBLISH_H

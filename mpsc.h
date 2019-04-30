@@ -6,7 +6,7 @@
 #include <thread>
 #include <atomic>
 #include <optional>
-#include "eventview.h"
+#include "types.h"
 
 namespace eventview {
 

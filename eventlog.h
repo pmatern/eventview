@@ -5,7 +5,7 @@
 #include <vector>
 #include <exception>
 #include <iostream>
-#include "eventview.h"
+#include "types.h"
 
 namespace eventview {
 

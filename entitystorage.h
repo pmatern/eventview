@@ -2,7 +2,7 @@
 #ifndef EVENTVIEW_ENTITYSTORAGE_H
 #define EVENTVIEW_ENTITYSTORAGE_H
 
-#include "eventview.h"
+#include "types.h"
 #include <unordered_map>
 #include <string>
 #include <vector>

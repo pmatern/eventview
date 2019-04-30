@@ -3,7 +3,7 @@
 #define EVENTVIEW_EVENTWRITER_H
 
 #include <variant>
-#include "eventview.h"
+#include "types.h"
 #include "snowflake.h"
 #include "eventlog.h"
 
