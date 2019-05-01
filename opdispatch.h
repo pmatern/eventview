@@ -57,8 +57,9 @@ namespace eventview {
     using EventPublishCallback = std::function<void(Event &&evt)>;
     using ViewReadCallback = std::function<const std::optional<View> (const ViewDescriptor &view_desc)>;
 
+
     template<std::uint32_t NumThreads>
-    class OpDispatch {
+    class OpDispatch : public std::enable_shared_from_this<OpDispatch<NumThreads>> {
 
     public:
         OpDispatch(EventPublishCallback pub, ViewReadCallback read) : pub_{std::move(pub)}, read_{std::move(read)},

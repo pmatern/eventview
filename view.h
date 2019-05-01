@@ -28,7 +28,7 @@ namespace eventview {
         inline const std::optional<View> read_view(const ViewDescriptor &view_desc) const noexcept;
 
     private:
-        OpDispatch<NumThreads> dispatch_;
+        std::shared_ptr<OpDispatch<NumThreads>> dispatch_;
     };
 
     template<std::uint32_t NumThreads>

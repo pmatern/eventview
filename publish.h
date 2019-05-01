@@ -14,7 +14,7 @@
 namespace eventview {
 
     template<std::uint32_t NumThreads>
-    class Publisher {
+    class Publisher : public std::enable_shared_from_this<Publisher<NumThreads>> {
 
     public:
         explicit Publisher(std::shared_ptr<OpDispatch<NumThreads>> dispatch) : dispatch_{dispatch} {}
@@ -30,6 +30,7 @@ namespace eventview {
         ~Publisher() = default;
 
 
+        //todo make no except and return error code on failure?
         inline void publish(Event &&evt);
 
     private:

@@ -13,6 +13,7 @@
 #include "publishimpl.h"
 #include "mpsc.h"
 #include "opdispatch.h"
+#include "eventview.h"
 
 #define CATCH_CONFIG_MAIN
 
@@ -516,5 +517,14 @@ TEST_CASE("basic opdispatch") {
 
     REQUIRE(res);
     REQUIRE(build_view().values.size() == res->values.size());
+}
+
+TEST_CASE("eventview factory") {
+    auto system =  make_eventview_system<5>();
+
+    auto& publisher = system.first;
+    auto& reader = system.second;
+
+    auto writer = make_writer<5>(4575, publisher);
 
 }

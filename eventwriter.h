@@ -3,6 +3,8 @@
 #define EVENTVIEW_EVENTWRITER_H
 
 #include <variant>
+#include <vector>
+
 #include "types.h"
 #include "snowflake.h"
 #include "eventlog.h"
@@ -42,11 +44,12 @@ namespace eventview {
     };
 
 
+    template<typename LogStorage = std::vector<Event> >
     class EventWriter final {
     public:
         EventWriter(std::uint32_t writer_id, EventReceiver receiver) :
                 snowflakes_{SnowflakeProvider{writer_id}},
-                log_{EventLog{std::move(receiver)}} {}
+                log_{EventLog<LogStorage>{std::move(receiver)}} {}
 
         inline const WriteResult write_event(EventEntity evt) noexcept;
 
@@ -70,11 +73,12 @@ namespace eventview {
         }
          */
     private:
-        EventLog<> log_;
+        EventLog<LogStorage> log_;
         SnowflakeProvider<> snowflakes_;
     };
 
-    inline const WriteResult EventWriter::write_event(EventEntity evt) noexcept {
+    template<typename LogStorage>
+    inline const WriteResult EventWriter<LogStorage>::write_event(EventEntity evt) noexcept {
 
         auto evt_id = snowflakes_.next();
         if (0 == evt.descriptor.id) {
