@@ -572,3 +572,28 @@ TEST_CASE("eventview factory") {
     REQUIRE(view->values[1].value.as_long() == 56);
     REQUIRE(view->values[2].value.as_string() =="john");
 }
+
+
+TEST_CASE("eventwriter no receiver") {
+    auto writer = make_writer(23);
+
+    EntityDescriptor manager_desc{writer.next_id(), 23};
+
+    ValueNode node{
+            {{"name", {std::string{"john"}}}, {"age", {41ull}}, {"manager_id", {manager_desc}}}
+    };
+
+    ValueNode mgr_node{
+            {{"name", {std::string{"ted"}}}, {"age", {56ull}}}
+    };
+
+    EntityDescriptor desc{writer.next_id(), 21};
+    EventEntity entity{desc, node};
+    EventEntity manager_entity{manager_desc, mgr_node};
+
+    auto mgr_result = writer.write_event(manager_entity);
+    REQUIRE(mgr_result);
+    auto result = writer.write_event(entity);
+    REQUIRE(result);
+
+}

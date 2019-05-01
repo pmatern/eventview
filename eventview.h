@@ -34,23 +34,33 @@ namespace eventview {
             return reader_impl_ptr->read_view(view_desc);
         };
 
-        //OpDispatch<NumThreads>{pub_cb, view_cb}.shared_from_this();
-        auto dispatch_ptr =  std::make_shared<OpDispatch<NumThreads>>(pub_cb, view_cb);
+        auto dispatch_ptr = std::make_shared<OpDispatch<NumThreads>>(pub_cb, view_cb);
+
         Publisher<NumThreads> pub{dispatch_ptr};
         ViewReader reader{dispatch_ptr};
 
         return {std::move(pub), std::move(reader)};
     };
 
+
     template<std::uint32_t NumThreads, typename LogStorage = std::vector<Event>>
     EventWriter<LogStorage> make_writer(std::uint32_t writer_id, Publisher<NumThreads> &publisher) {
 
         return EventWriter<LogStorage>{writer_id, [&](Event &&evt) {
-            auto result =  publisher.publish(std::move(evt));
+            auto result = publisher.publish(std::move(evt));
             if (!result) {
+                //EventWriter expects exceptions thrown internally rather than result objects
                 throw std::runtime_error{result.error()};
             }
         }};
+    }
+
+    EventReceiver NoOpReceiver = [](const Event &evt){};
+
+    template<typename LogStorage = std::vector<Event>>
+    EventWriter<LogStorage> make_writer(std::uint32_t writer_id, const EventReceiver &receiver=NoOpReceiver) {
+
+        return EventWriter<LogStorage>{writer_id, receiver};
     }
 }
 
