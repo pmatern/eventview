@@ -527,4 +527,48 @@ TEST_CASE("eventview factory") {
 
     auto writer = make_writer<5>(475, publisher);
 
+
+    EntityDescriptor manager_desc{writer.next_id(), 23};
+
+    ValueNode node{
+            {{"name", {std::string{"john"}}}, {"age", {41ull}}, {"manager_id", {manager_desc}}}
+    };
+
+    ValueNode mgr_node{
+            {{"name", {std::string{"ted"}}}, {"age", {56ull}}}
+    };
+
+    EntityDescriptor desc{writer.next_id(), 21};
+    EventEntity entity{desc, node};
+    EventEntity manager_entity{manager_desc, mgr_node};
+
+    auto mgr_result = writer.write_event(manager_entity);
+    REQUIRE(mgr_result);
+    auto result = writer.write_event(entity);
+    REQUIRE(result);
+
+    ViewDescriptor view_desc{manager_desc, {}};
+    ViewPath vp_1{};
+    vp_1.push_back({"name", 0, false});
+
+    ViewPath vp_2{};
+    vp_2.push_back({"age", 0, false});
+
+    ViewPath vp_3{};
+    vp_3.push_back({"manager_id", 21, false});
+    vp_3.push_back({"name", 0, false});
+
+    view_desc.paths.push_back(vp_1);
+    view_desc.paths.push_back(vp_2);
+    view_desc.paths.push_back(vp_3);
+
+    const auto &view = reader.read_view(view_desc);
+
+    REQUIRE(view);
+    REQUIRE(view->root == view_desc.root);
+    REQUIRE(view->values.size() == view_desc.paths.size());
+
+    REQUIRE(view->values[0].value.as_string() == "ted");
+    REQUIRE(view->values[1].value.as_long() == 56);
+    REQUIRE(view->values[2].value.as_string() =="john");
 }

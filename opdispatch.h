@@ -88,7 +88,7 @@ namespace eventview {
             return std::move(result);
         }
 
-        std::future<std::optional<View>> read_view(ViewDescriptor &&desc) {
+        std::future<std::optional<View>> read_view(ViewDescriptor desc) {
             std::promise<std::optional<View>> p{};
             auto result = p.get_future();
 

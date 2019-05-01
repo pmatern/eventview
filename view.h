@@ -34,7 +34,7 @@ namespace eventview {
     template<std::uint32_t NumThreads>
     inline const std::optional<View> ViewReader<NumThreads>::read_view(const ViewDescriptor &view_desc) const noexcept {
         try {
-            auto view_future = dispatch_.read_view(view_desc);
+            auto view_future = dispatch_->read_view(view_desc);
             return view_future.get();
         } catch (std::exception &e) {
             //do something
