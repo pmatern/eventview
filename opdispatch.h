@@ -59,7 +59,7 @@ namespace eventview {
 
 
     template<std::uint32_t NumThreads>
-    class OpDispatch : public std::enable_shared_from_this<OpDispatch<NumThreads>> {
+    class OpDispatch {
 
     public:
         OpDispatch(EventPublishCallback pub, ViewReadCallback read) : pub_{std::move(pub)}, read_{std::move(read)},

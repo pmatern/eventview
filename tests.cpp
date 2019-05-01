@@ -525,6 +525,6 @@ TEST_CASE("eventview factory") {
     auto& publisher = system.first;
     auto& reader = system.second;
 
-    auto writer = make_writer<5>(4575, publisher);
+    auto writer = make_writer<5>(475, publisher);
 
 }

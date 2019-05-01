@@ -22,9 +22,9 @@ namespace eventview {
 
         auto store = std::make_shared<EntityStore>();
 
-        auto reader_impl_ptr = std::make_shared<ViewReaderImpl>(ViewReaderImpl{store});
+        auto reader_impl_ptr = std::make_shared<ViewReaderImpl>(store);
 
-        auto pub_impl_ptr = std::make_shared<PublisherImpl>(PublisherImpl{store});
+        auto pub_impl_ptr = std::make_shared<PublisherImpl>(store);
 
         EventPublishCallback pub_cb = [=](Event &&evt) {
             pub_impl_ptr->publish(std::move(evt));
@@ -34,9 +34,8 @@ namespace eventview {
             return reader_impl_ptr->read_view(view_desc);
         };
 
-        OpDispatch<NumThreads> dispatch{pub_cb, view_cb};
-
-        auto dispatch_ptr = dispatch.shared_from_this(); //std::make_shared<OpDispatch<NumThreads>>(OpDispatch<NumThreads>{pub_cb, view_cb});
+        //OpDispatch<NumThreads>{pub_cb, view_cb}.shared_from_this();
+        auto dispatch_ptr =  std::make_shared<OpDispatch<NumThreads>>(pub_cb, view_cb);
         Publisher<NumThreads> pub{dispatch_ptr};
         ViewReader reader{dispatch_ptr};
 
@@ -46,10 +45,11 @@ namespace eventview {
     template<std::uint32_t NumThreads, typename LogStorage = std::vector<Event>>
     EventWriter<LogStorage> make_writer(std::uint32_t writer_id, Publisher<NumThreads> &publisher) {
 
-        auto pub_ptr = publisher.shared_from_this();
-
-        return EventWriter<LogStorage>{writer_id, [=](Event &&evt) {
-            pub_ptr->publish(std::move(evt));
+        return EventWriter<LogStorage>{writer_id, [&](Event &&evt) {
+            auto result =  publisher.publish(std::move(evt));
+            if (!result) {
+                throw std::runtime_error{result.error()};
+            }
         }};
     }
 }
