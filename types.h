@@ -8,6 +8,8 @@
 #include <unordered_map>
 #include <vector>
 #include <functional>
+#include <optional>
+#include <numeric>
 
 namespace eventview {
 
@@ -50,6 +52,27 @@ namespace eventview {
 
 
     using ViewPath = std::vector<PathElement>;
+
+    const std::string path_to_string(const ViewPath &path) {
+        std::string str;
+        for (int i=0; i<path.size(); ++i) {
+            str.append(path[i].name);
+            if (i<path.size()-1) {
+                str.append(".");
+            }
+        }
+        return std::move(str);
+    }
+
+    const bool path_has_multiple_values(const ViewPath &path) {
+        for (auto& elem : path) {
+            if (elem.is_reverse_ref()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 
     struct ViewDescriptor {
@@ -98,37 +121,161 @@ namespace eventview {
         return lhs.val == rhs.val;
     }
 
-    using ValueNode = std::unordered_map<std::string, PrimitiveFieldValue>;
+    class ViewBuilder;
 
-    struct ViewValue {
-        ViewPath path;
-        PrimitiveFieldValue value;
+    class View final {
+    public:
+
+        View(const View &)=default;
+        View& operator=(const View &)=default;
+        View(View &&)=default;
+        View& operator=(View &&)=default;
+        ~View()=default;
+
+        const std::optional<PrimitiveFieldValue> get_path_val(const ViewPath &path) const {
+            assert(path.size() > 0);
+
+            auto found =  values_.find(path_to_string(path));
+            if (found == values_.end()) {
+                return {};
+            } else {
+                return found->second;
+            }
+        }
+
+        const std::vector<PrimitiveFieldValue> get_path_vals(const ViewPath &path) const {
+            assert(path.size() > 0);
+
+            std::vector<PrimitiveFieldValue> vals{};
+            auto founds = values_.equal_range(path_to_string(path));
+            for (auto i = founds.first; i != founds.second; i++) {
+                vals.push_back(i->second);
+            }
+
+            return std::move(vals);
+        }
+
+        template<std::size_t size>
+        const std::optional<PrimitiveFieldValue> get_path_val(const std::array<std::string, size> &path) const {
+            assert(path.size() > 0);
+
+            auto found =  values_.find(path_str_(path));
+            if (found == values_.end()) {
+                return {};
+            } else {
+                return found->second;
+            }
+        }
+
+        template<std::size_t size>
+        const std::vector<PrimitiveFieldValue> get_path_vals(const std::array<std::string, size> &path) const {
+            assert(path.size() > 0);
+
+            std::vector<PrimitiveFieldValue> vals{};
+            auto founds = values_.equal_range(path_str_(path));
+            for (auto i = founds.first; i != founds.second; i++) {
+                vals.push_back(i->second);
+            }
+
+            return std::move(vals);
+        }
+
+    private:
+
+        template<std::size_t size>
+        const std::string path_str_(const std::array<std::string, size> &path) const {
+
+            std::string str;
+            for (int i=0; i<path.size(); ++i) {
+                str.append(path[i]);
+                if (i<path.size()-1) {
+                    str.append(".");
+                }
+            }
+            return std::move(str);
+        }
+
+
+        friend class ViewBuilder;
+        View(EntityID id, EntityTypeID type): descriptor_{id, type}{}
+
+        EntityDescriptor descriptor_;
+        std::unordered_multimap<std::string, PrimitiveFieldValue> values_;
     };
 
-    struct View {
-        EntityDescriptor root;
-        std::vector<ViewValue> values;
+
+    class ViewBuilder final {
+    public:
+        explicit ViewBuilder(EntityID id, EntityTypeID type): view_{id, type}{}
+        ViewBuilder(const ViewBuilder &)=default;
+        ViewBuilder& operator=(const ViewBuilder &)=default;
+        ViewBuilder(ViewBuilder &&)=default;
+        ViewBuilder& operator=(ViewBuilder &&)=default;
+        ~ViewBuilder()=default;
+
+        void add_path_val(ViewPath path, PrimitiveFieldValue value) {
+            view_.values_.insert({path_to_string(path), value});
+        }
+
+        View finish() {
+            return std::move(view_);
+        }
+    private:
+
+        View view_;
     };
 
-    struct EventEntity {
-        EntityDescriptor descriptor;
-        ValueNode node;
 
-        EventEntity() = default;
-        EventEntity(EventEntity &&) = default;
-        EventEntity& operator=(EventEntity &&) = default;
-        EventEntity(const EventEntity &) = default;
-        EventEntity& operator=(const EventEntity &) = default;
-        ~EventEntity() = default;
+    class Entity final {
+    public:
+
+        using Fields = std::unordered_map<std::string, PrimitiveFieldValue>;
+
+        Entity() : descriptor_{0,0}{}
+        explicit Entity(EntityDescriptor desc): descriptor_{desc}{}
+        explicit Entity(EntityTypeID type): descriptor_{0, type}{}
+        Entity(EntityID id, EntityTypeID type): descriptor_{id, type}{}
+        Entity(const Entity &)=default;
+        Entity& operator=(const Entity &)=default;
+        Entity(Entity &&)=default;
+        Entity& operator=(Entity &&)=default;
+        ~Entity()=default;
+
+        void set_field(const std::string field, PrimitiveFieldValue val) {
+            fields_[field] = val;
+        }
+
+        const Fields& fields() const {
+            return fields_;
+        }
+
+        const EntityDescriptor& descriptor() const {
+            return descriptor_;
+        }
+
+        void replace(Fields fields) {
+            fields_ = std::move(fields);
+        }
+
+        void set_entity_id(EntityID id) {
+            descriptor_.id = id;
+        }
+
+
+    private:
+        friend bool operator== (const Entity& lhs, const Entity& rhs);
+
+        EntityDescriptor descriptor_;
+        Fields fields_;
     };
 
-    bool operator==(const EventEntity &lhs, const EventEntity &rhs) {
-        return lhs.descriptor == rhs.descriptor && lhs.node == rhs.node;
+    bool operator==(const Entity &lhs, const Entity &rhs) {
+        return lhs.descriptor_ == rhs.descriptor_ && lhs.fields_ == rhs.fields_;
     }
 
     struct Event {
         EventID id;
-        EventEntity entity;
+        Entity entity;
 
         Event() = default;
         Event(Event &&) = default;

@@ -32,16 +32,16 @@ namespace eventview {
     private:
 
         inline void process_path_element(const ViewPath &path, const ViewPath::size_type &idx,
-                                         const StorageNode &node, View &view) const;
+                                         const StorageNode &node, ViewBuilder &builder) const;
 
         inline void follow_ref(const ViewPath &path, const PathElement &elem, const ViewPath::size_type &idx,
-                               const StorageNode &node, View &view) const;
+                               const StorageNode &node, ViewBuilder &builder) const;
 
         inline void follow_reverse_refs(const ViewPath &path, const PathElement &elem, const ViewPath::size_type &idx,
-                                        const StorageNode &node, View &view) const;
+                                        const StorageNode &node, ViewBuilder &builder) const;
 
         inline void load_value(const ViewPath &path, const PathElement &path_elem,
-                               const StorageNode &node, View &view) const;
+                               const StorageNode &node, ViewBuilder &builder) const;
 
         std::shared_ptr<EntityStore> store_;
     };
@@ -50,13 +50,13 @@ namespace eventview {
         const auto &root_node = store_->get(view_desc.root);
 
         if (root_node) {
-            View view{view_desc.root, {}};
+            ViewBuilder builder{view_desc.root.id, view_desc.root.type};
 
             for (auto &path : view_desc.paths) {
-                process_path_element(path, 0, root_node->get(), view);
+                process_path_element(path, 0, root_node->get(), builder);
             }
 
-            return std::move(view);
+            return builder.finish();
         }
 
         return {};
@@ -66,23 +66,23 @@ namespace eventview {
 
     inline void
     ViewReaderImpl::process_path_element(const ViewPath &path, const ViewPath::size_type &idx, const StorageNode &node,
-                                     View &view) const {
+                                     ViewBuilder &builder) const {
         if (idx < path.size()) {
             auto &elem = path[idx];
 
             if (elem.is_val()) {
-                load_value(path, elem, node, view);
+                load_value(path, elem, node, builder);
             } else if (elem.is_ref()) {
-                follow_ref(path, elem, idx, node, view);
+                follow_ref(path, elem, idx, node, builder);
             } else if (elem.is_reverse_ref()) {
-                follow_reverse_refs(path, elem, idx, node, view);
+                follow_reverse_refs(path, elem, idx, node, builder);
             }
         }
     }
 
 
     inline void ViewReaderImpl::follow_ref(const ViewPath &path, const PathElement &elem, const ViewPath::size_type &idx,
-                                       const StorageNode &node, View &view) const {
+                                       const StorageNode &node, ViewBuilder &builder) const {
 
         auto &fields = node.get_fields();
         auto ref = fields.find(elem.name);
@@ -94,7 +94,7 @@ namespace eventview {
                 if (desc.type == elem.type) {
                     const auto &next_node = store_->get(desc);
                     if (next_node) {
-                        process_path_element(path, idx + 1, next_node->get(), view);
+                        process_path_element(path, idx + 1, next_node->get(), builder);
                     }
                 }
             }
@@ -104,13 +104,13 @@ namespace eventview {
 
     inline void
     ViewReaderImpl::follow_reverse_refs(const ViewPath &path, const PathElement &elem, const ViewPath::size_type &idx,
-                                    const StorageNode &node, View &view) const {
+                                    const StorageNode &node, ViewBuilder &builder) const {
 
         for (auto &ed : node.referencers_for_field(elem.name)) {
             if (ed.type == elem.type) {
                 const auto &next_node = store_->get(ed);
                 if (next_node) {
-                    process_path_element(path, idx + 1, next_node->get(), view);
+                    process_path_element(path, idx + 1, next_node->get(), builder);
                 }
             }
         }
@@ -118,12 +118,12 @@ namespace eventview {
 
 
     inline void ViewReaderImpl::load_value(const ViewPath &path, const PathElement &path_elem, const StorageNode &node,
-                                       View &view) const {
+                                       ViewBuilder &builder) const {
         auto &fields = node.get_fields();
         auto field_val = fields.find(path_elem.name);
 
         if (field_val != fields.end()) {
-            view.values.push_back({path, field_val->second});
+            builder.add_path_val(path, field_val->second);
         }
     }
 }

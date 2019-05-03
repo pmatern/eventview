@@ -50,25 +50,25 @@ namespace eventview {
             const auto &lookup = store_->get(kv.second);
             if (lookup) {
                 auto &node = lookup->get();
-                node.remove_referencer(evt.id, kv.first, evt.entity.descriptor);
+                node.remove_referencer(evt.id, kv.first, evt.entity.descriptor());
             } else {
                 //need to add stub storage node for not-yet existent entity and remove ref it
-                reference_stub(kv.second, evt.id, kv.first, evt.entity.descriptor, false);
+                reference_stub(kv.second, evt.id, kv.first, evt.entity.descriptor(), false);
             }
         }
 
         //add new referencers
-        for (auto &kv : evt.entity.node) {
+        for (auto &kv : evt.entity.fields()) {
             if (kv.second.is_descriptor()) {
                 auto &desc = kv.second.as_descriptor();
 
                 const auto &lookup = store_->get(desc);
                 if (lookup) {
                     auto &node = lookup->get();
-                    node.add_referencer(evt.id, kv.first, evt.entity.descriptor);
+                    node.add_referencer(evt.id, kv.first, evt.entity.descriptor());
                 } else {
                     //need to add stub storage node for not-yet existent entity and ref it
-                    reference_stub(desc, evt.id, kv.first, evt.entity.descriptor, true);
+                    reference_stub(desc, evt.id, kv.first, evt.entity.descriptor(), true);
                 }
             }
         }
@@ -78,7 +78,7 @@ namespace eventview {
     inline void PublisherImpl::reference_stub(EntityDescriptor stub, EventID ref_time,
                                           const std::string &field, EntityDescriptor ref, bool add_ref) {
         //super low write time ensures whatever delayed write comes in will apply
-        store_->put(1, {stub, {}});
+        store_->put(1, Entity{stub.id, stub.type});
         const auto &node = store_->get(stub);
 
         if (add_ref) {

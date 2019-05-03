@@ -2,6 +2,7 @@
 #include <string>
 #include <functional>
 #include <variant>
+#include <atomic>
 
 #include "types.h"
 #include "snowflake.h"
@@ -25,10 +26,7 @@ TEST_CASE("value node") {
 
     SnowflakeProvider sp{ 125 };
 
-    ValueNode child{
-            {{"name", {std::string{"jane"}}}, {"age", {12ull}}}
-    };
-    ValueNode node{
+    Entity::Fields node{
             {{"name",  {std::string{"john"}}}, {"age", {41ull}}, {"department_id", {EntityDescriptor{sp.next(), 5}}}}
     };
 
@@ -83,15 +81,12 @@ TEST_CASE("log event") {
 
     EventLog el{rcvr};
 
-    ValueNode child{
-            {{"name", {std::string{"jane"}}}, {"age", {12ull}}}
-    };
-    ValueNode node{
-            {{"name",  {std::string{"john"}}}, {"age", {41ull}}}
-    };
-
     EntityDescriptor desc{577, 21};
-    EventEntity entity{desc, node};
+    Entity entity{desc.id, desc.type};
+    entity.set_field("name", {std::string{"john"}});
+    entity.set_field("age", {41ull});
+
+
     Event sent{848467, entity};
 
     Event to_send{sent};
@@ -109,31 +104,23 @@ TEST_CASE("write event") {
     EventLog el{rcvr};
     EventWriter writer{554, rcvr};
 
-    ValueNode child{
-            {{"name", {std::string{"jane"}}}, {"age", {12ull}}}
-    };
-    ValueNode node{
-            {{"name", {std::string{"john"}}}, {"age", {41ull}}}
-    };
-
     EntityDescriptor desc{577, 21};
-    EventEntity entity{desc, node};
+    Entity entity{desc.id, desc.type};
+    entity.set_field("name", {std::string{"john"}});
+    entity.set_field("age", {41ull});
+
 
     auto result = writer.write_event(entity);
     REQUIRE(result);
-    REQUIRE(received.entity == entity);
+    REQUIRE(entity == received.entity);
 }
 
 TEST_CASE("storage node referencers") {
-    ValueNode child{
-            {{"name", {std::string{"jane"}}}, {"age", {12ull}}}
-    };
-    ValueNode node{
-            {{"name", {std::string{"john"}}}, {"age", {41ull}}, {"department_id", {EntityDescriptor{3453, 5}}}}
-    };
-
     EntityDescriptor desc{577, 21};
-    EventEntity entity{desc, node};
+    Entity entity{desc.id, desc.type};
+    entity.set_field("name", {std::string{"john"}});
+    entity.set_field("age", {41ull});
+    entity.set_field("department_id", {EntityDescriptor{3453, 5}});
 
     StorageNode sn{34234, entity};
 
@@ -173,18 +160,15 @@ TEST_CASE("storage node referencers") {
 TEST_CASE("storage node fields") {
     SnowflakeProvider sp{ 85 };
 
-    ValueNode child{
-        {{"name", {std::string{"jane"}}}, {"age", {12ull}}}
-    };
-
     EntityDescriptor dept_id{sp.next(), 5};
 
-    ValueNode node{
-        {{"name", {std::string{"john"}}}, {"age", {41ull}}, {"department_id", {dept_id}}}
-    };
 
     EntityDescriptor desc{sp.next(), 21};
-    EventEntity entity{desc, node};
+    Entity entity{desc.id, desc.type};
+    entity.set_field("name", {std::string{"john"}});
+    entity.set_field("age", {41ull});
+    entity.set_field("department_id", {dept_id});
+
 
     auto write_time = sp.next();
     StorageNode sn{write_time, entity};
@@ -203,13 +187,10 @@ TEST_CASE("storage node fields") {
     REQUIRE(john.is_string());
     REQUIRE("john" == john.as_string());
 
-
-    ValueNode replacement {
-        {{"age", {91ull}}}
-    };
-
     //this write won't take effect
-    EventEntity replace_entity{ desc, replacement};
+    Entity replace_entity{ desc.id, desc.type};
+    replace_entity.set_field("age", {91ull});
+
     auto result_val = sn.update_fields(write_time - 100, replace_entity);
 
     REQUIRE(result_val.size() == 0);
@@ -253,18 +234,18 @@ TEST_CASE("entity store") {
     SnowflakeProvider sp{ 45 };
     EntityStore store{};
 
-    ValueNode child{
-        {{"name", {std::string{"jane"}}}, {"age", {12ull}}}
-    };
-
     EntityDescriptor dept_id{sp.next(), 5};
 
-    ValueNode node{
+    Entity::Fields node{
         {{"name",  {std::string{"john"}}}, {"age", {41ull}}, {"department_id", {dept_id}}}
     };
 
     EntityDescriptor desc{sp.next(), 21};
-    EventEntity entity{desc, node};
+    Entity entity{desc.id, desc.type};
+    entity.set_field("name", {std::string{"john"}});
+    entity.set_field("age", {41ull});
+    entity.set_field("department_id", {dept_id});
+
 
     auto result = store.get(desc);
     REQUIRE(!result.has_value());
@@ -291,19 +272,26 @@ TEST_CASE("publish round trip") {
     PublisherImpl pub{store};
     EntityDescriptor mgr_ref = EntityDescriptor{sp.next(), 90ull};
 
-    ValueNode node1{
+    Entity::Fields node1{
         {{"name", {std::string{"jane"}}}, {"age", {12ull}}}
     };
 
-    ValueNode node2{
+    Entity::Fields node2{
         {{"name", {std::string{"john"}}}, {"age", {41ull}}, {"manager_id", {mgr_ref}}}
     };
 
     EntityDescriptor desc1{sp.next(), 21};
-    EventEntity entity1{desc1, node1};
+    Entity entity1{desc1.id, desc1.type};
+    entity1.set_field("name", {std::string{"jane"}});
+    entity1.set_field("age", {12ull});
 
     EntityDescriptor desc2{sp.next(), 21};
-    EventEntity entity2{desc2, node2};
+    Entity entity2{desc2.id, desc2.type};
+    entity2.set_field("name", {std::string{"john"}});
+    entity2.set_field("age", {41ull});
+    entity2.set_field("manager_id", {mgr_ref});
+
+
 
     Event sent1{sp.next(), entity1};
     Event sent2{sp.next(), entity2};
@@ -349,12 +337,16 @@ TEST_CASE("event writer round trip") {
     EntityDescriptor mgr_ref{writer.next_id(), 90ull};
 
 
-    ValueNode node {
+    Entity::Fields node {
         {{"name", {std::string{"john"}}}, {"age", {41ull}}, {"manager_id", {mgr_ref}}}
     };
 
     EntityDescriptor desc{writer.next_id(), 21};
-    EventEntity entity{desc, node};
+    Entity entity{desc.id, desc.type};
+    entity.set_field("name", {std::string{"john"}});
+    entity.set_field("age", {41ull});
+    entity.set_field("manager_id", {mgr_ref});
+
 
     auto result = writer.write_event(entity);
     REQUIRE(result);
@@ -377,17 +369,16 @@ TEST_CASE("write to read_view loop") {
 
     EntityDescriptor manager_desc{writer.next_id(), 23};
 
-    ValueNode node{
-        {{"name", {std::string{"john"}}}, {"age", {41ull}}, {"manager_id", {manager_desc}}}
-    };
-
-    ValueNode mgr_node{
-        {{"name", {std::string{"ted"}}}, {"age", {56ull}}}
-    };
-
     EntityDescriptor desc{writer.next_id(), 21};
-    EventEntity entity{desc, node};
-    EventEntity manager_entity{manager_desc, mgr_node};
+    Entity entity{desc.id, desc.type};
+    entity.set_field("name", {std::string{"john"}});
+    entity.set_field("age", {41ull});
+    entity.set_field("manager_id", {manager_desc});
+
+
+    Entity manager_entity{manager_desc.id, manager_desc.type};
+    manager_entity.set_field("name", {std::string{"ted"}});
+    manager_entity.set_field("age", {56ull});
 
     auto mgr_result = writer.write_event(manager_entity);
     REQUIRE(mgr_result);
@@ -412,12 +403,22 @@ TEST_CASE("write to read_view loop") {
     const auto &view = view_processor.read_view(view_desc);
 
     REQUIRE(view);
-    REQUIRE(view->root == view_desc.root);
-    REQUIRE(view->values.size() == view_desc.paths.size());
 
-    REQUIRE(view->values[0].value.as_string() == "ted");
-    REQUIRE(view->values[1].value.as_long() == 56);
-    REQUIRE(view->values[2].value.as_string() =="john");
+    const auto& name_val = view->get_path_val<1>({"name"});
+    REQUIRE(name_val);
+    REQUIRE(name_val->is_string());
+    REQUIRE(name_val->as_string() == "ted");
+
+    const auto& age_val = view->get_path_val<1>({"age"});
+    REQUIRE(age_val);
+    REQUIRE(age_val->is_long());
+    REQUIRE(age_val->as_long() == 56ull);
+
+    const auto& employee_name_val = view->get_path_val<2>({"manager_id", "name"});
+    REQUIRE(employee_name_val);
+    REQUIRE(employee_name_val->is_string());
+    REQUIRE(employee_name_val->as_string() == "john");
+
 }
 
 TEST_CASE("basic mpsc") {
@@ -448,43 +449,25 @@ TEST_CASE("basic mpsc") {
 }
 
 View build_view() {
-    View v{};
-
-    v.root = {2324, 43};
-
+    ViewBuilder vb{2324, 43};
 
     ViewPath vp_1{};
     vp_1.push_back({"name", 0, false});
-
-    v.values.push_back({vp_1, {std::string{"ted"}}});
+    vb.add_path_val(vp_1, {std::string{"ted"}});
 
     ViewPath vp_2{};
     vp_2.push_back({"age", 0, false});
-
-    v.values.push_back({vp_2, {67ull}});
+    vb.add_path_val(vp_2, {67ull});
 
     ViewPath vp_3{};
     vp_3.push_back({"manager_id", 21, false});
     vp_3.push_back({"name", 0, false});
+    vb.add_path_val(vp_3,  {std::string{"jack"}});
 
-    v.values.push_back({vp_3, {std::string{"jack"}}});
-
-    return v;
+    return vb.finish();
 }
 
 TEST_CASE("basic opdispatch") {
-
-    ViewPath vp_1{};
-    vp_1.push_back({"name", 0, false});
-
-    ViewPath vp_2{};
-    vp_2.push_back({"age", 0, false});
-
-    ViewPath vp_3{};
-    vp_3.push_back({"manager_id", 21, false});
-    vp_3.push_back({"name", 0, false});
-
-
 
     EventPublishCallback pub = [](Event &&evt){
         std::cout << "event accepted" << std::endl;
@@ -497,13 +480,10 @@ TEST_CASE("basic opdispatch") {
 
     OpDispatch<5> dispatch{pub, view};
 
-
-    ValueNode node1{
-        {{"name", {std::string{"jane"}}}, {"age", {12ull}}}
-    };
-
     EntityDescriptor desc1{234, 21};
-    EventEntity entity1{desc1, node1};
+    Entity entity1{desc1.id, desc1.type};
+    entity1.set_field("name", {std::string{"jane"}});
+    entity1.set_field("age", {12ull});
 
     auto pub_f = dispatch.publish_event(Event{678,  entity1});
     pub_f.get();
@@ -516,7 +496,13 @@ TEST_CASE("basic opdispatch") {
     std::cout << "view read complete" << std::endl;
 
     REQUIRE(res);
-    REQUIRE(build_view().values.size() == res->values.size());
+
+    auto compare = build_view();
+
+    REQUIRE(compare.get_path_val<1>({"name"}) == res->get_path_val<1>({"name"}));
+    REQUIRE(compare.get_path_val<1>({"age"}) == res->get_path_val<1>({"age"}));
+    REQUIRE(compare.get_path_val<2>({"manager_id", "name"}) == res->get_path_val<2>({"manager_id", "name"}));
+
 }
 
 TEST_CASE("eventview factory") {
@@ -530,17 +516,16 @@ TEST_CASE("eventview factory") {
 
     EntityDescriptor manager_desc{writer.next_id(), 23};
 
-    ValueNode node{
-            {{"name", {std::string{"john"}}}, {"age", {41ull}}, {"manager_id", {manager_desc}}}
-    };
-
-    ValueNode mgr_node{
-            {{"name", {std::string{"ted"}}}, {"age", {56ull}}}
-    };
-
     EntityDescriptor desc{writer.next_id(), 21};
-    EventEntity entity{desc, node};
-    EventEntity manager_entity{manager_desc, mgr_node};
+    Entity entity{desc};
+    entity.set_field("name", {std::string{"john"}});
+    entity.set_field("age", {41ull});
+    entity.set_field("manager_id", {manager_desc});
+
+
+    Entity manager_entity{manager_desc};
+    manager_entity.set_field("name", {std::string{"ted"}});
+    manager_entity.set_field("age", {56ull});
 
     auto mgr_result = writer.write_event(manager_entity);
     REQUIRE(mgr_result);
@@ -565,12 +550,21 @@ TEST_CASE("eventview factory") {
     const auto &view = reader.read_view(view_desc);
 
     REQUIRE(view);
-    REQUIRE(view->root == view_desc.root);
-    REQUIRE(view->values.size() == view_desc.paths.size());
 
-    REQUIRE(view->values[0].value.as_string() == "ted");
-    REQUIRE(view->values[1].value.as_long() == 56);
-    REQUIRE(view->values[2].value.as_string() =="john");
+    const auto& name_val = view->get_path_val<1>({"name"});
+    REQUIRE(name_val);
+    REQUIRE(name_val->is_string());
+    REQUIRE(name_val->as_string() == "ted");
+
+    const auto& age_val = view->get_path_val<1>({"age"});
+    REQUIRE(age_val);
+    REQUIRE(age_val->is_long());
+    REQUIRE(age_val->as_long() == 56ull);
+
+    const auto& employee_name_val = view->get_path_val<2>({"manager_id", "name"});
+    REQUIRE(employee_name_val);
+    REQUIRE(employee_name_val->is_string());
+    REQUIRE(employee_name_val->as_string() == "john");
 }
 
 
@@ -579,17 +573,17 @@ TEST_CASE("eventwriter no receiver") {
 
     EntityDescriptor manager_desc{writer.next_id(), 23};
 
-    ValueNode node{
-            {{"name", {std::string{"john"}}}, {"age", {41ull}}, {"manager_id", {manager_desc}}}
-    };
-
-    ValueNode mgr_node{
-            {{"name", {std::string{"ted"}}}, {"age", {56ull}}}
-    };
-
     EntityDescriptor desc{writer.next_id(), 21};
-    EventEntity entity{desc, node};
-    EventEntity manager_entity{manager_desc, mgr_node};
+    Entity entity{desc.id, desc.type};
+    entity.set_field("name", {std::string{"john"}});
+    entity.set_field("age", {41ull});
+    entity.set_field("manager_id", {manager_desc});
+
+
+    Entity manager_entity{manager_desc.id, manager_desc.type};
+    manager_entity.set_field("name", {std::string{"ted"}});
+    manager_entity.set_field("age", {56ull});
+
 
     auto mgr_result = writer.write_event(manager_entity);
     REQUIRE(mgr_result);
@@ -597,3 +591,4 @@ TEST_CASE("eventwriter no receiver") {
     REQUIRE(result);
 
 }
+

@@ -7,4 +7,7 @@
   <component name="MacroExpansionManager">
     <option name="directoryName" value="pqDtvIZk" />
   </component>
+  <component name="RustProjectSettings">
+    <option name="toolchainHomeDirectory" value="$USER_HOME$/.cargo/bin" />
+  </component>
 </project>

@@ -51,7 +51,7 @@ namespace eventview {
                 snowflakes_{SnowflakeProvider{writer_id}},
                 log_{EventLog<LogStorage>{std::move(receiver)}} {}
 
-        inline const WriteResult write_event(EventEntity evt) noexcept;
+        inline const WriteResult write_event(Entity evt) noexcept;
 
         EventID next_id() {
             return snowflakes_.next();
@@ -78,11 +78,11 @@ namespace eventview {
     };
 
     template<typename LogStorage>
-    inline const WriteResult EventWriter<LogStorage>::write_event(EventEntity evt) noexcept {
+    inline const WriteResult EventWriter<LogStorage>::write_event(Entity evt) noexcept {
 
         auto evt_id = snowflakes_.next();
-        if (0 == evt.descriptor.id) {
-            evt.descriptor.id = evt_id;
+        if (0 == evt.descriptor().id) {
+            evt.set_entity_id(evt_id);
         }
 
         try {

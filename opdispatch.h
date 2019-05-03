@@ -20,7 +20,11 @@ namespace eventview {
         std::variant<Event, ViewDescriptor> op;
         std::variant<std::promise<void>, std::promise<std::optional<View> > > res;
 
-        Operation()=default;
+        Operation(): op{ViewDescriptor{}}, res{std::promise<std::optional<View>>{}}{};
+
+        Operation(Event e, std::promise<void> p): op{std::move(e)}, res{std::move(p)} {}
+        Operation(ViewDescriptor desc, std::promise<std::optional<View>> v): op{std::move(desc)}, res{std::move(v)} {}
+
         Operation(const Operation &)=delete;
         Operation& operator=(const Operation &)=delete;
         Operation(Operation &&)=default;

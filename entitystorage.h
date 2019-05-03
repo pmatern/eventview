@@ -39,7 +39,7 @@ namespace eventview {
     class StorageNode final {
 
     public:
-        StorageNode(EventID write_time, EventEntity initial_state) : existence_{Existence{write_time, 0}},
+        StorageNode(EventID write_time, Entity initial_state) : existence_{Existence{write_time, 0}},
                                                                      entity_{std::move(initial_state)},
                                                                      referencers_{{}} {}
 
@@ -54,7 +54,7 @@ namespace eventview {
         ~StorageNode() = default;
 
         const EntityTypeID type() const {
-            return entity_.descriptor.type;
+            return entity_.descriptor().type;
         }
 
         inline void
@@ -65,10 +65,10 @@ namespace eventview {
 
         inline std::vector<EntityDescriptor> referencers_for_field(const std::string &field) const;
 
-        inline RemovedReferences update_fields(EventID update_time, const EventEntity &update);
+        inline RemovedReferences update_fields(EventID update_time, const Entity &update);
 
-        const ValueNode get_fields() const {
-            return entity_.node;
+        const Entity::Fields& get_fields() const {
+            return entity_.fields();
         }
 
         bool exists() const {
@@ -81,7 +81,7 @@ namespace eventview {
 
     private:
         Existence existence_;
-        EventEntity entity_;
+        Entity entity_;
         std::unordered_map<std::string, ReferenceSet> referencers_;
     };
 
@@ -121,11 +121,11 @@ namespace eventview {
         return std::move(snapshot);
     }
 
-    inline RemovedReferences StorageNode::update_fields(EventID update_time, const EventEntity &update) {
+    inline RemovedReferences StorageNode::update_fields(EventID update_time, const Entity &update) {
         std::unordered_map<std::string, EntityDescriptor> snapshot;
 
-        if (update_time > existence_.add_time && update.descriptor == entity_.descriptor) {
-            ValueNode to_deref{entity_.node};
+        if (update_time > existence_.add_time && update.descriptor() == entity_.descriptor()) {
+            Entity::Fields to_deref{entity_.fields()};
 
             for (auto &kv : to_deref) {
                 if (kv.second.is_descriptor()) {
@@ -133,7 +133,8 @@ namespace eventview {
                 }
             }
 
-            entity_.node = update.node;
+
+            entity_.replace(std::move(update.fields()));
             existence_.touch(update_time);
         }
 
@@ -155,7 +156,7 @@ namespace eventview {
 
         ~EntityStore() = default;
 
-        const RemovedReferences put(EventID write_time, EventEntity entity);
+        const RemovedReferences put(EventID write_time, Entity entity);
 
         std::optional<std::reference_wrapper<StorageNode> > get(const EntityDescriptor &descriptor);
 
@@ -163,8 +164,8 @@ namespace eventview {
         std::unordered_map<EntityID, StorageNode> store_;
     };
 
-    inline const RemovedReferences EntityStore::put(EventID write_time, EventEntity entity) {
-        auto desc_id = entity.descriptor.id;
+    inline const RemovedReferences EntityStore::put(EventID write_time, Entity entity) {
+        auto desc_id = entity.descriptor().id;
         auto found = store_.find(desc_id);
 
         if (found == store_.end()) {
