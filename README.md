@@ -10,3 +10,5 @@ ViewDescriptors are how graph queries are modelled, and consist of an EntityDesc
 Views are how graph query results are modelled, and consist of the EntityDescriptor and paths provided in the query, along with the value found at the end of each path.
 
 The in-memory storage implements an lwww-element-map, which allows Entity write events to be delivered in any order and still converge on the correct state.
+
+The Publisher an ViewReader are safe to use in a multi-threaded environment. They processes all publish and query operations on a single internal thread fed by a lock-free mechanism. The internal thread lives as long as both the Publisher and ViewReader do, and is cleaned up automatically by their desctruction.
