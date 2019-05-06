@@ -79,6 +79,14 @@ namespace eventview {
             existence_.deref(deref_time);
         }
 
+        const EventID max_write_time() const {
+            return existence_.add_time > existence_.remove_time ? existence_.add_time : existence_.remove_time;
+        }
+
+        const EntityDescriptor& descriptor() const {
+            return entity_.descriptor();
+        };
+
     private:
         Existence existence_;
         Entity entity_;

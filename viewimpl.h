@@ -50,7 +50,7 @@ namespace eventview {
         const auto &root_node = store_->get(view_desc.root);
 
         if (root_node) {
-            ViewBuilder builder{view_desc.root.id, view_desc.root.type};
+            ViewBuilder builder{view_desc.root, view_desc.expectation};
 
             for (auto &path : view_desc.paths) {
                 process_path_element(path, 0, root_node->get(), builder);
@@ -68,6 +68,16 @@ namespace eventview {
     ViewReaderImpl::process_path_element(const ViewPath &path, const ViewPath::size_type &idx, const StorageNode &node,
                                      ViewBuilder &builder) const {
         if (idx < path.size()) {
+
+            if (!builder.expectation_met()) {
+                auto &expected = builder.expectation();
+                if (expected) {
+                    auto met = (expected->expected == node.descriptor()) &&
+                               (node.max_write_time() >= expected->minimum_write);
+                    builder.expectation_result(met);
+                }
+            }
+
             auto &elem = path[idx];
 
             if (elem.is_val()) {

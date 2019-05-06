@@ -62,6 +62,61 @@ namespace eventview {
 
         return EventWriter<LogStorage>{writer_id, receiver};
     }
+
+    class WriteReadResult final {
+    public:
+        WriteReadResult(WriteResult result, std::optional<View> view) : result_{std::move(result)},
+            view_{std::move(view)}{}
+
+        WriteReadResult(const WriteReadResult &) = default;
+
+        WriteReadResult &operator=(const WriteReadResult &) = default;
+
+        WriteReadResult(WriteReadResult &&) noexcept = default;
+
+        WriteReadResult &operator=(WriteReadResult &&) = default;
+
+        ~WriteReadResult() = default;
+
+        const WriteResult& result() const {
+            return result_;
+        }
+
+        const std::optional<View>& view() const {
+            return view_;
+        }
+
+    private:
+        WriteResult result_;
+        std::optional<View> view_;
+    };
+
+    template<typename LogStorage = std::vector<Event>, std::uint32_t NumThreads>
+    WriteReadResult write_and_read(EventWriter<LogStorage> writer, Entity evt,
+            ViewReader<NumThreads> reader, ViewDescriptor view_desc) noexcept {
+        auto result = writer.writer_event(evt);
+
+        if (result) {
+            auto desc = evt.descriptor();
+
+            if (desc.id == 0) {
+                desc.id = result.event_id();
+            }
+            if (view_desc.root.id == 0) {
+                view_desc.root.id == result.event_id();
+            }
+            if (!view_desc.expectation) {
+                view_desc.expectation = {desc, result.event_id};
+            }
+
+            auto view = reader.read_view(view_desc);
+
+            return ReadWriteResult(result, view);
+        }
+
+        return ReadWriteResult(result, {});
+    }
+
 }
 
 #endif //EVENTVIEW_EVENTVIEW_H

@@ -449,7 +449,7 @@ TEST_CASE("basic mpsc") {
 }
 
 View build_view() {
-    ViewBuilder vb{2324, 43};
+    ViewBuilder vb{{2324, 43}};
 
     ViewPath vp_1{};
     vp_1.push_back({"name", 0, false});
@@ -464,7 +464,7 @@ View build_view() {
     vp_3.push_back({"name", 0, false});
     vb.add_path_val(vp_3,  {std::string{"jack"}});
 
-    return vb.finish();
+    return *vb.finish();
 }
 
 TEST_CASE("basic opdispatch") {

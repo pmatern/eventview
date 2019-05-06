@@ -74,10 +74,16 @@ namespace eventview {
         return false;
     }
 
+    struct ExpectedEntity {
+        EntityDescriptor expected;
+        EventID minimum_write;
+    };
+
 
     struct ViewDescriptor {
         EntityDescriptor root;
         std::vector<ViewPath> paths;
+        std::optional<ExpectedEntity> expectation;
     };
 
     struct PrimitiveFieldValue {
@@ -197,8 +203,7 @@ namespace eventview {
 
 
         friend class ViewBuilder;
-        View(EntityID id, EntityTypeID type): descriptor_{id, type}{}
-
+        explicit View(EntityDescriptor descriptor): descriptor_{descriptor}{}
         EntityDescriptor descriptor_;
         std::unordered_multimap<std::string, PrimitiveFieldValue> values_;
     };
@@ -206,7 +211,8 @@ namespace eventview {
 
     class ViewBuilder final {
     public:
-        explicit ViewBuilder(EntityID id, EntityTypeID type): view_{id, type}{}
+        explicit ViewBuilder(EntityDescriptor descriptor): view_{descriptor}{}
+        ViewBuilder(EntityDescriptor descriptor, std::optional<ExpectedEntity> expectation): view_{descriptor}, expectation_{expectation}{}
         ViewBuilder(const ViewBuilder &)=default;
         ViewBuilder& operator=(const ViewBuilder &)=default;
         ViewBuilder(ViewBuilder &&)=default;
@@ -217,12 +223,32 @@ namespace eventview {
             view_.values_.insert({path_to_string(path), value});
         }
 
-        View finish() {
-            return std::move(view_);
+        const std::optional<ExpectedEntity> expectation() {
+            return expectation_;
         }
+
+        const bool expectation_met() const {
+            return expectation_met_ || !expectation_;
+        }
+
+        void expectation_result(bool result) {
+            expectation_met_ |= result;
+        }
+
+        std::optional<View> finish() {
+            if (expectation_met()) {
+                return std::move(view_);
+            } else {
+                return {};
+            }
+        }
+
     private:
 
         View view_;
+        std::optional<ExpectedEntity> expectation_;
+        bool expectation_met_;
+
     };
 
 
