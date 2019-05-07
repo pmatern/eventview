@@ -91,10 +91,10 @@ namespace eventview {
         std::optional<View> view_;
     };
 
-    template<typename LogStorage = std::vector<Event>, std::uint32_t NumThreads>
-    WriteReadResult write_and_read(EventWriter<LogStorage> writer, Entity evt,
-            ViewReader<NumThreads> reader, ViewDescriptor view_desc) noexcept {
-        auto result = writer.writer_event(evt);
+    template<std::uint32_t NumThreads, typename LogStorage = std::vector<Event>>
+    WriteReadResult write_and_read(EventWriter<LogStorage>& writer, Entity evt,
+            const ViewReader<NumThreads> &reader, ViewDescriptor view_desc) noexcept {
+        auto result = writer.write_event(evt);
 
         if (result) {
             auto desc = evt.descriptor();
@@ -103,18 +103,18 @@ namespace eventview {
                 desc.id = result.event_id();
             }
             if (view_desc.root.id == 0) {
-                view_desc.root.id == result.event_id();
+                view_desc.root.id = result.event_id();
             }
             if (!view_desc.expectation) {
-                view_desc.expectation = {desc, result.event_id};
+                view_desc.expectation = {desc, result.event_id()};
             }
 
             auto view = reader.read_view(view_desc);
 
-            return ReadWriteResult(result, view);
+            return WriteReadResult(result, view);
         }
 
-        return ReadWriteResult(result, {});
+        return WriteReadResult(result, {});
     }
 
 }

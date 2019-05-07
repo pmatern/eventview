@@ -592,3 +592,125 @@ TEST_CASE("eventwriter no receiver") {
 
 }
 
+TEST_CASE("expected entity") {
+    auto system =  make_eventview_system<5>();
+    auto& publisher = system.first;
+    auto& reader = system.second;
+    auto writer = make_writer<5>(475, publisher);
+
+    EntityDescriptor manager_desc{writer.next_id(), 23};
+
+    EntityDescriptor desc{writer.next_id(), 21};
+    Entity entity{desc};
+    entity.set_field("name", {std::string{"john"}});
+    entity.set_field("age", {41ull});
+    entity.set_field("manager_id", {manager_desc});
+
+    Entity manager_entity{manager_desc};
+    manager_entity.set_field("name", {std::string{"ted"}});
+    manager_entity.set_field("age", {56ull});
+
+    auto mgr_result = writer.write_event(manager_entity);
+    REQUIRE(mgr_result);
+    auto result = writer.write_event(entity);
+    REQUIRE(result);
+
+    ViewDescriptor view_desc{manager_desc, {}};
+    ViewPath vp_1{};
+    vp_1.push_back({"name", 0, false});
+
+    ViewPath vp_2{};
+    vp_2.push_back({"age", 0, false});
+
+    ViewPath vp_3{};
+    vp_3.push_back({"manager_id", 21, false});
+    vp_3.push_back({"name", 0, false});
+
+    view_desc.paths.push_back(vp_1);
+    view_desc.paths.push_back(vp_2);
+    view_desc.paths.push_back(vp_3);
+
+    view_desc.expectation = {{1,2}, result.event_id()};
+
+    const auto &view = reader.read_view(view_desc);
+
+    REQUIRE(!view);
+
+    view_desc.expectation = {view_desc.root, result.event_id() + 100};
+
+    const auto &view1 = reader.read_view(view_desc);
+
+    REQUIRE(!view1);
+
+    view_desc.expectation = {view_desc.root, result.event_id()};
+
+    const auto &view2 = reader.read_view(view_desc);
+
+    REQUIRE(view2);
+}
+
+
+TEST_CASE("write  and read api") {
+    auto system =  make_eventview_system<5>();
+
+    auto& publisher = system.first;
+    auto& reader = system.second;
+
+    auto writer = make_writer<5>(475, publisher);
+
+
+    EntityDescriptor manager_desc{writer.next_id(), 23};
+
+    EntityDescriptor desc{writer.next_id(), 21};
+    Entity entity{desc};
+    entity.set_field("name", {std::string{"john"}});
+    entity.set_field("age", {41ull});
+    entity.set_field("manager_id", {manager_desc});
+
+
+    Entity manager_entity{manager_desc};
+    manager_entity.set_field("name", {std::string{"ted"}});
+    manager_entity.set_field("age", {56ull});
+
+//    auto mgr_result = writer.write_event(manager_entity);
+//    REQUIRE(mgr_result);
+    auto result = writer.write_event(entity);
+    REQUIRE(result);
+
+    ViewDescriptor view_desc{manager_desc, {}};
+    ViewPath vp_1{};
+    vp_1.push_back({"name", 0, false});
+
+    ViewPath vp_2{};
+    vp_2.push_back({"age", 0, false});
+
+    ViewPath vp_3{};
+    vp_3.push_back({"manager_id", 21, false});
+    vp_3.push_back({"name", 0, false});
+
+    view_desc.paths.push_back(vp_1);
+    view_desc.paths.push_back(vp_2);
+    view_desc.paths.push_back(vp_3);
+
+    auto res_and_view = write_and_read<5>(writer, manager_entity, reader, view_desc);
+
+    const auto &view = res_and_view.view();
+
+    REQUIRE(res_and_view.result());
+    REQUIRE(view);
+
+    const auto& name_val = view->get_path_val<1>({"name"});
+    REQUIRE(name_val);
+    REQUIRE(name_val->is_string());
+    REQUIRE(name_val->as_string() == "ted");
+
+    const auto& age_val = view->get_path_val<1>({"age"});
+    REQUIRE(age_val);
+    REQUIRE(age_val->is_long());
+    REQUIRE(age_val->as_long() == 56ull);
+
+    const auto& employee_name_val = view->get_path_val<2>({"manager_id", "name"});
+    REQUIRE(employee_name_val);
+    REQUIRE(employee_name_val->is_string());
+    REQUIRE(employee_name_val->as_string() == "john");
+}
