@@ -24,7 +24,7 @@ namespace eventview {
         EntityTypeID type;
     };
 
-    bool operator==(const EntityDescriptor &lhs, const EntityDescriptor &rhs) {
+    inline bool operator==(const EntityDescriptor &lhs, const EntityDescriptor &rhs) {
         return lhs.id == rhs.id && lhs.type == rhs.type;
     }
 
@@ -46,14 +46,14 @@ namespace eventview {
         }
     };
 
-    bool operator==(const PathElement &lhs, const PathElement &rhs) {
+    inline bool operator==(const PathElement &lhs, const PathElement &rhs) {
         return lhs.name == rhs.name && lhs.type == rhs.type && lhs.forward == rhs.forward;
     }
 
 
     using ViewPath = std::vector<PathElement>;
 
-    const std::string path_to_string(const ViewPath &path) {
+    inline const std::string path_to_string(const ViewPath &path) {
         std::string str;
         for (int i=0; i<path.size(); ++i) {
             str.append(path[i].name);
@@ -64,7 +64,7 @@ namespace eventview {
         return std::move(str);
     }
 
-    const bool path_has_multiple_values(const ViewPath &path) {
+    inline const bool path_has_multiple_values(const ViewPath &path) {
         for (auto& elem : path) {
             if (elem.is_reverse_ref()) {
                 return true;
@@ -123,7 +123,7 @@ namespace eventview {
 
     };
 
-    bool operator==(const PrimitiveFieldValue &lhs, const PrimitiveFieldValue &rhs) {
+    inline bool operator==(const PrimitiveFieldValue &lhs, const PrimitiveFieldValue &rhs) {
         return lhs.val == rhs.val;
     }
 
@@ -289,13 +289,13 @@ namespace eventview {
 
 
     private:
-        friend bool operator== (const Entity& lhs, const Entity& rhs);
+        inline friend bool operator== (const Entity& lhs, const Entity& rhs);
 
         EntityDescriptor descriptor_;
         Fields fields_;
     };
 
-    bool operator==(const Entity &lhs, const Entity &rhs) {
+    inline bool operator==(const Entity &lhs, const Entity &rhs) {
         return lhs.descriptor_ == rhs.descriptor_ && lhs.fields_ == rhs.fields_;
     }
 
@@ -312,7 +312,7 @@ namespace eventview {
 
     };
 
-    bool operator==(const Event &lhs, const Event &rhs) {
+    inline bool operator==(const Event &lhs, const Event &rhs) {
         return lhs.id == rhs.id && lhs.entity == rhs.entity;
     }
 
